@@ -31,6 +31,7 @@ public class DiagonalMovement implements MovementRule {
         }
     }
 
+    //maybe check path blocked should be another validator
     @Override
     public boolean checkPathBlocked(Movement movement, Board board, Player player) {
         int offsetX = movement.getTo().getX() - movement.getFrom().getX();
