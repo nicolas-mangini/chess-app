@@ -1,17 +1,22 @@
-package edu.austral.dissis.chess.rule.movement;
+/*
+package edu.austral.dissis.chess.validator.impl.outdated;
 
-import edu.austral.dissis.chess.*;
+import edu.austral.dissis.chess.common.Board;
+import edu.austral.dissis.chess.common.Movement;
+import edu.austral.dissis.chess.common.Piece;
+import edu.austral.dissis.chess.common.Tile;
+import edu.austral.dissis.chess.validator.MoveValidator;
 
-public class DiagonalMovement implements MovementRule {
+public class DiagonalMove implements MoveValidator {
     private final int incrementX;
     private final int incrementY;
 
-    public DiagonalMovement(int incrementX, int incrementY) {
+    public DiagonalMove(int incrementX, int incrementY) {
         this.incrementX = incrementX;
         this.incrementY = incrementY;
     }
 
-    public DiagonalMovement() {
+    public DiagonalMove() {
         this.incrementX = 0;
         this.incrementY = 0;
     }
@@ -51,3 +56,4 @@ public class DiagonalMovement implements MovementRule {
         return true;
     }
 }
+*/

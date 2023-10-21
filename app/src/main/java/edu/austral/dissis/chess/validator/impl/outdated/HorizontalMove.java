@@ -1,15 +1,20 @@
-package edu.austral.dissis.chess.rule.movement;
+/*
+package edu.austral.dissis.chess.validator.impl.outdated;
 
-import edu.austral.dissis.chess.*;
+import edu.austral.dissis.chess.common.Board;
+import edu.austral.dissis.chess.common.Movement;
+import edu.austral.dissis.chess.common.Piece;
+import edu.austral.dissis.chess.common.Tile;
+import edu.austral.dissis.chess.validator.MoveValidator;
 
-public class HorizontalMovement implements MovementRule {
+public class HorizontalMove implements MoveValidator {
     private final int increment;
 
-    public HorizontalMovement(int increment) {
+    public HorizontalMove(int increment) {
         this.increment = increment;
     }
 
-    public HorizontalMovement() {
+    public HorizontalMove() {
         this.increment = 0;
     }
 
@@ -27,7 +32,7 @@ public class HorizontalMovement implements MovementRule {
     @Override
     public boolean checkPathBlocked(Movement movement, Board board, Player player) {
         Piece pieceToMove = movement.getFrom().getPiece();
-        Tile pieceTile = board.getPieceTile(pieceToMove).getValue();
+        Tile pieceTile = board.getTileByPiece(pieceToMove).getValue();
         //two possibilities: horizontal left or right
         if (movement.getTo().getY() > movement.getFrom().getY()) {
             for (int i = 1; i < movement.getTo().getY() - movement.getFrom().getY(); i++) {
@@ -46,3 +51,4 @@ public class HorizontalMovement implements MovementRule {
         return true;
     }
 }
+*/

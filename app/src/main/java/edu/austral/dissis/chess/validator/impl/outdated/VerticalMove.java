@@ -1,15 +1,19 @@
-package edu.austral.dissis.chess.rule.movement;
+/*
+package edu.austral.dissis.chess.validator.impl.outdated;
 
-import edu.austral.dissis.chess.*;
+import edu.austral.dissis.chess.common.Board;
+import edu.austral.dissis.chess.common.Movement;
+import edu.austral.dissis.chess.common.Piece;
+import edu.austral.dissis.chess.validator.MoveValidator;
 
-public class VerticalMovement implements MovementRule {
+public class VerticalMove implements MoveValidator {
     private final int increment;
 
-    public VerticalMovement(int increment) {
+    public VerticalMove(int increment) {
         this.increment = increment;
     }
 
-    public VerticalMovement() {
+    public VerticalMove() {
         this.increment = 0;
     }
 
@@ -25,6 +29,7 @@ public class VerticalMovement implements MovementRule {
 
     @Override
     public boolean checkPathBlocked(Movement movement, Board board, Player player) {
+*/
 /*        Piece pieceToMove = movement.getFrom().getPiece();
         Tile pieceTile = board.getPieceTile(pieceToMove).getValue();
 
@@ -33,7 +38,8 @@ public class VerticalMovement implements MovementRule {
 
         } else {
 
-        }*/
+        }*//*
+
         return false;
     }
-}
+}*/

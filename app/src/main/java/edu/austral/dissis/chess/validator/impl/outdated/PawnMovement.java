@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.rule.movement;/*
+package edu.austral.dissis.chess.validator.impl.outdated;/*
 package TP3.rule.movement;
 
 import TP3.*;
