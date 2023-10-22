@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.common;
 
 import edu.austral.dissis.chess.util.impl.MoveResult;
-import edu.austral.dissis.chess.validator.MoveValidator;
+import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -9,15 +9,21 @@ import java.util.List;
 
 @AllArgsConstructor
 public class GameMover {
-    public MoveResult<Game, String> move(Movement movement, Game game) {
+    public MoveResult<GameManager, String> tryMovement(Movement movement, GameManager gameManager) {
         Piece pieceToMove = movement.getFrom().getPiece();
-        if (pieceToMove == null) {
-            return new MoveResult<>(game, "No piece to move");
-        }
-        if (!validateMovement(pieceToMove.getOrValidators(), pieceToMove.getAndValidators(), movement, game)) {
-            return new MoveResult<>(game, "Invalid movement");
-        }
-        return new MoveResult<>(makeMovement(movement, game), null);
+        if (pieceToMove == null)
+            return new MoveResult<>(gameManager, "No piece to move");
+
+        Colour currentColourTurn = gameManager.getTurnHandler().getCurrent();
+        if (pieceToMove.getColour() != currentColourTurn)
+            return new MoveResult<>(gameManager, "Its not your turn");
+
+        if (!validateMovement(pieceToMove.getOrValidators(), pieceToMove.getAndValidators(), movement, gameManager))
+            return new MoveResult<>(gameManager, "Invalid movement");
+
+        Game gameMoved = makeMovement(movement, gameManager.getGame());
+        TurnHandler nextTurn = gameManager.getTurnHandler().nextTurn();
+        return new MoveResult<>(new GameManager(gameMoved, this, nextTurn), null);
     }
 
     private Game makeMovement(Movement movement, Game game) {
@@ -30,11 +36,11 @@ public class GameMover {
         return new Game(game.getWhitePlayer(), game.getBlackPlayer(), board, history);
     }
 
-    private boolean validateMovement(List<MoveValidator> orValidators, List<MoveValidator> andValidators, Movement movement, Game game) {
+    private boolean validateMovement(List<MovementValidator> orValidators, List<MovementValidator> andValidators, Movement movement, GameManager gameManager) {
         return orValidators.stream()
-                .anyMatch(moveValidator -> moveValidator.isValid(movement, game.getBoard()))
+                .anyMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard()))
                 &&
                 andValidators.stream()
-                        .allMatch(moveValidator -> moveValidator.isValid(movement, game.getBoard()));
+                        .allMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard()));
     }
 }

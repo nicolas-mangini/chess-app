@@ -2,11 +2,11 @@ package edu.austral.dissis.chess.validator.impl.move;
 
 import edu.austral.dissis.chess.common.Board;
 import edu.austral.dissis.chess.common.Movement;
-import edu.austral.dissis.chess.validator.MoveValidator;
+import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class IncrementValidator implements MoveValidator {
+public class IncrementValidator implements MovementValidator {
     private final int increments;
 
     @Override

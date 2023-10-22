@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.common;
 
-import edu.austral.dissis.chess.validator.MoveValidator;
+import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +15,8 @@ public class Piece {
     private final Colour colour;
     private final Tile initialPosition;
     private final String pieceId;
-    private final List<MoveValidator> orValidators;
-    private final List<MoveValidator> andValidators;
+    private final List<MovementValidator> orValidators;
+    private final List<MovementValidator> andValidators;
 
     public Piece(Piece toCopy) {
         this.id = toCopy.id;

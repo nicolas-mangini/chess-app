@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.test;
 
 import edu.austral.dissis.chess.common.*;
 import edu.austral.dissis.chess.util.impl.MoveResult;
-import edu.austral.dissis.chess.validator.MoveValidator;
+import edu.austral.dissis.chess.validator.MovementValidator;
 import edu.austral.dissis.chess.validator.impl.AndValidator;
 import edu.austral.dissis.chess.validator.impl.move.DirectionValidator;
 import edu.austral.dissis.chess.validator.impl.move.EatValidator;
@@ -16,13 +16,14 @@ public class Main {
         Board board = new Board(8, 8);
         Game game = new Game(Colour.WHITE, Colour.BLACK, board, new ArrayList<>());
         GameMover gameMover = new GameMover();
+        GameManager gameManager = new GameManager(game, gameMover, new TurnHandler(Colour.WHITE));
         Piece rook = createRook();
-        Board board2 = game.getBoard().setPieceAtTile(rook, rook.getInitialPosition()).get();
+        Board board2 = gameManager.getGame().getBoard().setPieceAtTile(rook, rook.getInitialPosition()).get();
         System.out.println(board2.display());
-        MoveResult<Game, String> result1 = gameMover.move(new Movement(board2.getTile(1, 1).get(), board2.getTile(5, 1).get()), game);
+        MoveResult<GameManager, String> result1 = gameMover.tryMovement(new Movement(board2.getTile(1, 1).get(), board2.getTile(5, 1).get()), gameManager);
         if (result1.getValue().isPresent()) System.out.println("error");
         else
-            System.out.println(result1.getKey().getBoard().display());
+            System.out.println(result1.getKey().getGame().getBoard().display());
     }
 
     private static Piece createRook() {
@@ -36,8 +37,8 @@ public class Main {
                 .build();
     }
 
-    private static List<MoveValidator> createRookOrValidators() {
-        List<MoveValidator> rookOrValidators = new ArrayList<>();
+    private static List<MovementValidator> createRookOrValidators() {
+        List<MovementValidator> rookOrValidators = new ArrayList<>();
 
         AndValidator compositeValidator1 = new AndValidator(List.of(
 

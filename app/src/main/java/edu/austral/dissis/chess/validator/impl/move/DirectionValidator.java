@@ -3,12 +3,12 @@ package edu.austral.dissis.chess.validator.impl.move;
 import edu.austral.dissis.chess.common.Board;
 import edu.austral.dissis.chess.common.Movement;
 import edu.austral.dissis.chess.common.Tile;
-import edu.austral.dissis.chess.validator.MoveValidator;
+import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 //TODO maybe change xDirection and yDirection to be a Vector -> ex: ENUM {UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT}
-public class DirectionValidator implements MoveValidator {
+public class DirectionValidator implements MovementValidator {
     private final int xDirection;
     private final int yDirection;
 
