@@ -77,7 +77,7 @@ public class Board {
                 if (square.getPiece() != null) {
                     Piece p = square.getPiece();
                     String pieceString;
-                    if (p.getColour() == PlayerColour.WHITE) {
+                    if (p.getColour() == Colour.WHITE) {
                         pieceString = p.getPieceId() + p.getId();
                     } else {
                         pieceString = "\u001B[1m" + p.getPieceId() + p.getId() + "\u001B[0m";

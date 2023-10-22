@@ -14,7 +14,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Board board = new Board(8, 8);
-        Game game = new Game(PlayerColour.WHITE, PlayerColour.BLACK, board, new ArrayList<>());
+        Game game = new Game(Colour.WHITE, Colour.BLACK, board, new ArrayList<>());
         GameMover gameMover = new GameMover();
         Piece rook = createRook();
         Board board2 = game.getBoard().setPieceAtTile(rook, rook.getInitialPosition()).get();
@@ -28,7 +28,7 @@ public class Main {
     private static Piece createRook() {
         return Piece.builder()
                 .id("1")
-                .colour(PlayerColour.WHITE)
+                .colour(Colour.WHITE)
                 .initialPosition(new Tile(1, 1, null))
                 .pieceId("rook")
                 .orValidators(createRookOrValidators())

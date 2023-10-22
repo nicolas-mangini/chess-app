@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 public class Piece {
     private final String id;
-    private final PlayerColour colour;
+    private final Colour colour;
     private final Tile initialPosition;
     private final String pieceId;
     private final List<MoveValidator> orValidators;

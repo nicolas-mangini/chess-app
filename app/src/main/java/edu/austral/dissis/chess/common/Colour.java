@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.common;
 
-public enum PlayerColour {
+public enum Colour {
     BLACK,
     WHITE
 }

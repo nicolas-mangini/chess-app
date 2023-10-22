@@ -1,13 +1,15 @@
 package edu.austral.dissis.chess.common;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class TurnHandler {
-    private final PlayerColour current;
+    private final Colour current;
 
     public TurnHandler nextTurn() {
-        PlayerColour nextTurnPlayer = (current == PlayerColour.WHITE) ? PlayerColour.BLACK : PlayerColour.WHITE;
+        Colour nextTurnPlayer = (current == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
         return new TurnHandler(nextTurnPlayer);
     }
 }
