@@ -6,9 +6,9 @@ import lombok.Setter;
 
 import java.util.Objects;
 
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
 public class Tile {
     private final Integer x;
     private final Integer y;
@@ -18,6 +18,11 @@ public class Tile {
         this.x = toCopy.getX();
         this.y = toCopy.getY();
         this.piece = toCopy.getPiece();
+    }
+
+    public Tile(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public boolean equalCoordinate(Tile toCompare) {

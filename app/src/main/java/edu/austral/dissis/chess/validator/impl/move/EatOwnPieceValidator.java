@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.validator.impl;
+package edu.austral.dissis.chess.validator.impl.move;
 
 import edu.austral.dissis.chess.common.Board;
 import edu.austral.dissis.chess.common.Movement;

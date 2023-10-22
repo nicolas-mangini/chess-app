@@ -1,17 +1,14 @@
 package edu.austral.dissis.chess.util.impl;
 
 import edu.austral.dissis.chess.util.Result;
+import lombok.AllArgsConstructor;
 
 import java.util.Optional;
 
+@AllArgsConstructor
 public class MoveResult<Game, String> implements Result<Game, String> {
     private final Game game;
     private final String error;
-
-    public MoveResult(Game game, String error) {
-        this.game = game;
-        this.error = error;
-    }
 
     @Override
     public Game getKey() {

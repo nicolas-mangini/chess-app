@@ -22,25 +22,31 @@ public class Board {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
-                //TODO change piece to optional
                 tiles.add(new Tile(x, y, null));
             }
         }
     }
 
-    public Optional<Board> setPieceInSquare(Piece piece) {
-        Tile initialPosition = piece.getInitialPosition();
+    public Optional<Board> setPieceAtTile(Piece piece, Tile tile) {
         List<Tile> updatedTiles = tiles.stream()
-                .map(tile -> {
-                    if (tile.getX() == initialPosition.getX() && tile.getY() == initialPosition.getY()) {
-                        return new Tile(tile.getX(), tile.getY(), piece);
+                .map(t -> {
+                    if (t.equalCoordinate(tile)) {
+                        Tile toSave = new Tile(tile.getX(), tile.getY(), piece);
+                        return toSave;
                     } else {
-                        return tile;
+                        return t;
                     }
                 })
                 .toList();
 
         return Optional.of(new Board(updatedTiles));
+    }
+
+    public Optional<Piece> getPieceByTile(int x, int y) {
+        return tiles.stream()
+                .filter(tile -> tile.getX() == x && tile.getY() == y)
+                .map(Tile::getPiece)
+                .findFirst();
     }
 
     public Optional<Tile> getTile(int x, int y) {
@@ -56,20 +62,13 @@ public class Board {
                 .findFirst();
     }
 
-    public Optional<Piece> getPieceByTile(int x, int y) {
-        return tiles.stream()
-                .filter(tile -> tile.getX() == x && tile.getY() == y)
-                .map(Tile::getPiece)
-                .findFirst();
-    }
-
     public Tile getMaxSquare() {
         return tiles.stream()
                 .max(Comparator.comparingInt(Tile::getX)
                         .thenComparingInt(Tile::getY)).get();
     }
 
-    public String print() {
+    public String display() {
         StringBuilder boardString = new StringBuilder();
         for (int i = 1; i <= getMaxSquare().getX(); i++) {
             boardString.append("\n");
