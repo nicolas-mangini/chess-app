@@ -1,16 +1,11 @@
 package edu.austral.dissis.chess.adapter.impl;
 
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
-import edu.austral.dissis.chess.common.Board;
-import edu.austral.dissis.chess.common.Colour;
-import edu.austral.dissis.chess.common.Tile;
-import edu.austral.dissis.chess.common.TurnHandler;
-import edu.austral.dissis.chess.gui.BoardSize;
-import edu.austral.dissis.chess.gui.ChessPiece;
-import edu.austral.dissis.chess.gui.PlayerColor;
-import edu.austral.dissis.chess.gui.Position;
+import edu.austral.dissis.chess.common.*;
+import edu.austral.dissis.chess.gui.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ChessGameEngineAdapter implements GameEngineAdapter {
     @Override
@@ -49,5 +44,16 @@ public class ChessGameEngineAdapter implements GameEngineAdapter {
     @Override
     public Position adaptPosition(Tile tile) {
         return new Position(tile.getX(), tile.getY());
+    }
+
+    @Override
+    public Movement adaptMovement(Move move, List<Tile> boardTiles) {
+        return new Movement(adaptTile(move.getFrom(), boardTiles), adaptTile(move.getTo(), boardTiles));
+    }
+
+    @Override
+    public Tile adaptTile(Position position, List<Tile> boardTiles) {
+        Optional<Tile> tileOptional = boardTiles.stream().filter(tile -> tile.getX() == position.getRow() && tile.getY() == position.getColumn()).findFirst();
+        return tileOptional.map(tile -> new Tile(position.getRow(), position.getColumn(), tile.getPiece())).orElseGet(() -> new Tile(position.getRow(), position.getColumn(), null));
     }
 }

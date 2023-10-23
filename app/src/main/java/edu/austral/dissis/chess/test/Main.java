@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.test;
 
 import edu.austral.dissis.chess.common.*;
-import edu.austral.dissis.chess.util.impl.MoveResult;
+import edu.austral.dissis.chess.util.impl.MovementResult;
 import edu.austral.dissis.chess.validator.MovementValidator;
 import edu.austral.dissis.chess.validator.impl.AndValidator;
 import edu.austral.dissis.chess.validator.impl.move.DirectionValidator;
@@ -15,15 +15,21 @@ public class Main {
     public static void main(String[] args) {
         Board board = new Board(8, 8);
         Game game = new Game(Colour.WHITE, Colour.BLACK, board, new ArrayList<>());
-        GameMover gameMover = new GameMover();
-        GameManager gameManager = new GameManager(game, gameMover, new TurnHandler(Colour.WHITE));
+        GameManager gameManager = new GameManager(game, new GameMover(), new TurnHandler(Colour.WHITE));
+
         Piece rook = createRook();
-        Board board2 = gameManager.getGame().getBoard().setPieceAtTile(rook, rook.getInitialPosition()).get();
-        System.out.println(board2.display());
-        MoveResult<GameManager, String> result1 = gameMover.tryMovement(new Movement(board2.getTile(1, 1).get(), board2.getTile(5, 1).get()), gameManager);
-        if (result1.getValue().isPresent()) System.out.println("error");
+        gameManager.getGame().getBoard().setPieceAtTile(rook, rook.getInitialPosition());
+
+        System.out.println(gameManager.getGame().getBoard().display());
+
+        MovementResult<GameManager, String> result1 = gameManager.getGameMover().tryMovement(new Movement(new Tile(1, 1), new Tile(5, 1)), gameManager);
+        if (result1.getValue().isPresent()) System.out.println("error: " + result1.getValue().get());
         else
             System.out.println(result1.getKey().getGame().getBoard().display());
+        MovementResult<GameManager, String> result2 = gameManager.getGameMover().tryMovement(new Movement(new Tile(5, 1), new Tile(5, 5)), gameManager);
+        if (result2.getValue().isPresent()) System.out.println("error: " + result2.getValue().get());
+        else
+            System.out.println(result2.getKey().getGame().getBoard().display());
     }
 
     private static Piece createRook() {

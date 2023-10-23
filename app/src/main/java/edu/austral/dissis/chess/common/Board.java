@@ -27,19 +27,11 @@ public class Board {
         }
     }
 
-    public Optional<Board> setPieceAtTile(Piece piece, Tile tile) {
-        List<Tile> updatedTiles = tiles.stream()
-                .map(t -> {
-                    if (t.equalCoordinate(tile)) {
-                        Tile toSave = new Tile(tile.getX(), tile.getY(), piece);
-                        return toSave;
-                    } else {
-                        return t;
-                    }
-                })
-                .toList();
-
-        return Optional.of(new Board(updatedTiles));
+    public void setPieceAtTile(Piece piece, Tile tile) {
+        tiles.stream()
+                .filter(t -> t.equalCoordinate(tile))
+                .findFirst()
+                .ifPresent(t -> t.setPiece(piece));
     }
 
     public Optional<Piece> getPieceByTile(int x, int y) {
