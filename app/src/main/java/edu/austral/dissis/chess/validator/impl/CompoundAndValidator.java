@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-public class AndValidator implements MovementValidator {
+public class CompoundAndValidator implements MovementValidator {
     private final List<MovementValidator> andValidators;
 
     @Override

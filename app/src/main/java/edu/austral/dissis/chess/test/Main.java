@@ -1,9 +1,10 @@
+/*
 package edu.austral.dissis.chess.test;
 
 import edu.austral.dissis.chess.common.*;
 import edu.austral.dissis.chess.util.impl.MovementResult;
 import edu.austral.dissis.chess.validator.MovementValidator;
-import edu.austral.dissis.chess.validator.impl.AndValidator;
+import edu.austral.dissis.chess.validator.impl.CompoundAndValidator;
 import edu.austral.dissis.chess.validator.impl.move.DirectionValidator;
 import edu.austral.dissis.chess.validator.impl.move.EatValidator;
 import edu.austral.dissis.chess.validator.impl.move.PathClearValidator;
@@ -46,25 +47,25 @@ public class Main {
     private static List<MovementValidator> createRookOrValidators() {
         List<MovementValidator> rookOrValidators = new ArrayList<>();
 
-        AndValidator compositeValidator1 = new AndValidator(List.of(
+        CompoundAndValidator compositeValidator1 = new CompoundAndValidator(List.of(
 
                 new DirectionValidator(1, 0),
                 new PathClearValidator(1, 0),
-                new EatValidator()
+                new EatValidator(false)
         ));
 
-        AndValidator compositeValidator2 = new AndValidator(List.of(
+        CompoundAndValidator compositeValidator2 = new CompoundAndValidator(List.of(
                 new DirectionValidator(-1, 0),
                 new PathClearValidator(-1, 0)
         ));
 
-        AndValidator compositeValidator3 = new AndValidator(List.of(
+        CompoundAndValidator compositeValidator3 = new CompoundAndValidator(List.of(
                 new DirectionValidator(0, 1),
                 new PathClearValidator(0, 1),
                 new EatValidator()
         ));
 
-        AndValidator compositeValidator4 = new AndValidator(List.of(
+        CompoundAndValidator compositeValidator4 = new CompoundAndValidator(List.of(
                 new DirectionValidator(0, -1),
                 new PathClearValidator(0, -1)
         ));
@@ -75,8 +76,5 @@ public class Main {
 
         return rookOrValidators;
     }
-
-/*    private List<MoveValidator> createDefaultAndValidators() {
-        return List.of(new CheckValidator());
-    }*/
 }
+*/
