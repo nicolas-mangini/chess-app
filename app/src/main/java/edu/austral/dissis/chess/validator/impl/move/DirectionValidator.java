@@ -6,6 +6,8 @@ import edu.austral.dissis.chess.common.Tile;
 import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 //TODO maybe change xDirection and yDirection to be a Vector -> ex: ENUM {UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT}
 public class DirectionValidator implements MovementValidator {
@@ -13,7 +15,7 @@ public class DirectionValidator implements MovementValidator {
     private final int yDirection;
 
     @Override
-    public boolean isValid(Movement movement, Board board) {
+    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Tile position = new Tile(movement.getFrom().getX() + xDirection, movement.getFrom().getY() + yDirection);
         while (!position.equalCoordinate(movement.getTo())) {
             if (isOutsideBoard(position, board)) return false;

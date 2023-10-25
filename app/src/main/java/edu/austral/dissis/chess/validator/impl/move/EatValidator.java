@@ -6,6 +6,7 @@ import edu.austral.dissis.chess.common.Piece;
 import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class EatValidator implements MovementValidator {
      * it will behave as if it can eat (canEat set to true)
      */
     @Override
-    public boolean isValid(Movement movement, Board board) {
+    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Optional<Piece> optionalToPiece = Optional.ofNullable(movement.getTo().getPiece());
         if (!canEat) {
             return optionalToPiece.isEmpty();

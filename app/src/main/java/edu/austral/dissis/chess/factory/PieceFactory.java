@@ -419,7 +419,8 @@ public class PieceFactory {
                         new DirectionValidator(1, 0),
                         new PathClearValidator(1, 0),
                         new IncrementValidator(2),
-                        new EatValidator(false)
+                        new EatValidator(false),
+                        new NumberOfMovementValidator(2)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 0),
@@ -431,8 +432,7 @@ public class PieceFactory {
                         new DirectionValidator(1, 1),
                         new PathClearValidator(1, 1),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new nthNumberValidator(1)
+                        new EatValidator(true)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, -1),

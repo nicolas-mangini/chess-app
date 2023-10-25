@@ -12,7 +12,8 @@ public class CompoundAndValidator implements MovementValidator {
     private final List<MovementValidator> andValidators;
 
     @Override
-    public boolean isValid(Movement movement, Board board) {
-        return andValidators.stream().allMatch(validator -> validator.isValid(movement, board));
+    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
+        return andValidators.stream()
+                .allMatch(validator -> validator.isValid(movement, board, movementHistory));
     }
 }

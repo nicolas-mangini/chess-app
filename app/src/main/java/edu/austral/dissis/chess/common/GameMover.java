@@ -39,9 +39,9 @@ public class GameMover {
 
     private boolean validateMovement(List<MovementValidator> orValidators, List<MovementValidator> andValidators, Movement movement, GameManager gameManager) {
         return orValidators.stream()
-                .anyMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard()))
+                .anyMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory()))
                 &&
                 andValidators.stream()
-                        .allMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard()));
+                        .allMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory()));
     }
 }
