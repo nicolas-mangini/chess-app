@@ -15,7 +15,7 @@ public class GameMover {
         if (pieceToMove.isEmpty())
             return new MovementResult<>(gameManager, "No piece to move, from: %s, %s".formatted(movement.getFrom().getX(), movement.getFrom().getY()));
 
-        Colour currentColourTurn = gameManager.getTurnManager().getCurrent();
+        Colour currentColourTurn = gameManager.getTurnChanger().getCurrent();
         if (pieceToMove.get().getColour() != currentColourTurn)
             return new MovementResult<>(gameManager, "Its not your turn");
 
@@ -23,7 +23,7 @@ public class GameMover {
             return new MovementResult<>(gameManager, "Invalid movement");
 
         Game gameMoved = makeMovement(movement, gameManager.getGame());
-        TurnManager nextTurn = gameManager.getTurnManager().nextTurn();
+        TurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
         return new MovementResult<>(new GameManager(gameMoved, this, nextTurn), null);
     }
 

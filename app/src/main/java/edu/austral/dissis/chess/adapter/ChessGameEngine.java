@@ -19,7 +19,7 @@ public class ChessGameEngine implements GameEngine {
 
         Board board = new Board(8, 8);
         Game game = new Game(Colour.WHITE, Colour.BLACK, board, new ArrayList<>());
-        GameManager gameManager = new GameManager(game, new GameMover(), new TurnManager(Colour.WHITE));
+        GameManager gameManager = new GameManager(game, new GameMover(), new TurnChanger(Colour.WHITE));
 
         Piece rook1 = PieceFactory.createRookW1();
         Piece knight1 = PieceFactory.createKnightW1();
@@ -86,22 +86,23 @@ public class ChessGameEngine implements GameEngine {
         gameManager.getGame().getBoard().setPieceAtTile(pawn15, pawn15.getInitialPosition());
         gameManager.getGame().getBoard().setPieceAtTile(pawn16, pawn16.getInitialPosition());
 
-        this.gameManager = new GameManager(game, gameManager.getGameMover(), gameManager.getTurnManager());
+        this.gameManager = new GameManager(game, gameManager.getGameMover(), gameManager.getTurnChanger());
     }
 
     @NotNull
     @Override
     public MoveResult applyMove(@NotNull Move move) {
-        MovementResult<GameManager, String> tryMovement = gameManager.getGameMover().tryMovement(
-                gameEngineAdapter.adaptMovement(move, gameManager.getGame().getBoard().getTiles())
-                , gameManager);
+        GameMover gameMover = gameManager.getGameMover();
+        Movement movementAdapted = gameEngineAdapter.adaptMovement(move, gameManager.getGame().getBoard().getTiles());
+
+        MovementResult<GameManager, String> tryMovement = gameMover.tryMovement(movementAdapted, gameManager);
 
         if (tryMovement.getValue().isPresent()) {
             return new InvalidMove(tryMovement.getValue().get());
         }
 
         List<ChessPiece> newPieces = gameEngineAdapter.getCurrentPieces(tryMovement.getKey().getGame().getBoard());
-        PlayerColor newTurn = gameEngineAdapter.getCurrentTurn(tryMovement.getKey().getTurnManager());
+        PlayerColor newTurn = gameEngineAdapter.getCurrentTurn(tryMovement.getKey().getTurnChanger());
         return new NewGameState(newPieces, newTurn);
     }
 
@@ -111,6 +112,6 @@ public class ChessGameEngine implements GameEngine {
         return new InitialState(
                 gameEngineAdapter.getBoardSize(gameManager.getGame().getBoard()),
                 gameEngineAdapter.getCurrentPieces(gameManager.getGame().getBoard()),
-                gameEngineAdapter.getCurrentTurn(gameManager.getTurnManager()));
+                gameEngineAdapter.getCurrentTurn(gameManager.getTurnChanger()));
     }
 }

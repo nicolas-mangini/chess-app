@@ -10,7 +10,7 @@ public interface GameEngineAdapter {
 
     List<ChessPiece> getCurrentPieces(Board board);
 
-    PlayerColor getCurrentTurn(TurnManager turnManager);
+    PlayerColor getCurrentTurn(TurnChanger turnChanger);
 
     PlayerColor adaptPlayerColor(Colour colour);
 
