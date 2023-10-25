@@ -34,11 +34,13 @@ public class Board {
                 .ifPresent(t -> t.setPiece(piece));
     }
 
+    //TODO check if this is correct, stays inside findFirst()?
     public Optional<Piece> getPieceByTile(int x, int y) {
-        return tiles.stream()
+        Optional<Piece> pieceOptional = tiles.stream()
                 .filter(tile -> tile.getX() == x && tile.getY() == y)
                 .map(Tile::getPiece)
                 .findFirst();
+        return pieceOptional;
     }
 
     public Optional<Tile> getTile(int x, int y) {

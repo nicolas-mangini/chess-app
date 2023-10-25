@@ -22,14 +22,14 @@ public class ChessGameEngine implements GameEngine {
 
         Board board = new Board(8, 8);
         Game game = new Game(Colour.WHITE, Colour.BLACK, board, new ArrayList<>());
-        GameManager gameManager = new GameManager(game, new GameMover(), new TurnHandler(Colour.WHITE));
+        GameManager gameManager = new GameManager(game, new GameMover(), new TurnManager(Colour.WHITE));
 
         Piece rook = createRook();
         Piece bishop = createBishop();
         gameManager.getGame().getBoard().setPieceAtTile(rook, rook.getInitialPosition());
         gameManager.getGame().getBoard().setPieceAtTile(bishop, bishop.getInitialPosition());
 
-        this.gameManager = new GameManager(game, gameManager.getGameMover(), gameManager.getTurnHandler());
+        this.gameManager = new GameManager(game, gameManager.getGameMover(), gameManager.getTurnManager());
     }
 
     @NotNull
@@ -44,7 +44,7 @@ public class ChessGameEngine implements GameEngine {
         }
 
         List<ChessPiece> newPieces = gameEngineAdapter.getCurrentPieces(tryMovement.getKey().getGame().getBoard());
-        PlayerColor newTurn = gameEngineAdapter.getCurrentTurn(tryMovement.getKey().getTurnHandler());
+        PlayerColor newTurn = gameEngineAdapter.getCurrentTurn(tryMovement.getKey().getTurnManager());
         return new NewGameState(newPieces, newTurn);
     }
 
@@ -54,6 +54,6 @@ public class ChessGameEngine implements GameEngine {
         return new InitialState(
                 gameEngineAdapter.getBoardSize(gameManager.getGame().getBoard()),
                 gameEngineAdapter.getCurrentPieces(gameManager.getGame().getBoard()),
-                gameEngineAdapter.getCurrentTurn(gameManager.getTurnHandler()));
+                gameEngineAdapter.getCurrentTurn(gameManager.getTurnManager()));
     }
 }

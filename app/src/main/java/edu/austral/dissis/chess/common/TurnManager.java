@@ -7,20 +7,20 @@ import java.util.Random;
 
 @AllArgsConstructor
 @Getter
-public class TurnHandler {
+public class TurnManager {
     private final Colour current;
 
-    public TurnHandler() {
+    public TurnManager() {
         Random random = new Random();
         current = random.nextBoolean() ? Colour.WHITE : Colour.BLACK;
     }
 
-    public TurnHandler(TurnHandler toCopy) {
+    public TurnManager(TurnManager toCopy) {
         current = toCopy.getCurrent();
     }
 
-    public TurnHandler nextTurn() {
+    public TurnManager nextTurn() {
         Colour nextTurnPlayer = (current == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
-        return new TurnHandler(nextTurnPlayer);
+        return new TurnManager(nextTurnPlayer);
     }
 }
