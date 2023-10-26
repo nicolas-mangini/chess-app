@@ -427,7 +427,7 @@ public class PieceFactory {
                         new PathClearValidator(xDirection, 0),
                         new IncrementValidator(2),
                         new EatValidator(false),
-                        new NumberOfMovementValidator(1)
+                        new LimitMovementsValidator(1)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, 0),

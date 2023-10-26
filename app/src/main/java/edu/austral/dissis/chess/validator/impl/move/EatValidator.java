@@ -14,7 +14,7 @@ public class EatValidator implements MovementValidator {
     private final boolean canEat;
 
     /**
-     * This validator determines whether a piece can eat other pieces. By default, if the piece doesn't contain this validator
+     * This validator will determine whether a piece can eat another pieces. By default, if the piece doesn't contain this validator
      * it will behave as if it can eat (canEat set to true)
      */
     @Override
