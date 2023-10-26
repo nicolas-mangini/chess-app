@@ -10,6 +10,7 @@ import java.util.Optional;
 @Getter
 public class Board {
     private final List<Tile> tiles;
+    private final Printer printer = new BoardPrinter();
 
     public Board(List<Piece> pieces, int rows, int columns) {
         tiles = new ArrayList<>();
@@ -67,30 +68,5 @@ public class Board {
         return tiles.stream()
                 .max(Comparator.comparingInt(Tile::getX)
                         .thenComparingInt(Tile::getY)).get();
-    }
-
-    public String display() {
-        StringBuilder boardString = new StringBuilder();
-        for (int i = 1; i <= getMaxSquare().getX(); i++) {
-            boardString.append("\n");
-            for (int j = 1; j <= getMaxSquare().getY(); j++) {
-                Tile square = getTile(i, j).get();
-                if (square.getPiece() != null) {
-                    Piece p = square.getPiece();
-                    String pieceString;
-                    if (p.getColour() == Colour.WHITE) {
-                        pieceString = p.getPieceId() + p.getId();
-                    } else {
-                        pieceString = "\u001B[1m" + p.getPieceId() + p.getId() + "\u001B[0m";
-                    }
-                    boardString.append("  ").append(pieceString).append("  ");
-                } else {
-                    boardString.append("   %s%s   ".formatted(square.getX(), square.getY()));
-                }
-            }
-            boardString.append("\n");
-        }
-        boardString.append("\n");
-        return boardString.toString();
     }
 }
