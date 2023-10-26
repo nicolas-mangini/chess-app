@@ -7,7 +7,6 @@ import edu.austral.dissis.chess.validator.MovementValidator;
 import edu.austral.dissis.chess.validator.impl.CompoundAndValidator;
 import edu.austral.dissis.chess.validator.impl.move.*;
 
-import java.util.Collections;
 import java.util.List;
 
 public class PieceFactory {
@@ -50,7 +49,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(1, 4))
                 .pieceId("king")
-                .orValidators(Collections.emptyList())
+                .orValidators(createKingOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -61,7 +60,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(1, 5))
                 .pieceId("queen")
-                .orValidators(Collections.emptyList())
+                .orValidators(createQueenOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -226,7 +225,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(8, 4))
                 .pieceId("king")
-                .orValidators(Collections.emptyList())
+                .orValidators(createKingOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -237,7 +236,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(8, 5))
                 .pieceId("queen")
-                .orValidators(Collections.emptyList())
+                .orValidators(createQueenOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -393,63 +392,6 @@ public class PieceFactory {
         );
     }
 
-    private static List<MovementValidator> createBishopOrValidators() {
-        return List.of(
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(1, 1),
-                        new PathClearValidator(1, 1),
-                        new EatValidator(true)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(-1, -1),
-                        new PathClearValidator(-1, -1),
-                        new EatValidator(true)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(1, -1),
-                        new PathClearValidator(1, -1),
-                        new EatValidator(true)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(-1, 1),
-                        new PathClearValidator(-1, 1),
-                        new EatValidator(true)
-                ))
-        );
-    }
-
-    private static List<MovementValidator> createPawnOrValidators(Colour colour) {
-        int xDirection = colour == Colour.WHITE ? 1 : -1;
-
-        return List.of(
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(xDirection, 0),
-                        new PathClearValidator(xDirection, 0),
-                        new IncrementValidator(2),
-                        new EatValidator(false),
-                        new LimitMovementsValidator(1)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(xDirection, 0),
-                        new PathClearValidator(xDirection, 0),
-                        new IncrementValidator(1),
-                        new EatValidator(false)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(xDirection, 1),
-                        new PathClearValidator(xDirection, 1),
-                        new IncrementValidator(1),
-                        new MustEatValidator()
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(xDirection, -1),
-                        new PathClearValidator(xDirection, -1),
-                        new IncrementValidator(1),
-                        new MustEatValidator()
-                ))
-        );
-    }
-
     private static List<MovementValidator> createKnightOrValidators() {
         return List.of(
                 new CompoundAndValidator(List.of(
@@ -487,7 +429,166 @@ public class PieceFactory {
         );
     }
 
+    private static List<MovementValidator> createBishopOrValidators() {
+        return List.of(
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, 1),
+                        new PathClearValidator(1, 1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, -1),
+                        new PathClearValidator(-1, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, -1),
+                        new PathClearValidator(1, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, 1),
+                        new PathClearValidator(-1, 1),
+                        new EatValidator(true)
+                ))
+        );
+    }
+
+    private static List<MovementValidator> createQueenOrValidators() {
+        return List.of(
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, 0),
+                        new PathClearValidator(1, 0),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, 0),
+                        new PathClearValidator(-1, 0),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(0, 1),
+                        new PathClearValidator(0, 1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(0, -1),
+                        new PathClearValidator(0, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, 1),
+                        new PathClearValidator(1, 1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, -1),
+                        new PathClearValidator(-1, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, -1),
+                        new PathClearValidator(1, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, 1),
+                        new PathClearValidator(-1, 1),
+                        new EatValidator(true)
+                ))
+        );
+    }
+
+    private static List<MovementValidator> createKingOrValidators() {
+        return List.of(
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, 0),
+                        new PathClearValidator(1, 0),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, 0),
+                        new PathClearValidator(-1, 0),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(0, 1),
+                        new PathClearValidator(0, 1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(0, -1),
+                        new PathClearValidator(0, -1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, 1),
+                        new PathClearValidator(1, 1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, -1),
+                        new PathClearValidator(-1, -1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(1, -1),
+                        new PathClearValidator(1, -1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, 1),
+                        new PathClearValidator(-1, 1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                ))
+        );
+    }
+
+    private static List<MovementValidator> createPawnOrValidators(Colour colour) {
+        int xDirection = colour == Colour.WHITE ? 1 : -1;
+
+        return List.of(
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 0),
+                        new PathClearValidator(xDirection, 0),
+                        new IncrementValidator(2),
+                        new EatValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new LimitMovementsValidator(1)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 0),
+                        new PathClearValidator(xDirection, 0),
+                        new IncrementValidator(1),
+                        new EatValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 1),
+                        new PathClearValidator(xDirection, 1),
+                        new IncrementValidator(1),
+                        new MustEatValidator(),
+                        new EatOwnPieceValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, -1),
+                        new PathClearValidator(xDirection, -1),
+                        new IncrementValidator(1),
+                        new MustEatValidator(),
+                        new EatOwnPieceValidator(false)
+                ))
+        );
+    }
+
     private static List<MovementValidator> createDefaultAndValidators() {
-        return Collections.emptyList();
+        return List.of(new EatOwnPieceValidator(false));
     }
 }
