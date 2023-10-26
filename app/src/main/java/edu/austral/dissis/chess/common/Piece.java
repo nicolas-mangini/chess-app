@@ -15,15 +15,13 @@ public class Piece {
     private final Colour colour;
     private final Tile initialPosition;
     private final String pieceId;
-    private final List<MovementValidator> orValidators;
-    private final List<MovementValidator> andValidators;
+    private final List<MovementValidator> validators;
 
     public Piece(Piece toCopy) {
         this.id = toCopy.id;
         this.colour = toCopy.colour;
         this.initialPosition = toCopy.initialPosition;
         this.pieceId = toCopy.pieceId;
-        this.orValidators = toCopy.orValidators;
-        this.andValidators = toCopy.andValidators;
+        this.validators = toCopy.validators;
     }
 }

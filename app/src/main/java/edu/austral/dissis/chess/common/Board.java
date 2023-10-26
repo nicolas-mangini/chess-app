@@ -1,6 +1,5 @@
 package edu.austral.dissis.chess.common;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -8,12 +7,29 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Getter
 public class Board {
     private final List<Tile> tiles;
 
     //copy constructor
+    public Board(List<Piece> pieces, int rows, int columns) {
+        tiles = new ArrayList<>();
+        for (int x = 1; x <= rows; x++) {
+            for (int y = 1; y <= columns; y++) {
+                tiles.add(new Tile(x, y, null));
+            }
+        }
+
+        for (Piece piece : pieces) {
+            Tile initialPosition = piece.getInitialPosition();
+            int x = initialPosition.getX();
+            int y = initialPosition.getY();
+            Tile tile = getTile(x, y).get();
+            tile.setPiece(piece);
+        }
+    }
+
+
     public Board(Board toCopy) {
         this.tiles = toCopy.getTiles();
     }
