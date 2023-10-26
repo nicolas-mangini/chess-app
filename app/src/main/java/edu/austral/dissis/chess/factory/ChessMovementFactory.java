@@ -1,9 +1,8 @@
 package edu.austral.dissis.chess.factory;
 
 import edu.austral.dissis.chess.common.Colour;
-import edu.austral.dissis.chess.validator.MovementValidator;
-import edu.austral.dissis.chess.validator.impl.CompoundAndValidator;
-import edu.austral.dissis.chess.validator.impl.move.*;
+import edu.austral.dissis.chess.validator.*;
+import edu.austral.dissis.chess.validator.CompoundAndValidator;
 
 import java.util.List;
 

@@ -40,8 +40,8 @@ public class GameMover {
         return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, newHistory);
     }
 
-    private boolean validateMovement(List<MovementValidator> orValidators, Movement movement, GameManager gameManager) {
-        return orValidators.stream()
+    private boolean validateMovement(List<MovementValidator> validators, Movement movement, GameManager gameManager) {
+        return validators.stream()
                 .anyMatch(moveValidator -> moveValidator.isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory()));
     }
 }
