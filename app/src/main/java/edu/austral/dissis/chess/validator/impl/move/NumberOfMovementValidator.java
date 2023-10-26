@@ -16,8 +16,8 @@ public class NumberOfMovementValidator implements MovementValidator {
     public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Piece pieceToMove = movement.getFrom().getPiece();
         long movements =  movementHistory.stream()
-                .filter(movement1 -> movement1.getFrom().getPiece().getPieceId().equals(pieceToMove.getPieceId()))
+                .filter(movement1 -> movement1.getFrom().getPiece().getId().equals(pieceToMove.getId()))
                 .count();
-        return movements <= numberOfMovements;
+        return movements < numberOfMovements;
     }
 }

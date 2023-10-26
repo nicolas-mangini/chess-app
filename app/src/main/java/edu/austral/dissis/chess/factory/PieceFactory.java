@@ -105,7 +105,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 1))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -116,7 +116,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 2))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -127,7 +127,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 3))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -138,7 +138,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 4))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -149,7 +149,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 5))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -160,7 +160,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 6))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -171,7 +171,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 7))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -182,7 +182,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(2, 8))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.WHITE))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -281,7 +281,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 1))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -292,7 +292,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 2))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -303,7 +303,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 3))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -314,7 +314,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 4))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -325,7 +325,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 5))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -336,7 +336,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 6))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -347,7 +347,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 7))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -358,7 +358,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(7, 8))
                 .pieceId("pawn")
-                .orValidators(createPawnOrValidators())
+                .orValidators(createPawnOrValidators(Colour.BLACK))
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -368,22 +368,27 @@ public class PieceFactory {
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 0),
                         new PathClearValidator(1, 0),
-                        new EatValidator(true)
+                        new EatValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(-1, 0),
                         new PathClearValidator(-1, 0),
-                        new EatValidator(true)
+                        new EatValidator(true),
+                        new EatOwnPieceValidator(false)
+
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(0, 1),
                         new PathClearValidator(0, 1),
-                        new EatValidator(true)
+                        new EatValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(0, -1),
                         new PathClearValidator(0, -1),
-                        new EatValidator(true)
+                        new EatValidator(true),
+                        new EatOwnPieceValidator(false)
                 ))
         );
     }
@@ -393,50 +398,52 @@ public class PieceFactory {
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 1),
                         new PathClearValidator(1, 1),
-                        new EatValidator(false)
+                        new EatValidator(true)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(-1, -1),
                         new PathClearValidator(-1, -1),
-                        new EatValidator(false)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(1, -1),
-                        new PathClearValidator(1, -1),
-                        new EatValidator(false)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(-1, 1),
-                        new PathClearValidator(-1, 1),
-                        new EatValidator(false)
-                ))
-        );
-    }
-
-    private static List<MovementValidator> createPawnOrValidators() {
-        return List.of(
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(1, 0),
-                        new PathClearValidator(1, 0),
-                        new IncrementValidator(2),
-                        new EatValidator(false),
-                        new NumberOfMovementValidator(2)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(1, 0),
-                        new PathClearValidator(1, 0),
-                        new IncrementValidator(1),
-                        new EatValidator(false)
-                )),
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(1, 1),
-                        new PathClearValidator(1, 1),
-                        new IncrementValidator(1),
                         new EatValidator(true)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, -1),
                         new PathClearValidator(1, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-1, 1),
+                        new PathClearValidator(-1, 1),
+                        new EatValidator(true)
+                ))
+        );
+    }
+
+    private static List<MovementValidator> createPawnOrValidators(Colour colour) {
+        int xDirection = colour == Colour.WHITE ? 1 : -1;
+
+        return List.of(
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 0),
+                        new PathClearValidator(xDirection, 0),
+                        new IncrementValidator(2),
+                        new EatValidator(false),
+                        new NumberOfMovementValidator(1)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 0),
+                        new PathClearValidator(xDirection, 0),
+                        new IncrementValidator(1),
+                        new EatValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 1),
+                        new PathClearValidator(xDirection, 1),
+                        new IncrementValidator(1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, -1),
+                        new PathClearValidator(xDirection, -1),
                         new IncrementValidator(1),
                         new EatValidator(true)
                 ))
