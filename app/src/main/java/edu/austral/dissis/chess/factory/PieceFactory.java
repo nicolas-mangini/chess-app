@@ -28,7 +28,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(1, 2))
                 .pieceId("knight")
-                .orValidators(Collections.emptyList())
+                .orValidators(createKnightOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -83,7 +83,7 @@ public class PieceFactory {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(1, 7))
                 .pieceId("knight")
-                .orValidators(Collections.emptyList())
+                .orValidators(createKnightOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -204,7 +204,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(8, 2))
                 .pieceId("knight")
-                .orValidators(Collections.emptyList())
+                .orValidators(createKnightOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -259,7 +259,7 @@ public class PieceFactory {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(8, 7))
                 .pieceId("knight")
-                .orValidators(Collections.emptyList())
+                .orValidators(createKnightOrValidators())
                 .andValidators(createDefaultAndValidators())
                 .build();
     }
@@ -439,12 +439,49 @@ public class PieceFactory {
                         new DirectionValidator(xDirection, 1),
                         new PathClearValidator(xDirection, 1),
                         new IncrementValidator(1),
-                        new EatValidator(true)
+                        new MustEatValidator()
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, -1),
                         new PathClearValidator(xDirection, -1),
                         new IncrementValidator(1),
+                        new MustEatValidator()
+                ))
+        );
+    }
+
+    private static List<MovementValidator> createKnightOrValidators() {
+        return List.of(
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(2, 1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(1, 2),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(-1, 2),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(-2, 1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(-2, -1),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(-1, -2),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(1, -2),
+                        new EatValidator(true)
+                )),
+                new CompoundAndValidator(List.of(
+                        new JumpMovementValidator(2, -1),
                         new EatValidator(true)
                 ))
         );
