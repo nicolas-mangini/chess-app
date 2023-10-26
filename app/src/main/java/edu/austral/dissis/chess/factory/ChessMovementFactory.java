@@ -235,7 +235,7 @@ public class ChessMovementFactory {
     }
 
     public List<MovementValidator> createPawnMovements(Colour colour) {
-        int xDirection = colour == Colour.WHITE ? 1 : -1;
+        int xDirection = colour == Colour.BLACK ? 1 : -1;
 
         return List.of(
                 new CompoundAndValidator(List.of(

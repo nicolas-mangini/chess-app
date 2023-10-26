@@ -56,7 +56,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("1")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 1))
+                .initialPosition(new Tile(8, 1))
                 .pieceId("rook")
                 .validators(chessMovementFactory.createRookMovements())
                 .build();
@@ -66,7 +66,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("2")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 2))
+                .initialPosition(new Tile(8, 2))
                 .pieceId("knight")
                 .validators(chessMovementFactory.createKnightMovements())
                 .build();
@@ -76,7 +76,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("3")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 3))
+                .initialPosition(new Tile(8, 3))
                 .pieceId("bishop")
                 .validators(chessMovementFactory.createBishopMovements())
                 .build();
@@ -86,7 +86,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("4")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 4))
+                .initialPosition(new Tile(8, 4))
                 .pieceId("king")
                 .validators(chessMovementFactory.createKingMovements())
                 .build();
@@ -96,7 +96,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("5")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 5))
+                .initialPosition(new Tile(8, 5))
                 .pieceId("queen")
                 .validators(chessMovementFactory.createQueenMovements())
                 .build();
@@ -106,7 +106,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("6")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 6))
+                .initialPosition(new Tile(8, 6))
                 .pieceId("bishop")
                 .validators(chessMovementFactory.createBishopMovements())
                 .build();
@@ -116,7 +116,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("7")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 7))
+                .initialPosition(new Tile(8, 7))
                 .pieceId("knight")
                 .validators(chessMovementFactory.createKnightMovements())
                 .build();
@@ -126,7 +126,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("8")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(1, 8))
+                .initialPosition(new Tile(8, 8))
                 .pieceId("rook")
                 .validators(chessMovementFactory.createRookMovements())
                 .build();
@@ -136,7 +136,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("9")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 1))
+                .initialPosition(new Tile(7, 1))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -146,7 +146,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("10")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 2))
+                .initialPosition(new Tile(7, 2))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -156,7 +156,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("11")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 3))
+                .initialPosition(new Tile(7, 3))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -166,7 +166,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("12")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 4))
+                .initialPosition(new Tile(7, 4))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -176,7 +176,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("13")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 5))
+                .initialPosition(new Tile(7, 5))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -186,7 +186,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("14")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 6))
+                .initialPosition(new Tile(7, 6))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -196,7 +196,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("15")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 7))
+                .initialPosition(new Tile(7, 7))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -206,7 +206,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("16")
                 .colour(Colour.WHITE)
-                .initialPosition(new Tile(2, 8))
+                .initialPosition(new Tile(7, 8))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
@@ -216,7 +216,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("17")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 8))
+                .initialPosition(new Tile(1, 8))
                 .pieceId("rook")
                 .validators(chessMovementFactory.createRookMovements())
                 .build();
@@ -226,7 +226,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("18")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 2))
+                .initialPosition(new Tile(1, 2))
                 .pieceId("knight")
                 .validators(chessMovementFactory.createKnightMovements())
                 .build();
@@ -236,7 +236,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("19")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 3))
+                .initialPosition(new Tile(1, 3))
                 .pieceId("bishop")
                 .validators(chessMovementFactory.createBishopMovements())
                 .build();
@@ -246,7 +246,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("20")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 4))
+                .initialPosition(new Tile(1, 4))
                 .pieceId("king")
                 .validators(chessMovementFactory.createKingMovements())
                 .build();
@@ -256,7 +256,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("21")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 5))
+                .initialPosition(new Tile(1, 5))
                 .pieceId("queen")
                 .validators(chessMovementFactory.createQueenMovements())
                 .build();
@@ -266,7 +266,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("22")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 6))
+                .initialPosition(new Tile(1, 6))
                 .pieceId("bishop")
                 .validators(chessMovementFactory.createBishopMovements())
                 .build();
@@ -276,7 +276,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("23")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 7))
+                .initialPosition(new Tile(1, 7))
                 .pieceId("knight")
                 .validators(chessMovementFactory.createKnightMovements())
                 .build();
@@ -286,7 +286,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("24")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(8, 1))
+                .initialPosition(new Tile(1, 1))
                 .pieceId("rook")
                 .validators(chessMovementFactory.createRookMovements())
                 .build();
@@ -296,7 +296,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("25")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 1))
+                .initialPosition(new Tile(2, 1))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -306,7 +306,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("26")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 2))
+                .initialPosition(new Tile(2, 2))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -316,7 +316,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("27")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 3))
+                .initialPosition(new Tile(2, 3))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -326,7 +326,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("28")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 4))
+                .initialPosition(new Tile(2, 4))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -336,7 +336,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("29")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 5))
+                .initialPosition(new Tile(2, 5))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -346,7 +346,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("30")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 6))
+                .initialPosition(new Tile(2, 6))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -356,7 +356,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("31")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 7))
+                .initialPosition(new Tile(2, 7))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
@@ -366,7 +366,7 @@ public class ChessPieceFactory {
         return Piece.builder()
                 .id("32")
                 .colour(Colour.BLACK)
-                .initialPosition(new Tile(7, 8))
+                .initialPosition(new Tile(2, 8))
                 .pieceId("pawn")
                 .validators(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
