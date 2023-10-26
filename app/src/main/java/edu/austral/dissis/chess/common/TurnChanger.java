@@ -8,19 +8,19 @@ import java.util.Random;
 @AllArgsConstructor
 @Getter
 public class TurnChanger {
-    private final Colour current;
+    private final Colour currentTurn;
 
     public TurnChanger() {
         Random random = new Random();
-        current = random.nextBoolean() ? Colour.WHITE : Colour.BLACK;
+        currentTurn = random.nextBoolean() ? Colour.WHITE : Colour.BLACK;
     }
 
     public TurnChanger(TurnChanger toCopy) {
-        current = toCopy.getCurrent();
+        currentTurn = toCopy.getCurrentTurn();
     }
 
     public TurnChanger nextTurn() {
-        Colour nextTurnPlayer = (current == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+        Colour nextTurnPlayer = (currentTurn == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
         return new TurnChanger(nextTurnPlayer);
     }
 }

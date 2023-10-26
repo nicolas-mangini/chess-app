@@ -1,6 +1,5 @@
-package edu.austral.dissis.chess.util.impl;
+package edu.austral.dissis.chess.util;
 
-import edu.austral.dissis.chess.util.Result;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;

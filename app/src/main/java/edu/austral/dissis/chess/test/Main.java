@@ -2,7 +2,7 @@
 package edu.austral.dissis.chess.test;
 
 import edu.austral.dissis.chess.common.*;
-import edu.austral.dissis.chess.util.impl.MovementResult;
+import edu.austral.dissis.chess.util.MovementResult;
 import edu.austral.dissis.chess.validator.MovementValidator;
 import edu.austral.dissis.chess.validator.impl.CompoundAndValidator;
 import edu.austral.dissis.chess.validator.impl.move.DirectionValidator;

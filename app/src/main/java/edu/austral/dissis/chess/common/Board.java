@@ -11,7 +11,6 @@ import java.util.Optional;
 public class Board {
     private final List<Tile> tiles;
 
-    //copy constructor
     public Board(List<Piece> pieces, int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
@@ -30,10 +29,6 @@ public class Board {
     }
 
 
-    public Board(Board toCopy) {
-        this.tiles = toCopy.getTiles();
-    }
-
     public Board(int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
@@ -41,6 +36,10 @@ public class Board {
                 tiles.add(new Tile(x, y, null));
             }
         }
+    }
+
+    public Board(Board toCopy) {
+        this.tiles = toCopy.getTiles();
     }
 
     public void setPieceAtTile(Piece piece, Tile tile) {
@@ -51,24 +50,16 @@ public class Board {
     }
 
     public Optional<Piece> getPieceByTile(int x, int y) {
-        Optional<Piece> pieceOptional = tiles.stream()
+        return tiles.stream()
                 .filter(tile -> tile.getX() == x && tile.getY() == y)
                 .map(tile -> Optional.ofNullable(tile.getPiece()))
                 .findFirst()
                 .orElse(Optional.empty());
-        return pieceOptional;
     }
 
     public Optional<Tile> getTile(int x, int y) {
         return tiles.stream()
                 .filter(tile -> tile.getX() == x && tile.getY() == y)
-                .findFirst();
-    }
-
-    public Optional<Tile> getTileByPiece(Piece piece) {
-        return tiles.stream()
-                .filter(tile -> tile.getPiece() != null)
-                .filter(tile -> tile.getPiece().equals(piece))
                 .findFirst();
     }
 

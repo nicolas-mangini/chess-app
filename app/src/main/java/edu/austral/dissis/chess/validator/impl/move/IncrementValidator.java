@@ -9,12 +9,12 @@ import java.util.List;
 
 @AllArgsConstructor
 public class IncrementValidator implements MovementValidator {
-    private final int increments;
+    private final int limit;
 
     @Override
     public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         int offsetX = movement.getTo().getX() - movement.getFrom().getX();
         int offsetY = movement.getTo().getY() - movement.getFrom().getY();
-        return Math.abs(offsetX) <= increments && Math.abs(offsetY) <= increments;
+        return Math.abs(offsetX) <= limit && Math.abs(offsetY) <= limit;
     }
 }

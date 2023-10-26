@@ -8,8 +8,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class Game {
-    private final Colour whitePlayer;
-    private final Colour blackPlayer;
+    private final Colour player1;
+    private final Colour player2;
     private final Board board;
     private final List<Movement> history;
 }

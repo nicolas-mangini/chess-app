@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.common;
 
-import edu.austral.dissis.chess.util.impl.MovementResult;
+import edu.austral.dissis.chess.util.MovementResult;
 import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
@@ -15,26 +15,29 @@ public class GameMover {
         if (pieceToMove.isEmpty())
             return new MovementResult<>(gameManager, "No piece to move, from: %s, %s".formatted(movement.getFrom().getX(), movement.getFrom().getY()));
 
-        Colour currentColourTurn = gameManager.getTurnChanger().getCurrent();
+        Colour currentColourTurn = gameManager.getTurnChanger().getCurrentTurn();
         if (pieceToMove.get().getColour() != currentColourTurn)
-            return new MovementResult<>(gameManager, "Its not your turn");
+            return new MovementResult<>(gameManager, "Its not your turn!");
 
         if (!validateMovement(pieceToMove.get().getValidators(), movement, gameManager))
-            return new MovementResult<>(gameManager, "Invalid movement");
+            return new MovementResult<>(gameManager, "Invalid movement!");
 
-        Game gameMoved = makeMovement(movement, gameManager.getGame());
+        Game movedGame = makeMovement(movement, gameManager.getGame());
         TurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
-        return new MovementResult<>(new GameManager(gameMoved, this, nextTurn), null);
+        return new MovementResult<>(new GameManager(movedGame, this, nextTurn), null);
     }
 
     private Game makeMovement(Movement movement, Game game) {
-        Board board = new Board(game.getBoard());
-        List<Movement> history = new ArrayList<>(game.getHistory());
-        Piece pieceToMove = new Piece(board.getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY()).get());
-        history.add(movement);
-        board.setPieceAtTile(pieceToMove, movement.getTo());
-        board.setPieceAtTile(null, movement.getFrom());
-        return new Game(game.getWhitePlayer(), game.getBlackPlayer(), board, history);
+        Board newBoard = new Board(game.getBoard());
+        Piece pieceToMove = newBoard.getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY()).get();
+
+        newBoard.setPieceAtTile(pieceToMove, movement.getTo());
+        newBoard.setPieceAtTile(null, movement.getFrom());
+
+        List<Movement> newHistory = new ArrayList<>(game.getHistory());
+        newHistory.add(movement);
+
+        return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, newHistory);
     }
 
     private boolean validateMovement(List<MovementValidator> orValidators, Movement movement, GameManager gameManager) {

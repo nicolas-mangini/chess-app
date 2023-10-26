@@ -2,14 +2,15 @@ package edu.austral.dissis.chess.adapter;
 
 import edu.austral.dissis.chess.adapter.impl.ChessGameEngineAdapter;
 import edu.austral.dissis.chess.common.*;
-import edu.austral.dissis.chess.factory.PieceFactory;
+import edu.austral.dissis.chess.factory.ChessPieceFactory;
 import edu.austral.dissis.chess.gui.*;
-import edu.austral.dissis.chess.util.impl.MovementResult;
+import edu.austral.dissis.chess.util.MovementResult;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Stream;
 
 public class ChessGameEngine implements GameEngine {
     private final GameEngineAdapter gameEngineAdapter;
@@ -18,7 +19,11 @@ public class ChessGameEngine implements GameEngine {
 
     public ChessGameEngine() {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
-        Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(PieceFactory.createAllPieces(), 8, 8), new ArrayList<>());
+
+        ChessPieceFactory chessPieceFactory = new ChessPieceFactory();
+        List<Piece> pieces = Stream.concat(chessPieceFactory.createWhitePieces().stream(), chessPieceFactory.createBlackPieces().stream()).toList();
+        Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(pieces, 8, 8), new ArrayList<>());
+
         this.gameManager = new GameManager(game, new GameMover(), new TurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
     }

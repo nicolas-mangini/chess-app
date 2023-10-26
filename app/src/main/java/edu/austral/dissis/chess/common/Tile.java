@@ -14,15 +14,15 @@ public class Tile {
     private final Integer y;
     private Piece piece;
 
+    public Tile(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public Tile(Tile toCopy) {
         this.x = toCopy.getX();
         this.y = toCopy.getY();
         this.piece = toCopy.getPiece();
-    }
-
-    public Tile(int x, int y) {
-        this.x = x;
-        this.y = y;
     }
 
     public boolean equalCoordinate(Tile toCompare) {
