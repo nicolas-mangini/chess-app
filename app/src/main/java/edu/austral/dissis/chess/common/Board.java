@@ -43,6 +43,16 @@ public class Board {
         this.tiles = toCopy.getTiles();
     }
 
+    public List<Piece> getPiecesByColour(Colour colour) {
+        List<Piece> pieces = new ArrayList<>();
+        for (Tile tile : tiles) {
+            if (tile.getPiece() != null && tile.getPiece().getColour() == colour) {
+                pieces.add(tile.getPiece());
+            }
+        }
+        return pieces;
+    }
+
     public void setPieceAtTile(Piece piece, Tile tile) {
         tiles.stream()
                 .filter(t -> t.equalCoordinate(tile))
