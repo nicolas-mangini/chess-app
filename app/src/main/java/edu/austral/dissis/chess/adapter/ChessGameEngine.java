@@ -3,6 +3,7 @@ package edu.austral.dissis.chess.adapter;
 import edu.austral.dissis.chess.adapter.impl.ChessGameEngineAdapter;
 import edu.austral.dissis.chess.common.*;
 import edu.austral.dissis.chess.factory.ChessPieceFactory;
+import edu.austral.dissis.chess.factory.ChessPieceFactoryTest;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.chess.util.MovementResult;
 import edu.austral.dissis.chess.util.Result;
@@ -22,11 +23,11 @@ public class ChessGameEngine implements GameEngine {
     public ChessGameEngine() {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
 
-        ChessPieceFactory chessPieceFactory = new ChessPieceFactory();
+        ChessPieceFactoryTest chessPieceFactory = new ChessPieceFactoryTest();
         List<Piece> pieces = Stream.concat(chessPieceFactory.createWhitePieces().stream(), chessPieceFactory.createBlackPieces().stream()).toList();
         Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(pieces, 8, 8), new CheckMate(), new ArrayList<>());
 
-        this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
+        this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.BLACK));
         previousGameManagers.push(this.gameManager);
     }
 
