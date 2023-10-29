@@ -22,7 +22,11 @@ public class Tile {
     public Tile(Tile toCopy) {
         this.x = toCopy.getX();
         this.y = toCopy.getY();
-        this.piece = toCopy.getPiece();
+        if (toCopy.getPiece() == null) {
+            this.piece = null;
+        } else {
+            this.piece = new Piece(toCopy.getPiece());
+        }
     }
 
     public boolean equalCoordinate(Tile toCompare) {

@@ -40,7 +40,10 @@ public class Board {
     }
 
     public Board(Board toCopy) {
-        this.tiles = toCopy.getTiles();
+        this.tiles = toCopy.getTiles()
+                .stream()
+                .map(Tile::new)
+                .toList();
     }
 
     public List<Piece> getPiecesByColour(Colour colour) {
