@@ -1,13 +1,16 @@
-package edu.austral.dissis.chess.validator;
+package edu.austral.dissis.chess.validator.piece;
 
 import edu.austral.dissis.chess.common.*;
+import edu.austral.dissis.chess.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class KingCheckValidator implements MovementValidator {
+public class CheckValidator implements MovementValidator {
+    private final String pieceId;
+
     @Override
     public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Movement movementClone = new Movement(movement);
@@ -16,7 +19,7 @@ public class KingCheckValidator implements MovementValidator {
         Colour teamColour = movementClone.getFrom().getPiece().getColour();
         Colour enemyColour = pieceToMove.getColour().equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
 
-        Optional<Piece> king = board.findPiece("king", teamColour);
+        Optional<Piece> king = board.findPiece(this.pieceId, teamColour);
         if (king.isEmpty()) return true;
 
         Optional<Tile> kingTile = board.getTileByPiece(king.get());

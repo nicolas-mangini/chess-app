@@ -26,7 +26,7 @@ public class ChessGameEngineAdapter implements GameEngineAdapter {
     }
 
     @Override
-    public PlayerColor getCurrentTurn(TurnChanger turnChanger) {
+    public PlayerColor getCurrentTurn(TwoPlayersTurnChanger turnChanger) {
         if (turnChanger.getCurrentTurn().equals(Colour.WHITE))
             return PlayerColor.WHITE;
         else

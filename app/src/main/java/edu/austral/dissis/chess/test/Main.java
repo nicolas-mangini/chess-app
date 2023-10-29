@@ -5,9 +5,9 @@ import edu.austral.dissis.chess.common.*;
 import edu.austral.dissis.chess.util.MovementResult;
 import edu.austral.dissis.chess.validator.MovementValidator;
 import edu.austral.dissis.chess.validator.CompoundAndValidator;
-import edu.austral.dissis.chess.validator.DirectionValidator;
-import edu.austral.dissis.chess.validator.EatValidator;
-import edu.austral.dissis.chess.validator.PathClearValidator;
+import edu.austral.dissis.chess.validator.piece.DirectionValidator;
+import edu.austral.dissis.chess.validator.piece.EatValidator;
+import edu.austral.dissis.chess.validator.piece.PathClearValidator;
 
 import java.util.ArrayList;
 import java.util.List;

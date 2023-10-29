@@ -6,8 +6,7 @@ import edu.austral.dissis.chess.factory.ChessPieceFactory;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.chess.util.MovementResult;
 import edu.austral.dissis.chess.util.Result;
-import edu.austral.dissis.chess.util.WinResult;
-import edu.austral.dissis.chess.validator.CheckMate;
+import edu.austral.dissis.chess.validator.game.CheckMate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ public class ChessGameEngine implements GameEngine {
         List<Piece> pieces = Stream.concat(chessPieceFactory.createWhitePieces().stream(), chessPieceFactory.createBlackPieces().stream()).toList();
         Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(pieces, 8, 8), new CheckMate(), new ArrayList<>());
 
-        this.gameManager = new GameManager(game, new GameMover(), new TurnChanger(Colour.WHITE));
+        this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
     }
 

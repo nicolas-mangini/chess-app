@@ -3,6 +3,7 @@ package edu.austral.dissis.chess.factory;
 import edu.austral.dissis.chess.common.Colour;
 import edu.austral.dissis.chess.validator.*;
 import edu.austral.dissis.chess.validator.CompoundAndValidator;
+import edu.austral.dissis.chess.validator.piece.*;
 
 import java.util.List;
 
@@ -270,6 +271,6 @@ public class ChessMovementFactory {
     }
 
     public List<MovementValidator> createDefaultValidators() {
-        return List.of(new KingCheckValidator());
+        return List.of(new CheckValidator("king"));
     }
 }

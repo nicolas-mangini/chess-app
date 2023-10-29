@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.validator;
+package edu.austral.dissis.chess.validator.piece;
 
 import edu.austral.dissis.chess.common.Board;
 import edu.austral.dissis.chess.common.Movement;
@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-//TODO maybe change xDirection and yDirection to be a Vector -> ex: ENUM {UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT}
 public class DirectionValidator implements MovementValidator {
     private final int xDirection;
     private final int yDirection;

@@ -10,7 +10,7 @@ import lombok.Getter;
 public class GameManager {
     private final Game game;
     private final GameMover gameMover;
-    private final TurnChanger turnChanger;
+    private final TwoPlayersTurnChanger turnChanger;
 
     public Result<Boolean, Colour> isGameOver(Movement movement) {
         boolean isGameOver = game.getGameOverValidator().isGameOver(movement, game.getBoard(), game.getHistory()).getKey();

@@ -23,7 +23,7 @@ public class GameMover {
             return new MovementResult<>(gameManager, "Invalid movement!");
 
         Game movedGame = makeMovement(movement, gameManager.getGame());
-        TurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
+        TwoPlayersTurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
         return new MovementResult<>(new GameManager(movedGame, this, nextTurn), null);
     }
 

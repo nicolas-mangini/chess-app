@@ -1,7 +1,8 @@
-package edu.austral.dissis.chess.validator;
+package edu.austral.dissis.chess.validator.game;
 
 import edu.austral.dissis.chess.common.*;
 import edu.austral.dissis.chess.util.WinResult;
+import edu.austral.dissis.chess.validator.GameOverValidator;
 
 import java.util.List;
 
