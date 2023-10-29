@@ -23,4 +23,8 @@ public class TurnChanger {
         Colour nextTurnPlayer = (currentTurn == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
         return new TurnChanger(nextTurnPlayer);
     }
+
+    public Colour getPreviousTurn() {
+        return (currentTurn == Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+    }
 }

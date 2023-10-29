@@ -5,6 +5,9 @@ import edu.austral.dissis.chess.common.*;
 import edu.austral.dissis.chess.factory.ChessPieceFactory;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.chess.util.MovementResult;
+import edu.austral.dissis.chess.util.Result;
+import edu.austral.dissis.chess.util.WinResult;
+import edu.austral.dissis.chess.validator.CheckMate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ public class ChessGameEngine implements GameEngine {
 
         ChessPieceFactory chessPieceFactory = new ChessPieceFactory();
         List<Piece> pieces = Stream.concat(chessPieceFactory.createWhitePieces().stream(), chessPieceFactory.createBlackPieces().stream()).toList();
-        Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(pieces, 8, 8), new ArrayList<>());
+        Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(pieces, 8, 8), new CheckMate(), new ArrayList<>());
 
         this.gameManager = new GameManager(game, new GameMover(), new TurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
@@ -45,6 +48,15 @@ public class ChessGameEngine implements GameEngine {
 
         previousGameManagers.pop();
         previousGameManagers.push(tryMovement.getKey());
+
+
+        //check if doing the movement you win -> before making the movement, i check that if the movement is checkmate
+        Result<Boolean, Colour> isGameOver = previousGameManagers.peek().isGameOver(movementAdapted);
+        if (isGameOver.getKey()) {
+            Colour winner = isGameOver.getValue().get();
+            return new GameOver(gameEngineAdapter.adaptPlayerColor(winner));
+        }
+
         return new NewGameState(newPieces, newTurn);
     }
 
