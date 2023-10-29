@@ -19,7 +19,7 @@ public class GameMover {
         if (pieceToMove.get().getColour() != currentColourTurn)
             return new MovementResult<>(gameManager, "Its not your turn!");
 
-        if (!validateMovement(pieceToMove.get().getOrValidators(), pieceToMove.get().getAndValidators(), movement, gameManager))
+        if (!validateMovement(pieceToMove.get(), movement, gameManager))
             return new MovementResult<>(gameManager, "Invalid movement!");
 
         Game movedGame = makeMovement(movement, gameManager.getGame());
@@ -40,11 +40,7 @@ public class GameMover {
         return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, game.getGameOverValidator(), newHistory);
     }
 
-    private boolean validateMovement(List<MovementValidator> orValidators, List<MovementValidator> andValidators, Movement movement, GameManager gameManager) {
-        return andValidators.stream()
-                .noneMatch(andValidator -> andValidator.isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory()))
-                &&
-                orValidators.stream()
-                        .anyMatch(orValidator -> orValidator.isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory()));
+    private boolean validateMovement(Piece piece, Movement movement, GameManager gameManager) {
+        return piece.getPieceMover().isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
     }
 }

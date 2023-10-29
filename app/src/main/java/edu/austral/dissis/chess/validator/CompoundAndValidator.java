@@ -9,7 +9,6 @@ import lombok.Getter;
 import java.util.List;
 
 @AllArgsConstructor
-@Getter
 public class CompoundAndValidator implements MovementValidator {
     private final List<MovementValidator> andValidators;
 

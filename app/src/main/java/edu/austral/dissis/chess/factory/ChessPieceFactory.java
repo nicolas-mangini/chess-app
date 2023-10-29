@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ChessPieceFactory {
     private final ChessMovementFactory chessMovementFactory;
+    private static int ID;
 
     public ChessPieceFactory() {
         this.chessMovementFactory = new ChessMovementFactory();
@@ -54,353 +55,321 @@ public class ChessPieceFactory {
 
     private Piece createRookW1() {
         return Piece.builder()
-                .id("1")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 1))
                 .pieceId("rook")
-                .orValidators(chessMovementFactory.createRookMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createRookMovements())
                 .build();
     }
 
     private Piece createKnightW1() {
         return Piece.builder()
-                .id("2")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 2))
                 .pieceId("knight")
-                .orValidators(chessMovementFactory.createKnightMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createKnightMovements())
                 .build();
     }
 
     private Piece createBishopW1() {
         return Piece.builder()
-                .id("3")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 3))
                 .pieceId("bishop")
-                .orValidators(chessMovementFactory.createBishopMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createBishopMovements())
                 .build();
     }
 
     private Piece createQueenW1() {
         return Piece.builder()
-                .id("4")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 4))
                 .pieceId("queen")
-                .orValidators(chessMovementFactory.createQueenMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createQueenMovements())
                 .build();
     }
 
     private Piece createKingW1() {
         return Piece.builder()
-                .id("5")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 5))
                 .pieceId("king")
-                .orValidators(chessMovementFactory.createKingMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createKingMovements())
                 .build();
     }
 
     private Piece createBishopW2() {
         return Piece.builder()
-                .id("6")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 6))
                 .pieceId("bishop")
-                .orValidators(chessMovementFactory.createBishopMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createBishopMovements())
                 .build();
     }
 
     private Piece createKnightW2() {
         return Piece.builder()
-                .id("7")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 7))
                 .pieceId("knight")
-                .orValidators(chessMovementFactory.createKnightMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createKnightMovements())
                 .build();
     }
 
     private Piece createRookW2() {
         return Piece.builder()
-                .id("8")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 8))
                 .pieceId("rook")
-                .orValidators(chessMovementFactory.createRookMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createRookMovements())
                 .build();
     }
 
     private Piece createPawnW1() {
         return Piece.builder()
-                .id("9")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 1))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW2() {
         return Piece.builder()
-                .id("10")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 2))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW3() {
         return Piece.builder()
-                .id("11")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 3))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW4() {
         return Piece.builder()
-                .id("12")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 4))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW5() {
         return Piece.builder()
-                .id("13")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 5))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW6() {
         return Piece.builder()
-                .id("14")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 6))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW7() {
         return Piece.builder()
-                .id("15")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 7))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createPawnW8() {
         return Piece.builder()
-                .id("16")
+                .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(7, 8))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.WHITE))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.WHITE))
                 .build();
     }
 
     private Piece createRookB1() {
         return Piece.builder()
-                .id("17")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 8))
                 .pieceId("rook")
-                .orValidators(chessMovementFactory.createRookMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createRookMovements())
                 .build();
     }
 
     private Piece createKnightB1() {
         return Piece.builder()
-                .id("18")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 2))
                 .pieceId("knight")
-                .orValidators(chessMovementFactory.createKnightMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createKnightMovements())
                 .build();
     }
 
     private Piece createBishopB1() {
         return Piece.builder()
-                .id("19")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 3))
                 .pieceId("bishop")
-                .orValidators(chessMovementFactory.createBishopMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createBishopMovements())
                 .build();
     }
 
     private Piece createQueenB1() {
         return Piece.builder()
-                .id("20")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 4))
                 .pieceId("queen")
-                .orValidators(chessMovementFactory.createQueenMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createQueenMovements())
                 .build();
     }
 
     private Piece createKingB1() {
         return Piece.builder()
-                .id("21")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 5))
                 .pieceId("king")
-                .orValidators(chessMovementFactory.createKingMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createKingMovements())
                 .build();
     }
 
     private Piece createBishopB2() {
         return Piece.builder()
-                .id("22")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 6))
                 .pieceId("bishop")
-                .orValidators(chessMovementFactory.createBishopMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createBishopMovements())
                 .build();
     }
 
     private Piece createKnightB2() {
         return Piece.builder()
-                .id("23")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 7))
                 .pieceId("knight")
-                .orValidators(chessMovementFactory.createKnightMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createKnightMovements())
                 .build();
     }
 
     private Piece createRookB2() {
         return Piece.builder()
-                .id("24")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 1))
                 .pieceId("rook")
-                .orValidators(chessMovementFactory.createRookMovements())
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createRookMovements())
                 .build();
     }
 
     private Piece createPawnB1() {
         return Piece.builder()
-                .id("25")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 1))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB2() {
         return Piece.builder()
-                .id("26")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 2))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB3() {
         return Piece.builder()
-                .id("27")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 3))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB4() {
         return Piece.builder()
-                .id("28")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 4))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB5() {
         return Piece.builder()
-                .id("29")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 5))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB6() {
         return Piece.builder()
-                .id("30")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 6))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB7() {
         return Piece.builder()
-                .id("31")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 7))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 
     private Piece createPawnB8() {
         return Piece.builder()
-                .id("32")
+                .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(2, 8))
                 .pieceId("pawn")
-                .orValidators(chessMovementFactory.createPawnMovements(Colour.BLACK))
-                .andValidators(chessMovementFactory.createDefaultValidators())
+                .pieceMover(chessMovementFactory.createPawnMovements(Colour.BLACK))
                 .build();
     }
 }

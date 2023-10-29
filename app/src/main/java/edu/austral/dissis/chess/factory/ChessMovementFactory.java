@@ -1,6 +1,8 @@
 package edu.austral.dissis.chess.factory;
 
 import edu.austral.dissis.chess.common.Colour;
+import edu.austral.dissis.chess.common.PieceMovementsValidator;
+import edu.austral.dissis.chess.common.SimplePieceMovementValidator;
 import edu.austral.dissis.chess.validator.*;
 import edu.austral.dissis.chess.validator.CompoundAndValidator;
 import edu.austral.dissis.chess.validator.piece.*;
@@ -8,8 +10,8 @@ import edu.austral.dissis.chess.validator.piece.*;
 import java.util.List;
 
 public class ChessMovementFactory {
-    public List<MovementValidator> createRookMovements() {
-        return List.of(
+    public PieceMovementsValidator createRookMovements() {
+        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 0),
                         new PathClearValidator(1, 0),
@@ -36,10 +38,11 @@ public class ChessMovementFactory {
                         new EatOwnPieceValidator(false)
                 ))
         );
+        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public List<MovementValidator> createKnightMovements() {
-        return List.of(
+    public PieceMovementsValidator createKnightMovements() {
+        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(2, 1),
                         new EatValidator(true),
@@ -89,10 +92,11 @@ public class ChessMovementFactory {
 
                 ))
         );
+        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public List<MovementValidator> createBishopMovements() {
-        return List.of(
+    public PieceMovementsValidator createBishopMovements() {
+        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 1),
                         new PathClearValidator(1, 1),
@@ -118,10 +122,11 @@ public class ChessMovementFactory {
                         new EatOwnPieceValidator(false)
                 ))
         );
+        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public List<MovementValidator> createQueenMovements() {
-        return List.of(
+    public PieceMovementsValidator createQueenMovements() {
+        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 0),
                         new PathClearValidator(1, 0),
@@ -171,10 +176,11 @@ public class ChessMovementFactory {
                         new EatOwnPieceValidator(false)
                 ))
         );
+        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public List<MovementValidator> createKingMovements() {
-        return List.of(
+    public PieceMovementsValidator createKingMovements() {
+        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(1, 0),
                         new PathClearValidator(1, 0),
@@ -232,12 +238,13 @@ public class ChessMovementFactory {
                         new EatOwnPieceValidator(false)
                 ))
         );
+        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public List<MovementValidator> createPawnMovements(Colour colour) {
+    public PieceMovementsValidator createPawnMovements(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
 
-        return List.of(
+        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, 0),
                         new PathClearValidator(xDirection, 0),
@@ -268,6 +275,7 @@ public class ChessMovementFactory {
                         new EatOwnPieceValidator(false)
                 ))
         );
+        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
     public List<MovementValidator> createDefaultValidators() {

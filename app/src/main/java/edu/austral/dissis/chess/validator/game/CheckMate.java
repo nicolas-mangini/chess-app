@@ -53,11 +53,7 @@ public class CheckMate implements GameOverValidator {
 
     private boolean validateMovement(Movement movement, Board board, List<Movement> movementHistory,
                                      Piece enemyPiece) {
-        return enemyPiece.getAndValidators().stream()
-                .noneMatch(andValidator -> andValidator.isValid(movement, board, movementHistory))
-                &&
-                enemyPiece.getOrValidators().stream()
-                        .anyMatch(orValidator -> orValidator.isValid(movement, board, movementHistory));
+        return enemyPiece.getPieceMover().isValid(movement, board, movementHistory);
     }
 }
 
