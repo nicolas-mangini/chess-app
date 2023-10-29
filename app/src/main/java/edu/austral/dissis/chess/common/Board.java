@@ -2,10 +2,7 @@ package edu.austral.dissis.chess.common;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Getter
 public class Board {
@@ -46,14 +43,14 @@ public class Board {
                 .toList();
     }
 
-    public List<Piece> getPiecesByColour(Colour colour) {
-        List<Piece> pieces = new ArrayList<>();
-        for (Tile tile : tiles) {
-            if (tile.getPiece() != null && tile.getPiece().getColour() == colour) {
-                pieces.add(tile.getPiece());
-            }
-        }
-        return pieces;
+    //pieceId, example: "rook"
+    public Optional<Piece> findPiece(String pieceId, Colour colour) {
+        return tiles.stream()
+                .map(Tile::getPiece)
+                .filter(Objects::nonNull)
+                .filter(piece -> piece.getPieceId().equals(pieceId))
+                .filter(piece -> piece.getColour().equals(colour))
+                .findFirst();
     }
 
     public void setPieceAtTile(Piece piece, Tile tile) {
@@ -69,6 +66,13 @@ public class Board {
                 .map(tile -> Optional.ofNullable(tile.getPiece()))
                 .findFirst()
                 .orElse(Optional.empty());
+    }
+
+    public Optional<Tile> getTileByPiece(Piece piece) {
+        return tiles.stream()
+                .filter(tile -> tile.getPiece() != null)
+                .filter(tile -> tile.getPiece().getId().equals(piece.getId()))
+                .findFirst();
     }
 
     public Optional<Tile> getTile(int x, int y) {

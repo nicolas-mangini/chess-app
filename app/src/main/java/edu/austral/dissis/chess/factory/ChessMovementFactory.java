@@ -268,4 +268,8 @@ public class ChessMovementFactory {
                 ))
         );
     }
+
+    public List<MovementValidator> createDefaultValidators() {
+        return List.of(new KingCheckValidator());
+    }
 }
