@@ -1,13 +1,11 @@
-package edu.austral.dissis.checkers.adapter;
+package edu.austral.dissis.chess;
 
-import edu.austral.dissis.checkers.builder.CheckersPieceBuilder;
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
-import edu.austral.dissis.chess.board.ChessBoard;
 import edu.austral.dissis.chess.game.*;
+import edu.austral.dissis.common.builder.GameBuilder;
+import edu.austral.dissis.chess.builder.ChessGameBuilder;
 import edu.austral.dissis.chess.gui.*;
-import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
@@ -15,21 +13,19 @@ import edu.austral.dissis.common.util.MovementResult;
 import edu.austral.dissis.common.util.Result;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class CheckersGameEngine implements GameEngine {
+public class ChessGameEngine implements GameEngine {
     private final GameEngineAdapter gameEngineAdapter;
     private final GameManager gameManager;
     private final Stack<GameManager> previousGameManagers = new Stack<>();
 
-    public CheckersGameEngine() {
+    public ChessGameEngine() {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
 
-        CheckersPieceBuilder checkersPieceBuilder = new CheckersPieceBuilder();
-        List<Piece> pieces = checkersPieceBuilder.createPieces();
-        Game game = new Game(Colour.WHITE, Colour.BLACK, new ChessBoard(pieces, 8, 8), new EmptyPieces(), new ArrayList<>());
+        GameBuilder gameBuilder = new ChessGameBuilder();
+        Game game = gameBuilder.build();
 
         this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
