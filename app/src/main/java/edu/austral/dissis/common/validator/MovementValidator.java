@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.validator;
 
-import edu.austral.dissis.chess.board.Board;
+import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
 
 import java.util.List;

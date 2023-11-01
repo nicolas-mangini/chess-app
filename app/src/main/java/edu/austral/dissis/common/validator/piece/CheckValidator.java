@@ -1,6 +1,7 @@
 package edu.austral.dissis.common.validator.piece;
 
-import edu.austral.dissis.chess.board.Board;
+import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
@@ -45,7 +46,7 @@ public class CheckValidator implements MovementValidator {
     private boolean checkEnemyValidators(Movement movement, Board board, List<Movement> movementHistory,
                                          Tile kingTile, Tile enemyTile, Piece pieceToMove) {
 
-        Board newBoard = new Board(board);
+        SimpleBoard newBoard = new SimpleBoard(board);
 
         //make the movement
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());

@@ -1,10 +1,11 @@
+/*
 package edu.austral.dissis.checkers.adapter;
 
 import edu.austral.dissis.checkers.builder.CheckersPieceBuilder;
 import edu.austral.dissis.checkers.validator.game.EmptyPieces;
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
-import edu.austral.dissis.chess.board.Board;
+import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.chess.game.*;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.chess.piece.Piece;
@@ -29,7 +30,7 @@ public class CheckersGameEngine implements GameEngine {
 
         CheckersPieceBuilder checkersPieceBuilder = new CheckersPieceBuilder();
         List<Piece> pieces = checkersPieceBuilder.createPieces();
-        Game game = new Game(Colour.WHITE, Colour.BLACK, new Board(pieces, 8, 8), new EmptyPieces(), new ArrayList<>());
+        Game game = new Game(Colour.WHITE, Colour.BLACK, new SimpleBoard(pieces, 8, 8), new EmptyPieces(), new ArrayList<>());
 
         this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
@@ -73,3 +74,4 @@ public class CheckersGameEngine implements GameEngine {
                 gameEngineAdapter.getCurrentTurn(gameManager.getTurnChanger()));
     }
 }
+*/

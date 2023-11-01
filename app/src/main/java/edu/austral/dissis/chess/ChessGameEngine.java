@@ -2,6 +2,7 @@ package edu.austral.dissis.chess;
 
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
+import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
 import edu.austral.dissis.chess.game.*;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.chess.builder.ChessGameBuilder;
@@ -24,7 +25,7 @@ public class ChessGameEngine implements GameEngine {
     public ChessGameEngine() {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
 
-        GameBuilder gameBuilder = new ChessGameBuilder();
+        GameBuilder gameBuilder = new CustomChessGameBuilder();
         Game game = gameBuilder.build();
 
         this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));

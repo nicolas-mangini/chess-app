@@ -7,7 +7,7 @@ import edu.austral.dissis.common.board.Tile;
 
 public class ChessBoardPrinter implements BoardPrinter {
     @Override
-    public String print(Board board) {
+    public String print(SimpleBoard board) {
         StringBuilder boardString = new StringBuilder();
         for (int i = 1; i <= board.getMaxSquare().getX(); i++) {
             boardString.append("\n");

@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.game;
 
-import edu.austral.dissis.chess.board.Board;
+import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.validator.GameOverValidator;

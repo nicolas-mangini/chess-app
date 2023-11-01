@@ -1,5 +1,6 @@
 package edu.austral.dissis.chess.board;
 
+import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.board.BoardPrinter;
@@ -10,11 +11,11 @@ import lombok.Getter;
 import java.util.*;
 
 @Getter
-public class Board implements edu.austral.dissis.common.board.Board {
+public class SimpleBoard implements Board {
     private final List<Tile> tiles;
     private final BoardPrinter printer = new ChessBoardPrinter();
 
-    public Board(List<Piece> pieces, int rows, int columns) {
+    public SimpleBoard(List<Piece> pieces, int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
@@ -32,7 +33,7 @@ public class Board implements edu.austral.dissis.common.board.Board {
     }
 
 
-    public Board(int rows, int columns) {
+    public SimpleBoard(int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
@@ -41,14 +42,20 @@ public class Board implements edu.austral.dissis.common.board.Board {
         }
     }
 
-    public Board(Board toCopy) {
+    public SimpleBoard(Board toCopy) {
         this.tiles = toCopy.getTiles()
                 .stream()
                 .map(Tile::new)
                 .toList();
     }
 
-    //pieceType, example: "rook"
+    @Override
+    public Tile getMaxSquare() {
+        return tiles.stream()
+                .max(Comparator.comparingInt(Tile::getX)
+                        .thenComparingInt(Tile::getY)).get();
+    }
+
     public Optional<Piece> findPiece(PieceType pieceType, Colour colour) {
         return tiles.stream()
                 .map(Tile::getPiece)
@@ -84,11 +91,5 @@ public class Board implements edu.austral.dissis.common.board.Board {
         return tiles.stream()
                 .filter(tile -> tile.getX() == x && tile.getY() == y)
                 .findFirst();
-    }
-
-    public Tile getMaxSquare() {
-        return tiles.stream()
-                .max(Comparator.comparingInt(Tile::getX)
-                        .thenComparingInt(Tile::getY)).get();
     }
 }
