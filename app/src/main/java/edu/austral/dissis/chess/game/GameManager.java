@@ -19,12 +19,13 @@ public class GameManager {
     private final TwoPlayersTurnChanger turnChanger;
 
     public Result<Boolean, Colour> isGameOver(Movement movement) {
-        boolean isGameOver = game.getGameOverValidator().isGameOver(movement, game.getBoard(), game.getHistory()).getKey();
-        if (isGameOver) {
-            // turnChanger already changed the turn (inside makeMovement) in the applyMovement method
-            // and this method is called after that, so we need to get the previous one
-            return new WinResult<>(true, turnChanger.getPreviousTurn());
-        }
-        return new WinResult<>(false, null);
+        return game.getGameOverValidators().stream()
+                .map(validator -> validator.isGameOver(movement, game.getBoard(), game.getHistory()))
+                .filter(Result::getKey)
+                .findFirst()
+                // turnChanger already changed the turn (inside makeMovement) in the applyMovement method
+                // and this method is called after that, so we need to get the previous one
+                .map(result -> new WinResult<>(true, turnChanger.getPreviousTurn()))
+                .orElse(new WinResult<>(false, null));
     }
 }

@@ -41,7 +41,7 @@ public class GameMover {
         List<Movement> newHistory = new ArrayList<>(game.getHistory());
         newHistory.add(movement);
 
-        return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, game.getGameOverValidator(), newHistory);
+        return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, game.getGameOverValidators(), newHistory);
     }
 
     private boolean validateMovement(Piece piece, Movement movement, GameManager gameManager) {

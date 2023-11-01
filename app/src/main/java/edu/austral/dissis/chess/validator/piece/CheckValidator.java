@@ -1,4 +1,4 @@
-package edu.austral.dissis.common.validator.piece;
+package edu.austral.dissis.chess.validator.piece;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.common.board.Board;
@@ -7,6 +7,7 @@ import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.validator.MovementValidator;
+import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.AllArgsConstructor;
 
 import java.util.List;

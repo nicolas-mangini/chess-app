@@ -17,6 +17,6 @@ public class Game {
     private final Colour player1;
     private final Colour player2;
     private final Board board;
-    private final GameOverValidator gameOverValidator;
+    private final List<GameOverValidator> gameOverValidators;
     private final List<Movement> history;
 }
