@@ -13,6 +13,11 @@ public class PathClearValidator implements MovementValidator {
     private final int xDirection;
     private final int yDirection;
 
+    public PathClearValidator(Direction direction) {
+        this.xDirection = direction.getX();
+        this.yDirection = direction.getY();
+    }
+
     @Override
     public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Tile tile = board.getTile(movement.getFrom().getX() + xDirection, movement.getFrom().getY() + yDirection).get();

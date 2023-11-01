@@ -1,6 +1,7 @@
 package edu.austral.dissis.common.validator.piece;
 
 import edu.austral.dissis.chess.board.Board;
+import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.validator.MovementValidator;
@@ -12,6 +13,11 @@ import java.util.List;
 public class DirectionValidator implements MovementValidator {
     private final int xDirection;
     private final int yDirection;
+
+    public DirectionValidator(Direction direction) {
+        this.xDirection = direction.getX();
+        this.yDirection = direction.getY();
+    }
 
     @Override
     public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
