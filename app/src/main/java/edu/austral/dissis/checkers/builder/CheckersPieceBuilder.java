@@ -1,5 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
+import edu.austral.dissis.common.validator.piece.PieceType;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.board.Tile;
@@ -94,7 +95,7 @@ public class CheckersPieceBuilder {
                 .id(String.valueOf(ID++))
                 .colour(colour)
                 .initialPosition(initialPosition)
-                .pieceId("pawn")
+                .pieceType(PieceType.PAWN)
                 .pieceMover(checkersMovementBuilder.createPawnMovements(colour))
                 .build();
     }

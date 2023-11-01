@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.game;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
@@ -32,7 +32,7 @@ public class GameMover {
     }
 
     private Game makeMovement(Movement movement, Game game) {
-        ChessBoard newBoard = new ChessBoard(game.getBoard());
+        Board newBoard = new Board(game.getBoard());
         Piece pieceToMove = newBoard.getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY()).get();
 
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());

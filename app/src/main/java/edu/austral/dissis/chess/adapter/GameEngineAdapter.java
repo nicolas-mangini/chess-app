@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.adapter;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.common.game.Colour;
@@ -10,9 +10,9 @@ import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 import java.util.List;
 
 public interface GameEngineAdapter {
-    BoardSize getBoardSize(ChessBoard board);
+    BoardSize getBoardSize(Board board);
 
-    List<ChessPiece> getCurrentPieces(ChessBoard board);
+    List<ChessPiece> getCurrentPieces(Board board);
 
     PlayerColor getCurrentTurn(TwoPlayersTurnChanger turnChanger);
 

@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.validator.piece;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.validator.MovementValidator;
@@ -22,7 +22,7 @@ public class LimitMovementsValidator implements MovementValidator {
      * like a pawn's initial double movement.
      */
     @Override
-    public boolean isValid(Movement movement, ChessBoard board, List<Movement> movementHistory) {
+    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Piece pieceToMove = movement.getFrom().getPiece();
         long movements = movementHistory.stream()
                 .filter(movement1 -> movement1.getFrom().getPiece().getId().equals(pieceToMove.getId()))

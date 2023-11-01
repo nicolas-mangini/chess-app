@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.adapter;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.common.game.Colour;
@@ -12,19 +12,19 @@ import java.util.Optional;
 
 public class ChessGameEngineAdapter implements GameEngineAdapter {
     @Override
-    public BoardSize getBoardSize(ChessBoard board) {
+    public BoardSize getBoardSize(Board board) {
         return new BoardSize(board.getMaxSquare().getX(), board.getMaxSquare().getY());
     }
 
     @Override
-    public List<ChessPiece> getCurrentPieces(ChessBoard board) {
+    public List<ChessPiece> getCurrentPieces(Board board) {
         return board.getTiles().stream()
                 .filter(tile -> tile.getPiece() != null)
                 .map(tile -> new ChessPiece(
                         tile.getPiece().getId(),
                         adaptPlayerColor(tile.getPiece().getColour()),
                         adaptPosition(tile),
-                        tile.getPiece().getPieceId()))
+                        tile.getPiece().getPieceType().toString().toLowerCase()))
                 .toList();
     }
 

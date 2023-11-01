@@ -1,15 +1,38 @@
 package edu.austral.dissis.chess.builder;
 
+import edu.austral.dissis.common.builder.ValidatorBuilder;
 import edu.austral.dissis.common.game.Colour;
+import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.PieceMovementsValidator;
 import edu.austral.dissis.chess.piece.SimplePieceMovementValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
+import edu.austral.dissis.common.validator.game.CheckMate;
 import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
-public class ChessMovementBuilder {
+public class ChessValidatorBuilder implements ValidatorBuilder {
+    @Override
+    public List<MovementValidator> buildMovementValidators() {
+        return List.of(
+                createRookMovements(),
+                createKnightMovements(),
+                createBishopMovements(),
+                createQueenMovements(),
+                createKingMovements(),
+                createPawnMovements(Colour.WHITE),
+                createPawnMovements(Colour.BLACK)
+        );
+    }
+
+    @Override
+    public List<GameOverValidator> buildGameOverValidators() {
+        return List.of(
+                new CheckMate()
+        );
+    }
+
     public PieceMovementsValidator createRookMovements() {
         List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
@@ -279,6 +302,6 @@ public class ChessMovementBuilder {
     }
 
     public List<MovementValidator> createDefaultValidators() {
-        return List.of(new CheckValidator("king"));
+        return List.of(new CheckValidator(PieceType.KING));
     }
 }

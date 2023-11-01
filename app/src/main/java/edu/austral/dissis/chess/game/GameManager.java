@@ -5,8 +5,11 @@ import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 import edu.austral.dissis.common.util.Result;
 import edu.austral.dissis.common.util.WinResult;
+import edu.austral.dissis.common.validator.GameOverValidator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Getter

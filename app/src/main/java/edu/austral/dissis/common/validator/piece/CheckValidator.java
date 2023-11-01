@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.validator.piece;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
@@ -13,17 +13,17 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class CheckValidator implements MovementValidator {
-    private final String pieceId;
+    private final PieceType pieceType;
 
     @Override
-    public boolean isValid(Movement movement, ChessBoard board, List<Movement> movementHistory) {
+    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Movement movementClone = new Movement(movement);
 
         Piece pieceToMove = movementClone.getFrom().getPiece();
         Colour teamColour = movementClone.getFrom().getPiece().getColour();
         Colour enemyColour = pieceToMove.getColour().equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
 
-        Optional<Piece> king = board.findPiece(this.pieceId, teamColour);
+        Optional<Piece> king = board.findPiece(this.pieceType, teamColour);
         if (king.isEmpty()) return true;
 
         Optional<Tile> kingTile = board.getTileByPiece(king.get());
@@ -32,7 +32,7 @@ public class CheckValidator implements MovementValidator {
         return checkEnemyMovements(movementClone, board, movementHistory, kingTile.get(), enemyColour, pieceToMove);
     }
 
-    private boolean checkEnemyMovements(Movement movement, ChessBoard board, List<Movement> movementHistory,
+    private boolean checkEnemyMovements(Movement movement, Board board, List<Movement> movementHistory,
                                         Tile kingTile, Colour enemyColour, Piece pieceToMove) {
 
         List<Tile> enemyTiles = board.getTiles();
@@ -42,10 +42,10 @@ public class CheckValidator implements MovementValidator {
                 .anyMatch(tile -> checkEnemyValidators(movement, board, movementHistory, kingTile, tile, pieceToMove));
     }
 
-    private boolean checkEnemyValidators(Movement movement, ChessBoard board, List<Movement> movementHistory,
+    private boolean checkEnemyValidators(Movement movement, Board board, List<Movement> movementHistory,
                                          Tile kingTile, Tile enemyTile, Piece pieceToMove) {
 
-        ChessBoard newBoard = new ChessBoard(board);
+        Board newBoard = new Board(board);
 
         //make the movement
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());
@@ -62,7 +62,7 @@ public class CheckValidator implements MovementValidator {
         return canEatKingOriginal && canEatKingNew;
     }
 
-    private boolean enemyCanEat(ChessBoard board, List<Movement> movementHistory,
+    private boolean enemyCanEat(Board board, List<Movement> movementHistory,
                                 Tile enemyTile, Tile tileToMove) {
 
         Piece enemyPiece = enemyTile.getPiece();

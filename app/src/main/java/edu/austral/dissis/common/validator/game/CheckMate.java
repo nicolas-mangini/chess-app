@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.validator.game;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CheckMate implements GameOverValidator {
     @Override
-    public WinResult<Boolean, Colour> isGameOver(Movement movement, ChessBoard board, List<Movement> movementHistory) {
+    public WinResult<Boolean, Colour> isGameOver(Movement movement, Board board, List<Movement> movementHistory) {
         Colour teamColour = movement.getFrom().getPiece().getColour();
         Colour enemyColour = teamColour.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
 
@@ -29,7 +29,7 @@ public class CheckMate implements GameOverValidator {
      * @param enemyColour     The color of the enemy pieces to check for movements.
      * @return True if any piece of the enemy color can make a valid move, false otherwise.
      */
-    private boolean checkAllEnemyMovements(ChessBoard board, List<Movement> movementHistory,
+    private boolean checkAllEnemyMovements(Board board, List<Movement> movementHistory,
                                            Colour enemyColour) {
 
         List<Tile> emptyTiles = board.getTiles()
@@ -55,7 +55,7 @@ public class CheckMate implements GameOverValidator {
         return false;
     }
 
-    private boolean validateMovement(Movement movement, ChessBoard board, List<Movement> movementHistory,
+    private boolean validateMovement(Movement movement, Board board, List<Movement> movementHistory,
                                      Piece enemyPiece) {
         return enemyPiece.getPieceMover().isValid(movement, board, movementHistory);
     }

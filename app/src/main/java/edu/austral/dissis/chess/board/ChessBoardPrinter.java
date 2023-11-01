@@ -7,7 +7,7 @@ import edu.austral.dissis.common.board.Tile;
 
 public class ChessBoardPrinter implements BoardPrinter {
     @Override
-    public String print(ChessBoard board) {
+    public String print(Board board) {
         StringBuilder boardString = new StringBuilder();
         for (int i = 1; i <= board.getMaxSquare().getX(); i++) {
             boardString.append("\n");
@@ -17,9 +17,9 @@ public class ChessBoardPrinter implements BoardPrinter {
                     Piece p = square.getPiece();
                     String pieceString;
                     if (p.getColour() == Colour.WHITE) {
-                        pieceString = p.getPieceId() + p.getId();
+                        pieceString = p.getPieceType() + p.getId();
                     } else {
-                        pieceString = "\u001B[1m" + p.getPieceId() + p.getId() + "\u001B[0m";
+                        pieceString = "\u001B[1m" + p.getPieceType() + p.getId() + "\u001B[0m";
                     }
                     boardString.append("  ").append(pieceString).append("  ");
                 } else {

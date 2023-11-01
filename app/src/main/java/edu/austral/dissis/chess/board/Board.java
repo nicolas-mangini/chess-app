@@ -2,19 +2,19 @@ package edu.austral.dissis.chess.board;
 
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.chess.piece.Piece;
-import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.BoardPrinter;
 import edu.austral.dissis.common.board.Tile;
+import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.Getter;
 
 import java.util.*;
 
 @Getter
-public class ChessBoard implements Board {
+public class Board implements edu.austral.dissis.common.board.Board {
     private final List<Tile> tiles;
     private final BoardPrinter printer = new ChessBoardPrinter();
 
-    public ChessBoard(List<Piece> pieces, int rows, int columns) {
+    public Board(List<Piece> pieces, int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
@@ -32,7 +32,7 @@ public class ChessBoard implements Board {
     }
 
 
-    public ChessBoard(int rows, int columns) {
+    public Board(int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {
             for (int y = 1; y <= columns; y++) {
@@ -41,19 +41,19 @@ public class ChessBoard implements Board {
         }
     }
 
-    public ChessBoard(ChessBoard toCopy) {
+    public Board(Board toCopy) {
         this.tiles = toCopy.getTiles()
                 .stream()
                 .map(Tile::new)
                 .toList();
     }
 
-    //pieceId, example: "rook"
-    public Optional<Piece> findPiece(String pieceId, Colour colour) {
+    //pieceType, example: "rook"
+    public Optional<Piece> findPiece(PieceType pieceType, Colour colour) {
         return tiles.stream()
                 .map(Tile::getPiece)
                 .filter(Objects::nonNull)
-                .filter(piece -> piece.getPieceId().equals(pieceId))
+                .filter(piece -> piece.getPieceType().equals(pieceType))
                 .filter(piece -> piece.getColour().equals(colour))
                 .findFirst();
     }

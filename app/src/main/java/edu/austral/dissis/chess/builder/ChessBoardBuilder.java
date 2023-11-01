@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.builder;
 
-import edu.austral.dissis.chess.board.ChessBoard;
+import edu.austral.dissis.chess.board.Board;
 import edu.austral.dissis.common.builder.BoardBuilder;
 import edu.austral.dissis.common.builder.PieceBuilder;
 
@@ -12,7 +12,7 @@ public class ChessBoardBuilder implements BoardBuilder {
     }
 
     @Override
-    public ChessBoard build() {
-        return new ChessBoard(chessPieceBuilder.buildAll(), 8, 8);
+    public Board build() {
+        return new Board(chessPieceBuilder.buildAll(), 8, 8);
     }
 }
