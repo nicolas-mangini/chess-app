@@ -25,7 +25,7 @@ public class ChessGameEngine implements GameEngine {
     public ChessGameEngine() {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
 
-        GameBuilder gameBuilder = new ChessGameBuilder();
+        GameBuilder gameBuilder = new CustomChessGameBuilder();
         Game game = gameBuilder.build();
 
         this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));

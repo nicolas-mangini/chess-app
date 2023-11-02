@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public class CustomChessGameBuilder implements GameBuilder {
     private final BoardBuilder customChessBoardBuilder;
-    private final CustomChessValidatorBuilder customChessValidatorBuilder;
+    private final CustomChessMovementBuilder customChessMovementBuilder;
 
     public CustomChessGameBuilder() {
         this.customChessBoardBuilder = new CustomChessBoardBuilder();
-        this.customChessValidatorBuilder = new CustomChessValidatorBuilder();
+        this.customChessMovementBuilder = new CustomChessMovementBuilder();
     }
 
     @Override
@@ -22,7 +22,7 @@ public class CustomChessGameBuilder implements GameBuilder {
                 .player1(Colour.WHITE)
                 .player2(Colour.BLACK)
                 .board(customChessBoardBuilder.build())
-                .gameOverValidators(customChessValidatorBuilder.buildGameOverValidators())
+                .gameOverValidators(customChessMovementBuilder.buildGameOverValidators())
                 .history(new ArrayList<>())
                 .build();
     }

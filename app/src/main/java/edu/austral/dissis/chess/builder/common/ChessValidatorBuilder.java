@@ -1,43 +1,16 @@
-package edu.austral.dissis.chess.builder;
+package edu.austral.dissis.chess.builder.common;
 
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
 import edu.austral.dissis.chess.validator.piece.CheckValidator;
-import edu.austral.dissis.common.builder.ValidatorBuilder;
 import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.common.validator.GameOverValidator;
-import edu.austral.dissis.common.validator.PieceMovementsValidator;
-import edu.austral.dissis.chess.piece.SimplePieceMovementValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
-import edu.austral.dissis.chess.validator.game.CheckMate;
 import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
-public class ChessValidatorBuilder implements ValidatorBuilder {
-    @Override
-    public List<MovementValidator> buildMovementValidators() {
+public class ChessValidatorBuilder {
+    public List<MovementValidator> createRookOrValidators() {
         return List.of(
-                createRookMovements(),
-                createKnightMovements(),
-                createBishopMovements(),
-                createQueenMovements(),
-                createKingMovements(),
-                createPawnMovements(Colour.WHITE),
-                createPawnMovements(Colour.BLACK)
-        );
-    }
-
-    @Override
-    public List<GameOverValidator> buildGameOverValidators() {
-        return List.of(
-                new CheckMate(),
-                new EmptyPieces()
-        );
-    }
-
-    public PieceMovementsValidator createRookMovements() {
-        List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
                         new PathClearValidator(Direction.RIGHT),
@@ -64,11 +37,10 @@ public class ChessValidatorBuilder implements ValidatorBuilder {
                         new EatOwnPieceValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public PieceMovementsValidator createKnightMovements() {
-        List<MovementValidator> orValidators = List.of(
+    public List<MovementValidator> createKnightOrValidators() {
+        return List.of(
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(2, 1),
                         new EatValidator(true),
@@ -118,11 +90,10 @@ public class ChessValidatorBuilder implements ValidatorBuilder {
 
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public PieceMovementsValidator createBishopMovements() {
-        List<MovementValidator> orValidators = List.of(
+    public List<MovementValidator> createBishopOrValidators() {
+        return List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_RIGHT),
                         new PathClearValidator(Direction.UP_RIGHT),
@@ -148,11 +119,10 @@ public class ChessValidatorBuilder implements ValidatorBuilder {
                         new EatOwnPieceValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public PieceMovementsValidator createQueenMovements() {
-        List<MovementValidator> orValidators = List.of(
+    public List<MovementValidator> createQueenOrValidators() {
+        return List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
                         new PathClearValidator(Direction.RIGHT),
@@ -202,11 +172,10 @@ public class ChessValidatorBuilder implements ValidatorBuilder {
                         new EatOwnPieceValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public PieceMovementsValidator createKingMovements() {
-        List<MovementValidator> orValidators = List.of(
+    public List<MovementValidator> createKingOrValidators() {
+        return List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
                         new PathClearValidator(Direction.RIGHT),
@@ -264,13 +233,12 @@ public class ChessValidatorBuilder implements ValidatorBuilder {
                         new EatOwnPieceValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
-    public PieceMovementsValidator createPawnMovements(Colour colour) {
+    public List<MovementValidator> createPawnOrValidators(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
 
-        List<MovementValidator> orValidators = List.of(
+        return List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, 0),
                         new PathClearValidator(xDirection, 0),
@@ -301,10 +269,13 @@ public class ChessValidatorBuilder implements ValidatorBuilder {
                         new EatOwnPieceValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, createDefaultValidators());
     }
 
     public List<MovementValidator> createDefaultValidators() {
+        return List.of(new CheckValidator(PieceType.KING));
+    }
+
+    public List<MovementValidator> createGameOverValidators() {
         return List.of(new CheckValidator(PieceType.KING));
     }
 }

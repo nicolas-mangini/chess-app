@@ -7,11 +7,11 @@ import edu.austral.dissis.common.builder.GameBuilder;
 import java.util.ArrayList;
 
 public class ChessGameBuilder implements GameBuilder {
+    private final ChessMovementBuilder chessMovementBuilder;
     private final ChessBoardBuilder chessBoardBuilder;
-    private final ChessValidatorBuilder chessValidatorBuilder;
 
     public ChessGameBuilder() {
-        this.chessValidatorBuilder = new ChessValidatorBuilder();
+        this.chessMovementBuilder = new ChessMovementBuilder();
         this.chessBoardBuilder = new ChessBoardBuilder();
     }
 
@@ -21,7 +21,7 @@ public class ChessGameBuilder implements GameBuilder {
                 .player1(Colour.WHITE)
                 .player2(Colour.BLACK)
                 .board(chessBoardBuilder.build())
-                .gameOverValidators(chessValidatorBuilder.buildGameOverValidators())
+                .gameOverValidators(chessMovementBuilder.buildGameOverValidators())
                 .history(new ArrayList<>())
                 .build();
     }
