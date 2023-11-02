@@ -33,10 +33,7 @@ public class CheckMate implements GameOverValidator {
     private boolean checkAllEnemyMovements(Board board, List<Movement> movementHistory,
                                            Colour enemyColour) {
 
-        List<Tile> emptyTiles = board.getTiles()
-                .stream()
-                .filter(tile -> tile.getPiece() == null)
-                .toList();
+        List<Tile> emptyTiles = board.getTiles();
 
         List<Tile> enemyTiles = board.getTiles()
                 .stream()
