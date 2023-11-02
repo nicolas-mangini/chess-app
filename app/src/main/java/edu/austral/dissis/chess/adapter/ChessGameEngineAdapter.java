@@ -5,7 +5,7 @@ import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
-import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
+import edu.austral.dissis.common.turn.TurnChanger;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +29,7 @@ public class ChessGameEngineAdapter implements GameEngineAdapter {
     }
 
     @Override
-    public PlayerColor getCurrentTurn(TwoPlayersTurnChanger turnChanger) {
+    public PlayerColor getCurrentTurn(TurnChanger turnChanger) {
         if (turnChanger.getCurrentTurn().equals(Colour.WHITE))
             return PlayerColor.WHITE;
         else

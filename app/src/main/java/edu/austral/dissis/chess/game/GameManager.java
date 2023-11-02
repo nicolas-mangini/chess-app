@@ -2,6 +2,7 @@ package edu.austral.dissis.chess.game;
 
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
+import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 import edu.austral.dissis.common.util.Result;
 import edu.austral.dissis.common.util.WinResult;
@@ -16,7 +17,7 @@ import java.util.List;
 public class GameManager {
     private final Game game;
     private final GameMover gameMover;
-    private final TwoPlayersTurnChanger turnChanger;
+    private final TurnChanger turnChanger;
 
     public Result<Boolean, Colour> isGameOver(Movement movement) {
         return game.getGameOverValidators().stream()

@@ -68,7 +68,7 @@ public class CheckValidator implements MovementValidator {
                                 Tile enemyTile, Tile tileToMove) {
 
         Piece enemyPiece = enemyTile.getPiece();
-        return enemyPiece.getPieceMover().getOrValidators()
+        return enemyPiece.getPieceMovementsValidator().getOrValidators()
                 .stream()
                 .anyMatch(validator -> validator.isValid(new Movement(enemyTile, tileToMove), board, movementHistory));
     }

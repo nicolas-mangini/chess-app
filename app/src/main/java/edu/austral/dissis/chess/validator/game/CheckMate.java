@@ -1,6 +1,5 @@
 package edu.austral.dissis.chess.validator.game;
 
-
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.piece.Piece;
@@ -53,7 +52,7 @@ public class CheckMate implements GameOverValidator {
 
     private boolean validateMovement(Movement movement, Board board, List<Movement> movementHistory,
                                      Piece enemyPiece) {
-        return enemyPiece.getPieceMover().isValid(movement, board, movementHistory);
+        return enemyPiece.getPieceMovementsValidator().isValid(movement, board, movementHistory);
     }
 }
 

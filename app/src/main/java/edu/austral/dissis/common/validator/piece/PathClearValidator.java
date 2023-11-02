@@ -1,6 +1,5 @@
 package edu.austral.dissis.common.validator.piece;
 
-import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.board.Tile;

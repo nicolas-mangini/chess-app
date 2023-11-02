@@ -4,7 +4,7 @@ import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
-import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
+import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
 import lombok.AllArgsConstructor;
 
@@ -27,7 +27,7 @@ public class GameMover {
             return new MovementResult<>(gameManager, "Invalid movement!");
 
         Game movedGame = makeMovement(movement, gameManager.getGame());
-        TwoPlayersTurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
+        TurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
         return new MovementResult<>(new GameManager(movedGame, this, nextTurn), null);
     }
 
@@ -45,6 +45,6 @@ public class GameMover {
     }
 
     private boolean validateMovement(Piece piece, Movement movement, GameManager gameManager) {
-        return piece.getPieceMover().isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
+        return piece.getPieceMovementsValidator().isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
     }
 }
