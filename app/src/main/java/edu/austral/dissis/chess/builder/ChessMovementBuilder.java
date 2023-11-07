@@ -31,37 +31,31 @@ public class ChessMovementBuilder implements ValidatorBuilder {
 
     public PieceMovementsValidator createRookMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createRookOrValidators();
-        List<MovementValidator> andValidators = chessValidatorBuilder.createDefaultValidators();
-        return new SimplePieceMovementValidator(orValidators, andValidators);
+        return new SimplePieceMovementValidator(orValidators);
     }
 
     public PieceMovementsValidator createKnightMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createKnightOrValidators();
-        List<MovementValidator> andValidators = chessValidatorBuilder.createDefaultValidators();
-        return new SimplePieceMovementValidator(orValidators, andValidators);
+        return new SimplePieceMovementValidator(orValidators);
     }
 
     public PieceMovementsValidator createBishopMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createBishopOrValidators();
-        List<MovementValidator> andValidators = chessValidatorBuilder.createDefaultValidators();
-        return new SimplePieceMovementValidator(orValidators, andValidators);
+        return new SimplePieceMovementValidator(orValidators);
     }
 
     public PieceMovementsValidator createQueenMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createQueenOrValidators();
-        List<MovementValidator> andValidators = chessValidatorBuilder.createDefaultValidators();
-        return new SimplePieceMovementValidator(orValidators, andValidators);
+        return new SimplePieceMovementValidator(orValidators);
     }
 
     public PieceMovementsValidator createKingMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createKingOrValidators();
-        List<MovementValidator> andValidators = chessValidatorBuilder.createDefaultValidators();
-        return new SimplePieceMovementValidator(orValidators, andValidators);
+        return new SimplePieceMovementValidator(orValidators);
     }
 
     public PieceMovementsValidator createPawnMovements(Colour colour) {
         List<MovementValidator> orValidators = chessValidatorBuilder.createPawnOrValidators(colour);
-        List<MovementValidator> andValidators = chessValidatorBuilder.createDefaultValidators();
-        return new SimplePieceMovementValidator(orValidators, andValidators);
+        return new SimplePieceMovementValidator(orValidators);
     }
 }

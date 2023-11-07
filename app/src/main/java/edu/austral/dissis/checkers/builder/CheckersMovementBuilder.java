@@ -26,6 +26,6 @@ public class CheckersMovementBuilder {
                         new EatValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators, List.of());
+        return new SimplePieceMovementValidator(orValidators);
     }
 }

@@ -17,6 +17,14 @@ import java.util.Optional;
 public class CheckValidator implements MovementValidator {
     private final PieceType pieceType;
 
+    /**
+     * Checks if the given movement would result in the piece being in check.
+     *
+     * @param movement        The movement to be validated.
+     * @param board           The current state of the board.
+     * @param movementHistory A list of previous movements.
+     * @return True if the movement would not result in the piece being in check, false otherwise.
+     */
     @Override
     public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
         Movement movementClone = new Movement(movement);
@@ -26,10 +34,10 @@ public class CheckValidator implements MovementValidator {
         Colour enemyColour = pieceToMove.getColour().equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
 
         Optional<Piece> king = board.findPiece(this.pieceType, teamColour);
-        if (king.isEmpty()) return true;
+        if (king.isEmpty()) return false;
 
         Optional<Tile> kingTile = board.getTileByPiece(king.get());
-        if (kingTile.isEmpty()) return true;
+        if (kingTile.isEmpty()) return false;
 
         return checkEnemyMovements(movementClone, board, movementHistory, kingTile.get(), enemyColour, pieceToMove);
     }
@@ -41,7 +49,7 @@ public class CheckValidator implements MovementValidator {
         return enemyTiles.stream()
                 .filter(tile -> tile.getPiece() != null)
                 .filter(tile -> tile.getPiece().getColour().equals(enemyColour))
-                .anyMatch(tile -> checkEnemyValidators(movement, board, movementHistory, kingTile, tile, pieceToMove));
+                .noneMatch(tile -> checkEnemyValidators(movement, board, movementHistory, kingTile, tile, pieceToMove));
     }
 
     private boolean checkEnemyValidators(Movement movement, Board board, List<Movement> movementHistory,
