@@ -2,7 +2,7 @@ package edu.austral.dissis.checkers.builder;
 
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.PieceMovementsValidator;
-import edu.austral.dissis.chess.piece.SimplePieceMovementValidator;
+import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
 import edu.austral.dissis.common.validator.piece.DirectionValidator;
@@ -26,6 +26,6 @@ public class CheckersMovementBuilder {
                         new EatValidator(false)
                 ))
         );
-        return new SimplePieceMovementValidator(orValidators);
+        return new CompoundOrValidator(orValidators);
     }
 }
