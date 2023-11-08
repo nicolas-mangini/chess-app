@@ -15,16 +15,21 @@ import java.util.Optional;
 @AllArgsConstructor
 public class GameMover {
     public MovementResult<GameManager, String> tryMovement(Movement movement, GameManager gameManager) {
-        Optional<Piece> pieceToMove = gameManager.getGame().getBoard().getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY());
-        if (pieceToMove.isEmpty())
-            return new MovementResult<>(gameManager, "No piece to move, from: %s, %s".formatted(movement.getFrom().getX(), movement.getFrom().getY()));
+        Optional<Piece> pieceToMove = gameManager
+                .getGame()
+                .getBoard()
+                .getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY());
 
+        //piece validator
+        if (!validateMovement(pieceToMove, movement, gameManager))
+            return new MovementResult<>(gameManager, "Invalid movement!");
+
+
+        //Turn validator
         Colour currentColourTurn = gameManager.getTurnChanger().getCurrentTurn();
         if (pieceToMove.get().getColour() != currentColourTurn)
             return new MovementResult<>(gameManager, "Its not your turn!");
 
-        if (!validateMovement(pieceToMove.get(), movement, gameManager))
-            return new MovementResult<>(gameManager, "Invalid movement!");
 
         Game movedGame = makeMovement(movement, gameManager.getGame());
         TurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
@@ -41,10 +46,16 @@ public class GameMover {
         List<Movement> newHistory = new ArrayList<>(game.getHistory());
         newHistory.add(movement);
 
-        return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, game.getGameOverValidators(), newHistory);
+        return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, game.getGameValidators(), game.getGameOverValidators(), newHistory);
     }
 
-    private boolean validateMovement(Piece piece, Movement movement, GameManager gameManager) {
-        return piece.getPieceValidators().isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
+    private boolean validateMovement(Optional<Piece> piece, Movement movement, GameManager gameManager) {
+        return gameManager.getGame()
+                .getGameValidators()
+                .isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory())
+                &&
+                piece.get().
+                        getPieceValidators()
+                        .isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
     }
 }

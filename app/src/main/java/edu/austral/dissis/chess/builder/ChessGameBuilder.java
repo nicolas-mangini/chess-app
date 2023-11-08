@@ -21,6 +21,7 @@ public class ChessGameBuilder implements GameBuilder {
                 .player1(Colour.WHITE)
                 .player2(Colour.BLACK)
                 .board(chessBoardBuilder.build())
+                .gameValidators(chessMovementBuilder.buildGameValidators())
                 .gameOverValidators(chessMovementBuilder.buildGameOverValidators())
                 .history(new ArrayList<>())
                 .build();

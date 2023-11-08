@@ -4,11 +4,12 @@ import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
+import edu.austral.dissis.common.validator.game.NonExistentPieceValidator;
 import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
-public class ChessValidatorBuilder {
+public class ValidatorBuilder {
     public List<MovementValidator> createRookOrValidators() {
         return List.of(
                 new CompoundAndValidator(List.of(
@@ -296,6 +297,12 @@ public class ChessValidatorBuilder {
                         new EatOwnPieceValidator(false),
                         new CheckValidator(PieceType.KING)
                 ))
+        );
+    }
+
+    public List<MovementValidator> createGameValidators() {
+        return List.of(
+                new NonExistentPieceValidator()
         );
     }
 
