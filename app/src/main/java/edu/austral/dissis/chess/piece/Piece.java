@@ -16,13 +16,13 @@ public class Piece {
     private final Colour colour;
     private final Tile initialPosition;
     private final PieceType pieceType;
-    private final MovementValidator pieceMovementsValidator;
+    private final MovementValidator pieceValidators;
 
     public Piece(Piece toCopy) {
         this.id = toCopy.id;
         this.colour = toCopy.colour;
         this.initialPosition = toCopy.initialPosition;
         this.pieceType = toCopy.pieceType;
-        this.pieceMovementsValidator = toCopy.pieceMovementsValidator;
+        this.pieceValidators = toCopy.pieceValidators;
     }
 }

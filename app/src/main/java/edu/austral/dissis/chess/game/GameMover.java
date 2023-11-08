@@ -45,6 +45,6 @@ public class GameMover {
     }
 
     private boolean validateMovement(Piece piece, Movement movement, GameManager gameManager) {
-        return piece.getPieceMovementsValidator().isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
+        return piece.getPieceValidators().isValid(movement, gameManager.getGame().getBoard(), gameManager.getGame().getHistory());
     }
 }

@@ -96,7 +96,7 @@ public class CheckersPieceBuilder {
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceMovementsValidator(checkersMovementBuilder.createPawnMovements(colour))
+                .pieceValidators(checkersMovementBuilder.createPawnMovements(colour))
                 .build();
     }
 }

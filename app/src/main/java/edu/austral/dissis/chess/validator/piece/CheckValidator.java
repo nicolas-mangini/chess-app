@@ -67,11 +67,11 @@ public class CheckValidator implements MovementValidator {
         Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? movement.getTo() : kingTile;
 
         boolean canEatKingOriginal = enemyTile.getPiece()
-                .getPieceMovementsValidator()
+                .getPieceValidators()
                 .isValid(new Movement(enemyTile, tileToMove), board, movementHistory);
 
         boolean canEatKingNew = enemyTile.getPiece()
-                .getPieceMovementsValidator()
+                .getPieceValidators()
                 .isValid(new Movement(enemyTile, tileToMove), newBoard, movementHistory);
 
         return canEatKingOriginal && canEatKingNew;
