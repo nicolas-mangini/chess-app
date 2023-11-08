@@ -66,11 +66,11 @@ public class CheckValidator implements MovementValidator {
         try {
             boolean canEatKingOriginal = enemyTile.getPiece()
                     .getPieceValidators()
-                    .isValid(new Movement(enemyTile, tileToMove), board, movementHistory);
+                    .isValid(new Movement(enemyTile, tileToMove), board, gameManager);
 
             boolean canEatKingNew = enemyTile.getPiece()
                     .getPieceValidators()
-                    .isValid(new Movement(enemyTile, tileToMove), newBoard, movementHistory);
+                    .isValid(new Movement(enemyTile, tileToMove), newBoard, gameManager);
             return canEatKingOriginal && canEatKingNew;
         } catch (StackOverflowError e) {
             System.out.println();
