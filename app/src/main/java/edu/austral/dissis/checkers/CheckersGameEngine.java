@@ -1,14 +1,13 @@
-/*
-package edu.austral.dissis.checkers.adapter;
+package edu.austral.dissis.checkers;
 
-import edu.austral.dissis.checkers.builder.CheckersPieceBuilder;
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
-import edu.austral.dissis.chess.adapter.GameEngineAdapter;
+import edu.austral.dissis.checkers.builder.CheckersGameBuilder;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
-import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.game.*;
+import edu.austral.dissis.chess.adapter.GameEngineAdapter;
+import edu.austral.dissis.chess.game.Game;
+import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.chess.game.GameMover;
 import edu.austral.dissis.chess.gui.*;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
@@ -16,7 +15,6 @@ import edu.austral.dissis.common.util.MovementResult;
 import edu.austral.dissis.common.util.Result;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -28,9 +26,8 @@ public class CheckersGameEngine implements GameEngine {
     public CheckersGameEngine() {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
 
-        CheckersPieceBuilder checkersPieceBuilder = new CheckersPieceBuilder();
-        List<Piece> pieces = checkersPieceBuilder.createPieces();
-        Game game = new Game(Colour.WHITE, Colour.BLACK, new SimpleBoard(pieces, 8, 8), new EmptyPieces(), new ArrayList<>());
+        GameBuilder gameBuilder = new CheckersGameBuilder();
+        Game game = gameBuilder.build();
 
         this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
@@ -74,4 +71,3 @@ public class CheckersGameEngine implements GameEngine {
                 gameEngineAdapter.getCurrentTurn(gameManager.getTurnChanger()));
     }
 }
-*/

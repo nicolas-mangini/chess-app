@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.builder.custom;
 
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
+import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.GameOverValidator;
@@ -10,10 +11,10 @@ import edu.austral.dissis.chess.validator.game.CheckMate;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class CustomChessMovementBuilder implements edu.austral.dissis.common.builder.ValidatorBuilder {
+public class CustomChessMovementBuilderI implements ValidatorBuilderI {
     private final ValidatorBuilder validatorBuilder;
 
-    public CustomChessMovementBuilder() {
+    public CustomChessMovementBuilderI() {
         this.validatorBuilder = new ValidatorBuilder();
     }
 

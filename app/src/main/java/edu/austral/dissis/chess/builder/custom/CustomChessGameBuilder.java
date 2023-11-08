@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 public class CustomChessGameBuilder implements GameBuilder {
     private final BoardBuilder customChessBoardBuilder;
-    private final CustomChessMovementBuilder customChessMovementBuilder;
+    private final CustomChessMovementBuilderI customChessMovementBuilder;
 
     public CustomChessGameBuilder() {
         this.customChessBoardBuilder = new CustomChessBoardBuilder();
-        this.customChessMovementBuilder = new CustomChessMovementBuilder();
+        this.customChessMovementBuilder = new CustomChessMovementBuilderI();
     }
 
     @Override

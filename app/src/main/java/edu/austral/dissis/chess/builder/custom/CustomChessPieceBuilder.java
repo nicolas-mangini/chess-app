@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CustomChessPieceBuilder implements PieceBuilder {
-    private final CustomChessMovementBuilder customChessMovementBuilder;
+    private final CustomChessMovementBuilderI customChessMovementBuilder;
     private static int ID;
 
     public CustomChessPieceBuilder() {
-        this.customChessMovementBuilder = new CustomChessMovementBuilder();
+        this.customChessMovementBuilder = new CustomChessMovementBuilderI();
     }
 
     @Override

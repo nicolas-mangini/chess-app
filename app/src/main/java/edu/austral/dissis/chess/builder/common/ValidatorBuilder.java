@@ -301,10 +301,17 @@ public class ValidatorBuilder {
         );
     }
 
-    public List<MovementValidator> createGameValidators() {
+    public List<MovementValidator> createChessGameValidators() {
         return List.of(
                 new NonExistentPieceValidator(),
                 new ChessTurnValidator()
+        );
+    }
+
+    public List<MovementValidator> createCheckersGameValidators() {
+        return List.of(
+                new NonExistentPieceValidator()
+                //new CheckersTurnValidator()
         );
     }
 

@@ -1,5 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
+import edu.austral.dissis.common.builder.PieceBuilder;
 import edu.austral.dissis.common.validator.piece.PieceType;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.chess.piece.Piece;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class CheckersPieceBuilder {
+public class CheckersPieceBuilder implements PieceBuilder {
     private final CheckersMovementBuilder checkersMovementBuilder;
     private static int ID;
 
@@ -17,7 +18,8 @@ public class CheckersPieceBuilder {
         this.checkersMovementBuilder = new CheckersMovementBuilder();
     }
 
-    public List<Piece> createPieces() {
+    @Override
+    public List<Piece> buildAll() {
         return Stream.concat(createWhitePieces().stream(), createBlackPieces().stream())
                 .toList();
     }
