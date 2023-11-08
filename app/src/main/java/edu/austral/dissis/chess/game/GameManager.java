@@ -21,7 +21,7 @@ public class GameManager {
 
     public Result<Boolean, Colour> isGameOver(Movement movement) {
         return game.getGameOverValidators().stream()
-                .map(validator -> validator.isGameOver(movement, game.getBoard(), game.getHistory()))
+                .map(validator -> validator.isGameOver(movement, game.getBoard(), this))
                 .filter(Result::getKey)
                 .findFirst()
                 // turnChanger already changed the turn (inside makeMovement) in the applyMovement method

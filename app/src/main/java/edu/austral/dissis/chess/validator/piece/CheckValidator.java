@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.validator.piece;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.chess.piece.Piece;
@@ -19,14 +20,10 @@ public class CheckValidator implements MovementValidator {
 
     /**
      * Checks if the given movement would result in the piece being in check.
-     *
-     * @param movement        The movement to be validated.
-     * @param board           The current state of the board.
-     * @param movementHistory A list of previous movements.
      * @return True if the movement would not result in the piece being in check, false otherwise.
      */
     @Override
-    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
+    public boolean isValid(Movement movement, Board board, GameManager gameManager) {
         Movement movementClone = new Movement(movement);
 
         Piece pieceToMove = movementClone.getFrom().getPiece();
@@ -39,20 +36,20 @@ public class CheckValidator implements MovementValidator {
         Optional<Tile> kingTile = board.getTileByPiece(king.get());
         if (kingTile.isEmpty()) return false;
 
-        return checkEnemyMovements(movementClone, board, movementHistory, kingTile.get(), enemyColour, pieceToMove);
+        return checkEnemyMovements(movementClone, board, gameManager, kingTile.get(), enemyColour, pieceToMove);
     }
 
-    private boolean checkEnemyMovements(Movement movement, Board board, List<Movement> movementHistory,
+    private boolean checkEnemyMovements(Movement movement, Board board, GameManager gameManager,
                                         Tile kingTile, Colour enemyColour, Piece pieceToMove) {
 
         List<Tile> enemyTiles = board.getTiles();
         return enemyTiles.stream()
                 .filter(tile -> tile.getPiece() != null)
                 .filter(tile -> tile.getPiece().getColour().equals(enemyColour))
-                .noneMatch(tile -> checkEnemyValidators(movement, board, movementHistory, kingTile, tile, pieceToMove));
+                .noneMatch(tile -> checkEnemyValidators(movement, board, gameManager, kingTile, tile, pieceToMove));
     }
 
-    private boolean checkEnemyValidators(Movement movement, Board board, List<Movement> movementHistory,
+    private boolean checkEnemyValidators(Movement movement, Board board, GameManager gameManager,
                                          Tile kingTile, Tile enemyTile, Piece pieceToMove) {
 
         SimpleBoard newBoard = new SimpleBoard(board);
@@ -68,11 +65,11 @@ public class CheckValidator implements MovementValidator {
 
         boolean canEatKingOriginal = enemyTile.getPiece()
                 .getPieceValidators()
-                .isValid(new Movement(enemyTile, tileToMove), board, movementHistory);
+                .isValid(new Movement(enemyTile, tileToMove), board, gameManager);
 
         boolean canEatKingNew = enemyTile.getPiece()
                 .getPieceValidators()
-                .isValid(new Movement(enemyTile, tileToMove), newBoard, movementHistory);
+                .isValid(new Movement(enemyTile, tileToMove), newBoard, gameManager);
 
         return canEatKingOriginal && canEatKingNew;
     }

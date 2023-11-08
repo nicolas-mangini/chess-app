@@ -1,5 +1,6 @@
 package edu.austral.dissis.checkers.validator.game;
 
+import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class EmptyPieces implements GameOverValidator {
     @Override
-    public WinResult<Boolean, Colour> isGameOver(Movement movement, Board board, List<Movement> movementHistory) {
+    public WinResult<Boolean, Colour> isGameOver(Movement movement, Board board, GameManager gameManager) {
         Colour teamColour = movement.getFrom().getPiece().getColour();
 
         boolean hasPieces = board.getTiles()

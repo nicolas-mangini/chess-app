@@ -1,5 +1,6 @@
 package edu.austral.dissis.chess.builder.common;
 
+import edu.austral.dissis.chess.validator.game.ChessTurnValidator;
 import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
@@ -302,7 +303,8 @@ public class ValidatorBuilder {
 
     public List<MovementValidator> createGameValidators() {
         return List.of(
-                new NonExistentPieceValidator()
+                new NonExistentPieceValidator(),
+                new ChessTurnValidator()
         );
     }
 

@@ -1,5 +1,6 @@
 package edu.austral.dissis.common.validator.piece;
 
+import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.board.Tile;
@@ -19,7 +20,7 @@ public class PathClearValidator implements MovementValidator {
     }
 
     @Override
-    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
+    public boolean isValid(Movement movement, Board board, GameManager gameManager) {
         Tile tile = board.getTile(movement.getFrom().getX() + xDirection, movement.getFrom().getY() + yDirection).get();
         while (!tile.equalCoordinate(movement.getTo())) {
             if (tile.getPiece() != null) return false;

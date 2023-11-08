@@ -1,5 +1,6 @@
 package edu.austral.dissis.common.validator.piece;
 
+import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.board.Tile;
@@ -19,7 +20,7 @@ public class DirectionValidator implements MovementValidator {
     }
 
     @Override
-    public boolean isValid(Movement movement, Board board, List<Movement> movementHistory) {
+    public boolean isValid(Movement movement, Board board, GameManager gameManager) {
         Tile position = new Tile(movement.getFrom().getX() + xDirection, movement.getFrom().getY() + yDirection);
         while (!position.equalCoordinate(movement.getTo())) {
             if (isOutsideBoard(position, board)) return false;
