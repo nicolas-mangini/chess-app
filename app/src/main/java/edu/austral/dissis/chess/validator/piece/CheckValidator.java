@@ -52,7 +52,7 @@ public class CheckValidator implements MovementValidator {
     private boolean checkEnemyValidators(Movement movement, Board board, GameManager gameManager,
                                          Tile kingTile, Tile enemyTile, Piece pieceToMove) {
 
-        SimpleBoard newBoard = new SimpleBoard(board);
+        Board newBoard = new SimpleBoard(board);
 
         //make the movement
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());
@@ -63,14 +63,18 @@ public class CheckValidator implements MovementValidator {
 
         Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? movement.getTo() : kingTile;
 
-        boolean canEatKingOriginal = enemyTile.getPiece()
-                .getPieceValidators()
-                .isValid(new Movement(enemyTile, tileToMove), board, gameManager);
+        try {
+            boolean canEatKingOriginal = enemyTile.getPiece()
+                    .getPieceValidators()
+                    .isValid(new Movement(enemyTile, tileToMove), board, movementHistory);
 
-        boolean canEatKingNew = enemyTile.getPiece()
-                .getPieceValidators()
-                .isValid(new Movement(enemyTile, tileToMove), newBoard, gameManager);
-
-        return canEatKingOriginal && canEatKingNew;
+            boolean canEatKingNew = enemyTile.getPiece()
+                    .getPieceValidators()
+                    .isValid(new Movement(enemyTile, tileToMove), newBoard, movementHistory);
+            return canEatKingOriginal && canEatKingNew;
+        } catch (StackOverflowError e) {
+            System.out.println();
+        }
+        return false;
     }
 }
