@@ -1,7 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
 import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.common.validator.PieceMovementsValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
@@ -12,7 +11,7 @@ import edu.austral.dissis.common.validator.piece.IncrementValidator;
 import java.util.List;
 
 public class CheckersMovementBuilder {
-    public PieceMovementsValidator createPawnMovements(Colour colour) {
+    public MovementValidator createPawnMovements(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
         List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(

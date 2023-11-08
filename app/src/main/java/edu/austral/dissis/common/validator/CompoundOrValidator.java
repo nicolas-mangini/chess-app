@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import java.util.List;
 
 @AllArgsConstructor
-public class CompoundOrValidator implements PieceMovementsValidator {
+public class CompoundOrValidator implements MovementValidator {
     private final List<MovementValidator> orValidators;
 
     @Override

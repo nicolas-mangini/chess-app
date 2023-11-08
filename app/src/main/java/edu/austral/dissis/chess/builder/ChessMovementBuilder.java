@@ -5,7 +5,6 @@ import edu.austral.dissis.chess.builder.common.ChessValidatorBuilder;
 import edu.austral.dissis.common.builder.ValidatorBuilder;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.GameOverValidator;
-import edu.austral.dissis.common.validator.PieceMovementsValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
 import edu.austral.dissis.chess.validator.game.CheckMate;
@@ -27,32 +26,32 @@ public class ChessMovementBuilder implements ValidatorBuilder {
         );
     }
 
-    public PieceMovementsValidator createRookMovements() {
+    public MovementValidator createRookMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createRookOrValidators();
         return new CompoundOrValidator(orValidators);
     }
 
-    public PieceMovementsValidator createKnightMovements() {
+    public MovementValidator createKnightMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createKnightOrValidators();
         return new CompoundOrValidator(orValidators);
     }
 
-    public PieceMovementsValidator createBishopMovements() {
+    public MovementValidator createBishopMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createBishopOrValidators();
         return new CompoundOrValidator(orValidators);
     }
 
-    public PieceMovementsValidator createQueenMovements() {
+    public MovementValidator createQueenMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createQueenOrValidators();
         return new CompoundOrValidator(orValidators);
     }
 
-    public PieceMovementsValidator createKingMovements() {
+    public MovementValidator createKingMovements() {
         List<MovementValidator> orValidators = chessValidatorBuilder.createKingOrValidators();
         return new CompoundOrValidator(orValidators);
     }
 
-    public PieceMovementsValidator createPawnMovements(Colour colour) {
+    public MovementValidator createPawnMovements(Colour colour) {
         List<MovementValidator> orValidators = chessValidatorBuilder.createPawnOrValidators(colour);
         return new CompoundOrValidator(orValidators);
     }
