@@ -56,12 +56,16 @@ public class CheckValidator implements MovementValidator {
         //to escape from check eating
         if (movement.getTo().equalCoordinate(enemyTile)) return false;
 
-        Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? movement.getTo() : kingTile;
+        //because the piece to move is not saved yet in movement.getTo()
+        Tile getToTileWithPiece = new Tile(movement.getTo());
+        getToTileWithPiece.setPiece(pieceToMove);
 
-        boolean canEatKingOriginal = enemyCanEat(board, movementHistory, enemyTile, tileToMove);
+        Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? getToTileWithPiece : kingTile;
+
+        //boolean canEatKingOriginal = enemyCanEat(board, movementHistory, enemyTile, tileToMove);
         boolean canEatKingNew = enemyCanEat(newBoard, movementHistory, enemyTile, tileToMove);
 
-        return canEatKingOriginal && canEatKingNew;
+        return /*canEatKingOriginal &&*/ canEatKingNew;
     }
 
     private boolean enemyCanEat(Board board, List<Movement> movementHistory,
