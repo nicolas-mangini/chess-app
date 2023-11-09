@@ -11,6 +11,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 @Getter
+//TODO integrate with checkers piece
 public class Piece {
     private final String id;
     private final Colour colour;

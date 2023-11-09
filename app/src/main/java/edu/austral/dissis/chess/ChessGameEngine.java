@@ -2,7 +2,6 @@ package edu.austral.dissis.chess;
 
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
-import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
 import edu.austral.dissis.chess.game.*;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.chess.builder.ChessGameBuilder;
@@ -28,7 +27,7 @@ public class ChessGameEngine implements GameEngine {
         GameBuilder gameBuilder = new ChessGameBuilder();
         Game game = gameBuilder.build();
 
-        this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
+        this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
     }
 
@@ -38,7 +37,7 @@ public class ChessGameEngine implements GameEngine {
         GameManager previousGameManager = previousGameManagers.peek();
         Movement movementAdapted = gameEngineAdapter.adaptMovement(move, previousGameManager.getGame().getBoard().getTiles());
 
-        MovementResult<GameManager, String> tryMovement = previousGameManager.getGameMover().tryMovement(movementAdapted, previousGameManager);
+        MovementResult<GameManager, String> tryMovement = previousGameManager.getChessGameMover().tryMovement(movementAdapted, previousGameManager);
 
         if (tryMovement.getValue().isPresent()) {
             return new InvalidMove(tryMovement.getValue().get());

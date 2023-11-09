@@ -1,11 +1,12 @@
 package edu.austral.dissis.checkers;
 
 import edu.austral.dissis.checkers.builder.CheckersGameBuilder;
+import edu.austral.dissis.checkers.game.CheckersGameMover;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
 import edu.austral.dissis.chess.game.Game;
 import edu.austral.dissis.chess.game.GameManager;
-import edu.austral.dissis.chess.game.GameMover;
+import edu.austral.dissis.chess.game.ChessGameMover;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.game.Colour;
@@ -29,7 +30,7 @@ public class CheckersGameEngine implements GameEngine {
         GameBuilder gameBuilder = new CheckersGameBuilder();
         Game game = gameBuilder.build();
 
-        this.gameManager = new GameManager(game, new GameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
+        this.gameManager = new GameManager(game, new CheckersGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
     }
 
@@ -39,7 +40,7 @@ public class CheckersGameEngine implements GameEngine {
         GameManager previousGameManager = previousGameManagers.peek();
         Movement movementAdapted = gameEngineAdapter.adaptMovement(move, previousGameManager.getGame().getBoard().getTiles());
 
-        MovementResult<GameManager, String> tryMovement = previousGameManager.getGameMover().tryMovement(movementAdapted, previousGameManager);
+        MovementResult<GameManager, String> tryMovement = previousGameManager.getChessGameMover().tryMovement(movementAdapted, previousGameManager);
 
         if (tryMovement.getValue().isPresent()) {
             return new InvalidMove(tryMovement.getValue().get());

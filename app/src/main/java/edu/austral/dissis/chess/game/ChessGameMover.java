@@ -2,7 +2,7 @@ package edu.austral.dissis.chess.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.chess.piece.Piece;
-import edu.austral.dissis.common.game.Colour;
+import edu.austral.dissis.common.game.GameMover;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class GameMover {
+public class ChessGameMover implements GameMover {
+    @Override
     public MovementResult<GameManager, String> tryMovement(Movement movement, GameManager gameManager) {
         Optional<Piece> pieceToMove = gameManager
                 .getGame()
