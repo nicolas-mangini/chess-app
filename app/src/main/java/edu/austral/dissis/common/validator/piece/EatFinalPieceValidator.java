@@ -7,11 +7,10 @@ import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class EatValidator implements MovementValidator {
+public class EatFinalPieceValidator implements MovementValidator {
     private final boolean canEat;
 
     /**
