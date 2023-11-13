@@ -2,6 +2,7 @@ package edu.austral.dissis.checkers.builder;
 
 import edu.austral.dissis.checkers.validator.game.EmptyPieces;
 import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
+import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
 import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.builder.ValidatorBuilderI;
@@ -63,15 +64,24 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
                         new EatFinalPieceValidator(false),
                         new EatOwnPieceValidator(false),
                         new EatMiddlePieceValidator()
-                ))/*,
-                //consecutive movements
+                )),
+                //eat consecutive movements
                 new CompoundAndValidator(List.of(
-                        new DirectionValidator(xDirection, 1),
+                        new DirectionValidator(-xDirection, -1),
                         new IncrementValidator(2),
                         new EatFinalPieceValidator(false),
-                        // if piece has eaten in previous movement, then it can eat again
-                        new CanEatIfAlreadyEatenValidator()
-                ))*/
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator(),
+                        new EatenBeforeValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-xDirection, 1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator(),
+                        new EatenBeforeValidator()
+                ))
         );
         return new CompoundOrValidator(orValidators);
     }
