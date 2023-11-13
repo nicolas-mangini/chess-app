@@ -60,13 +60,13 @@ public class CheckersGameMover implements GameMover {
                     .filter(tile -> Math.abs(tile.getX() - newPieceTile.getX()) == 2)
                     .filter(tile -> Math.abs(tile.getY() - newPieceTile.getY()) == 2)
                     .filter(tile -> tile.getPiece() == null)
-/*                    .filter(tile -> {
+                    .filter(tile -> {
                         Tile middleTile = newBoard.getTile(
-                                (movement.getFrom().getX() + movement.getTo().getX()) / 2,
-                                (movement.getFrom().getY() + movement.getTo().getY()) / 2
+                                (tile.getX() + newPieceTile.getX()) / 2,
+                                (tile.getY() + newPieceTile.getY()) / 2
                         ).get();
                         return middleTile.getPiece() != null;
-                    })*/
+                    })
                     .toList();
 
             for (Tile possibleTile : possibleEatTiles) {
