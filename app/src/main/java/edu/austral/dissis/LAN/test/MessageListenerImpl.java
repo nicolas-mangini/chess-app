@@ -1,4 +1,4 @@
-package edu.austral.dissis.LAN.server.listener;
+package edu.austral.dissis.LAN.test;
 
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;

@@ -1,7 +1,6 @@
 
-package edu.austral.dissis.LAN.server;
+package edu.austral.dissis.LAN.test;
 
-import edu.austral.dissis.LAN.server.listener.ServerConnectionCollectorListener;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.Server;
 import edu.austral.ingsis.clientserver.netty.server.NettyServerBuilder;
