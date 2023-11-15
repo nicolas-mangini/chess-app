@@ -1,6 +1,7 @@
+/*
 package edu.austral.dissis.chess.builder.custom;
 
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.builder.PieceBuilder;
 import edu.austral.dissis.common.game.Colour;
@@ -268,4 +269,4 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .pieceValidators(customChessMovementBuilder.createChancellorMovements())
                 .build();
     }
-}
+}*/

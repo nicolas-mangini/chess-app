@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.game.GameMover;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TurnChanger;
@@ -48,7 +48,7 @@ public class ChessGameMover implements GameMover {
                 .isValid(movement, gameManager.getGame().getBoard(), gameManager)
                 &&
                 piece.get().
-                        getPieceValidators()
+                        getPieceValidator()
                         .isValid(movement, gameManager.getGame().getBoard(), gameManager);
     }
 }

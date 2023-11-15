@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.board;
 
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

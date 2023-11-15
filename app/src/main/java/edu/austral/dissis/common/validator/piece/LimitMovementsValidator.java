@@ -3,11 +3,9 @@ package edu.austral.dissis.common.validator.piece;
 import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.validator.MovementValidator;
 import lombok.AllArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 public class LimitMovementsValidator implements MovementValidator {

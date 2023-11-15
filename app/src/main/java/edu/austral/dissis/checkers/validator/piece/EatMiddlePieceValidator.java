@@ -1,7 +1,6 @@
 package edu.austral.dissis.checkers.validator.piece;
 
 import edu.austral.dissis.chess.game.GameManager;
-import edu.austral.dissis.chess.piece.Piece;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.game.Movement;
@@ -17,6 +16,10 @@ public class EatMiddlePieceValidator implements MovementValidator {
                 (initial.getX() + movement.getTo().getX()) / 2,
                 (initial.getY() + movement.getTo().getY()) / 2
         );
-        return middle.isPresent() && middle.get().getPiece() != null;
+        return middle.isPresent()
+                &&
+                middle.get().getPiece() != null
+                &&
+                middle.get().getPiece().getColour() != initial.getPiece().getColour();
     }
 }

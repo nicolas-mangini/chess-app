@@ -3,7 +3,7 @@ package edu.austral.dissis.checkers.game;
 import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.chess.game.Game;
 import edu.austral.dissis.chess.game.GameManager;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.game.GameMover;
@@ -72,7 +72,7 @@ public class CheckersGameMover implements GameMover {
                 .isValid(movement, gameManager.getGame().getBoard(), gameManager)
                 &&
                 piece.get().
-                        getPieceValidators()
+                        getPieceValidator()
                         .isValid(movement, gameManager.getGame().getBoard(), gameManager);
     }
 

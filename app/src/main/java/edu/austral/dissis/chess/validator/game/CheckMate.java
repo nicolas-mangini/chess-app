@@ -3,7 +3,7 @@ package edu.austral.dissis.chess.validator.game;
 import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.util.WinResult;
@@ -49,7 +49,7 @@ public class CheckMate implements GameOverValidator {
 
     private boolean validateMovement(Movement movement, Board board, GameManager gameManager,
                                      Piece enemyPiece) {
-        return enemyPiece.getPieceValidators().isValid(movement, board, gameManager);
+        return enemyPiece.getPieceValidator().isValid(movement, board, gameManager);
     }
 }
 

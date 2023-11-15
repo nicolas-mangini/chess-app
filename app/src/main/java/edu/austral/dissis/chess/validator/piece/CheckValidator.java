@@ -4,7 +4,7 @@ import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.chess.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.validator.MovementValidator;
@@ -73,8 +73,8 @@ public class CheckValidator implements MovementValidator {
                     .isValid(new Movement(enemyTile, tileToMove), board, gameManager);*/
 
             boolean canEatKingNew = enemyTile.getPiece()
-                    .getPieceValidators()
-                    .isValid(new Movement(enemyTile, tileToMove), newBoard, gameManager);
+                    .getPieceValidator()
+                    .isValidClassic(new Movement(enemyTile, tileToMove), newBoard, gameManager);
             return /*canEatKingOriginal &&*/ canEatKingNew;
         } catch (StackOverflowError e) {
             System.out.println();

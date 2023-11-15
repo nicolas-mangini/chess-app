@@ -3,7 +3,7 @@ package edu.austral.dissis.checkers.builder;
 import edu.austral.dissis.common.builder.PieceBuilder;
 import edu.austral.dissis.common.validator.piece.PieceType;
 import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Tile;
 
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class CheckersPieceBuilder implements PieceBuilder {
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidators(checkersMovementBuilder.createPawnMovements(colour))
+                .pieceValidator(checkersMovementBuilder.createPawnMovements(colour))
                 .build();
     }
 }

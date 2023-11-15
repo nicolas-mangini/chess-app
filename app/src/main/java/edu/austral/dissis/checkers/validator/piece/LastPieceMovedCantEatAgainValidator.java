@@ -1,7 +1,7 @@
 package edu.austral.dissis.checkers.validator.piece;
 
 import edu.austral.dissis.chess.game.GameManager;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.game.Movement;
@@ -18,10 +18,14 @@ public class LastPieceMovedCantEatAgainValidator implements MovementValidator {
     public boolean isValid(Movement movement, Board board, GameManager gameManager) {
         List<Movement> history = gameManager.getGame().getHistory();
         if (history.isEmpty()) return true;
+        Movement previousMovement = history.get(history.size() - 1);
+        if (Math.abs(previousMovement.getFrom().getX() - previousMovement.getTo().getX()) != 2){
+            return true;
+        }
 
         Piece pieceToMove = movement.getFrom().getPiece();
         Piece lastMovedPiece = history.get(history.size() - 1).getFrom().getPiece();
-        Tile lastMovedPieceTile = movement.getFrom();
+        Tile lastMovedPieceTile = board.getTileByPiece(lastMovedPiece).get();
         List<Tile> possibleEatTiles = board.getTiles().stream()
                 .filter(tile -> Math.abs(tile.getX() - lastMovedPieceTile.getX()) == 2)
                 .filter(tile -> Math.abs(tile.getY() - lastMovedPieceTile.getY()) == 2)
@@ -47,6 +51,6 @@ public class LastPieceMovedCantEatAgainValidator implements MovementValidator {
 
     private boolean validatePieceMovement(Movement movement, Board board, GameManager gameManager) {
         Piece piece = movement.getFrom().getPiece();
-        return piece.getPieceValidators().isValid(movement, board, gameManager);
+        return piece.getPieceValidator().isValidClassic(movement, board, gameManager);
     }
 }

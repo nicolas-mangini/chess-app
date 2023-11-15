@@ -8,6 +8,7 @@ import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
 import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.game.Colour;
+import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.GameOverValidator;
@@ -35,7 +36,7 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
         return new CompoundAndValidator(gameValidators);
     }
 
-    public MovementValidator createPawnMovements(Colour colour) {
+    public PieceValidator createPawnMovements(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
         List<MovementValidator> orValidators = List.of(
                 //simple movements
@@ -84,10 +85,15 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
                         new EatenBeforeValidator()
                 ))
         );
-        return new CompoundOrValidator(orValidators);
+
+        List<MovementValidator> specialAndValidators = List.of(
+                new LastPieceMovedCantEatAgainValidator()
+        );
+
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialAndValidators));
     }
 
-    public MovementValidator createQueenValidators() {
+/*    public MovementValidator createQueenValidators() {
         List<MovementValidator> orValidators = List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP),
@@ -96,5 +102,5 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
                 ))
         );
         return new CompoundOrValidator(orValidators);
-    }
+    }*/
 }

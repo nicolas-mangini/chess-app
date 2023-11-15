@@ -1,8 +1,9 @@
+/*
 package edu.austral.dissis.chess.builder;
 
 import edu.austral.dissis.common.validator.piece.PieceType;
 import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.builder.PieceBuilder;
 
@@ -268,4 +269,4 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .pieceValidators(chessMovementBuilder.createRookMovements())
                 .build();
     }
-}
+}*/

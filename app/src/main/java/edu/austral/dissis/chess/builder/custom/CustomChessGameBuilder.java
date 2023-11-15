@@ -1,3 +1,4 @@
+/*
 package edu.austral.dissis.chess.builder.custom;
 
 import edu.austral.dissis.chess.game.Game;
@@ -27,3 +28,4 @@ public class CustomChessGameBuilder implements GameBuilder {
                 .build();
     }
 }
+*/

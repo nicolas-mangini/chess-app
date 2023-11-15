@@ -1,3 +1,4 @@
+/*
 package edu.austral.dissis.chess.builder;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
@@ -16,3 +17,4 @@ public class ChessBoardBuilder implements BoardBuilder {
         return new SimpleBoard(chessPieceBuilder.buildAll(), 8, 8);
     }
 }
+*/
