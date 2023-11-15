@@ -35,12 +35,23 @@ public class GameServerManager implements ServerManager {
     }
 
     @Override
-    public void notifyMovement(Move move) {
+    public void tryMovement(Move move) {
         MoveResult moveResult = gameEngine.applyMove(move);
         broadcastMovementResult(moveResult);
     }
 
-    private void broadcastMovementResult(MoveResult moveResult) {
+    @Override
+    public void stopServer() {
+        server.stop();
+    }
+
+    @Override
+    public void sendInitialState(String clientId) {
+        Message<InitialState> message = new Message<>("initialState", gameEngine.init());
+        server.sendMessage(clientId, message);
+    }
+
+    public void broadcastMovementResult(MoveResult moveResult) {
         if (moveResult instanceof NewGameState) {
             server.broadcast(new Message<>("newGameState", moveResult));
         } else if (moveResult instanceof GameOver) {

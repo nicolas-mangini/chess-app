@@ -11,6 +11,6 @@ public class ServerGameEventListener implements GameEventListener {
     private final ServerManager serverManager;
     @Override
     public void handleMove(@NotNull Move move) {
-        serverManager.notifyMovement(move);
+        serverManager.tryMovement(move);
     }
 }
