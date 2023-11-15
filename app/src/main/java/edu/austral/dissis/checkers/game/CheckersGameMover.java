@@ -9,6 +9,7 @@ import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.game.GameMover;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.util.MovementResult;
+import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -38,35 +39,20 @@ public class CheckersGameMover implements GameMover {
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());
         newBoard.setPieceAtTile(null, movement.getFrom());
 
-        if (isPawnEatMovement(movement)) {
-            Tile middle = middleTile(movement, newBoard);
+        if (isEatMovement(movement)) {
+            Tile middle = middleMovementTile(movement, newBoard);
             newBoard.setPieceAtTile(null, middle);
 
             List<Movement> newHistory = new ArrayList<>(gameManager.getGame().getHistory());
             newHistory.add(movement);
 
-            //CAN EAT AGAIN?
-            // before return, check if can eat again
             Tile newPieceTile = newBoard.getTile(movement.getTo().getX(), movement.getTo().getY()).get();
-            List<Tile> possibleEatTiles = possiblePawnEatTiles(newPieceTile, newBoard);
-
-            for (Tile possibleTile : possibleEatTiles) {
-                Movement consecutiveMovement = new Movement(newPieceTile, possibleTile);
-                // updated game manager with new history
-                GameManager consecutiveGameManager = new GameManager(
-                        new Game(gameManager.getGame(), newHistory),
+            if (canEatAgain(newPieceTile, newBoard, gameManager, newHistory)) {
+                return new GameManager(
+                        new Game(gameManager.getGame(), newBoard, newHistory),
                         this,
-                        gameManager.getTurnChanger()
+                        gameManager.getTurnChanger() //current turn
                 );
-
-                if (validateMovement(Optional.of(pieceToMove), consecutiveMovement, consecutiveGameManager)) {
-                    // if can eat again, then return the same gameManager with the new movement
-                    return new GameManager(
-                            new Game(gameManager.getGame(), newBoard, newHistory),
-                            this,
-                            gameManager.getTurnChanger()
-                    );
-                }
             }
         }
 
@@ -76,7 +62,7 @@ public class CheckersGameMover implements GameMover {
         return new GameManager(
                 new Game(gameManager.getGame(), newBoard, newHistory),
                 this,
-                gameManager.getTurnChanger().nextTurn()
+                gameManager.getTurnChanger().nextTurn() // next turn
         );
     }
 
@@ -107,14 +93,39 @@ public class CheckersGameMover implements GameMover {
                 .toList();
     }
 
-    private boolean isPawnEatMovement(Movement movement) {
-        return Math.abs(movement.getFrom().getX() - movement.getTo().getX()) == 2;
+    private boolean isEatMovement(Movement movement) {
+        if (movement.getFrom().getPiece().getPieceType() == PieceType.PAWN) {
+            return Math.abs(movement.getFrom().getX() - movement.getTo().getX()) == 2;
+        }
+        return false;
     }
 
-    private Tile middleTile(Movement movement, Board board) {
-        return board.getTile(
-                (movement.getFrom().getX() + movement.getTo().getX()) / 2,
-                (movement.getFrom().getY() + movement.getTo().getY()) / 2
-        ).get();
+    private Tile middleMovementTile(Movement movement, Board board) {
+        if (movement.getFrom().getPiece().getPieceType() != PieceType.PAWN) {
+            return board.getTile(
+                    (movement.getFrom().getX() + movement.getTo().getX()) / 2,
+                    (movement.getFrom().getY() + movement.getTo().getY()) / 2
+            ).get();
+        }
+        return null;
+    }
+
+    private boolean canEatAgain(Tile pieceTile, Board board, GameManager currentGameManager, List<Movement> newHistory) {
+        List<Tile> possibleEatTiles = possiblePawnEatTiles(pieceTile, board);
+
+        for (Tile possibleTile : possibleEatTiles) {
+            Movement consecutiveMovement = new Movement(pieceTile, possibleTile);
+            // updated game manager with new history
+            GameManager consecutiveGameManager = new GameManager(
+                    new Game(currentGameManager.getGame(), newHistory),
+                    this,
+                    currentGameManager.getTurnChanger()
+            );
+
+            if (validateMovement(Optional.of(pieceTile.getPiece()), consecutiveMovement, consecutiveGameManager)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
