@@ -6,7 +6,7 @@ import edu.austral.ingsis.clientserver.Server;
 public interface ServerManager {
     Server buildServer();
 
-    void tryMovement(Move move);
+    void handleMovement(Move move);
 
     void stopServer();
 

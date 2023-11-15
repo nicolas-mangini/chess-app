@@ -35,7 +35,7 @@ public class GameServerManager implements ServerManager {
     }
 
     @Override
-    public void tryMovement(Move move) {
+    public void handleMovement(Move move) {
         MoveResult moveResult = gameEngine.applyMove(move);
         broadcastMovementResult(moveResult);
     }
