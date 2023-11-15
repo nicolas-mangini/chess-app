@@ -1,13 +1,11 @@
 package edu.austral.dissis.checkers.validator.game;
 
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.util.WinResult;
 import edu.austral.dissis.common.validator.GameOverValidator;
-
-import java.util.List;
 
 public class EmptyPieces implements GameOverValidator {
     @Override

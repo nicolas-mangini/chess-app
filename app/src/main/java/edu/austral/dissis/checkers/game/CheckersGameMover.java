@@ -1,8 +1,8 @@
 package edu.austral.dissis.checkers.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.game.Game;
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.Game;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;

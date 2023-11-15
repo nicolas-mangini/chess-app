@@ -1,7 +1,7 @@
 /*
 package edu.austral.dissis.chess.builder.custom;
 
-import edu.austral.dissis.chess.game.Game;
+import edu.austral.dissis.common.game.Game;
 import edu.austral.dissis.common.builder.BoardBuilder;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.game.Colour;

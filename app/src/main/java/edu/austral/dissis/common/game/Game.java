@@ -1,8 +1,6 @@
-package edu.austral.dissis.chess.game;
+package edu.austral.dissis.common.game;
 
 import edu.austral.dissis.common.board.Board;
-import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
 import lombok.AllArgsConstructor;

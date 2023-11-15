@@ -1,8 +1,5 @@
-package edu.austral.dissis.chess.game;
+package edu.austral.dissis.common.game;
 
-import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.common.game.GameMover;
-import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.Result;
 import edu.austral.dissis.common.util.WinResult;

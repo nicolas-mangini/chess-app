@@ -7,6 +7,8 @@ import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.chess.builder.ChessGameBuilder;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.common.game.Colour;
+import edu.austral.dissis.common.game.Game;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 import edu.austral.dissis.common.util.MovementResult;

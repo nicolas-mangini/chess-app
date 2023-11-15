@@ -1,12 +1,10 @@
 package edu.austral.dissis.common.validator.piece;
 
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.validator.MovementValidator;
 import lombok.AllArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 public class IncrementValidator implements MovementValidator {

@@ -1,10 +1,8 @@
 package edu.austral.dissis.common.validator;
 
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
-
-import java.util.List;
 
 public interface MovementValidator {
     /**

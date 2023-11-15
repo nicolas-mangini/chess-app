@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.validator.piece;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.piece.Piece;
@@ -20,6 +20,7 @@ public class CheckValidator implements MovementValidator {
 
     /**
      * Checks if the given movement would result in the piece being in check.
+     *
      * @return True if the movement would not result in the piece being in check, false otherwise.
      */
     @Override
@@ -67,18 +68,13 @@ public class CheckValidator implements MovementValidator {
 
         Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? getToTileWithPiece : kingTile;
 
-        try {
-/*            boolean canEatKingOriginal = enemyTile.getPiece()
-                    .getPieceValidators()
-                    .isValid(new Movement(enemyTile, tileToMove), board, gameManager);*/
+        boolean canEatKingOriginal = enemyTile.getPiece()
+                .getPieceValidator()
+                .isValidClassic(new Movement(enemyTile, tileToMove), board, gameManager);
 
-            boolean canEatKingNew = enemyTile.getPiece()
-                    .getPieceValidator()
-                    .isValidClassic(new Movement(enemyTile, tileToMove), newBoard, gameManager);
-            return /*canEatKingOriginal &&*/ canEatKingNew;
-        } catch (StackOverflowError e) {
-            System.out.println();
-        }
-        return false;
+        boolean canEatKingNew = enemyTile.getPiece()
+                .getPieceValidator()
+                .isValidClassic(new Movement(enemyTile, tileToMove), newBoard, gameManager);
+        return canEatKingOriginal && canEatKingNew;
     }
 }

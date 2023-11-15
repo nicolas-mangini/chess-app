@@ -1,6 +1,6 @@
 package edu.austral.dissis.checkers.validator.piece;
 
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
