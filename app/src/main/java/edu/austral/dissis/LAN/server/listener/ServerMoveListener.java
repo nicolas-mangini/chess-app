@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @AllArgsConstructor
-public class ServerEventListener implements MessageListener<Move> {
+public class ServerMoveListener implements MessageListener<Move> {
     private final GameEventListener gameEventListener;
 
     @Override

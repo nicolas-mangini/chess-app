@@ -12,7 +12,7 @@ fun main() {
     Application.launch(Client::class.java)
 }
 
-class Client : Application() {
+class Client2 : Application() {
     private val imageResolver = CachedImageResolver(DefaultImageResolver())
 
     companion object {

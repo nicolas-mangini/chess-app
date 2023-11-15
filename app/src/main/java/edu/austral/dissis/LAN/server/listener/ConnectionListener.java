@@ -9,12 +9,11 @@ import org.jetbrains.annotations.NotNull;
 public class ConnectionListener implements ServerConnectionListener {
     private final ServerManager serverManager;
 
-
     @Override
     public void handleClientConnection(@NotNull String clientId) {
         serverManager.sendInitialState(clientId);
     }
-
+    
     @Override
     public void handleClientConnectionClosed(@NotNull String clientId) {
         serverManager.stopServer();
