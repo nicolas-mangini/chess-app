@@ -8,6 +8,8 @@ public interface ServerManager {
 
     void handleMovement(Move move);
 
+    void startServer();
+
     void stopServer();
 
     void sendInitialState(String clientId);

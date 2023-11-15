@@ -17,7 +17,7 @@ public class GameServerManager implements ServerManager {
     public GameServerManager(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
         this.server = buildServer();
-        this.server.start();
+        startServer();
     }
 
     @Override
@@ -38,6 +38,11 @@ public class GameServerManager implements ServerManager {
     public void handleMovement(Move move) {
         MoveResult moveResult = gameEngine.applyMove(move);
         broadcastMovementResult(moveResult);
+    }
+
+    @Override
+    public void startServer() {
+        server.start();
     }
 
     @Override

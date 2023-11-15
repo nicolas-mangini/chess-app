@@ -1,3 +1,4 @@
+/*
 package edu.austral.dissis.chess.LAN;
 
 import edu.austral.dissis.LAN.server.GameServerManager;
@@ -18,3 +19,4 @@ public class Server extends Application {
         new GameServerManager(gameEngine);
     }
 }
+*/
