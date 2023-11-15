@@ -105,7 +105,7 @@ public class CheckersGameMover implements GameMover {
     }
 
     private Tile middleMovementTile(Movement movement, Board board) {
-        if (movement.getFrom().getPiece().getPieceType() != PieceType.PAWN) {
+        if (movement.getFrom().getPiece().getPieceType() == PieceType.PAWN) {
             return board.getTile(
                     (movement.getFrom().getX() + movement.getTo().getX()) / 2,
                     (movement.getFrom().getY() + movement.getTo().getY()) / 2
