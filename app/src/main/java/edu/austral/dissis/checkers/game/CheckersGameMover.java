@@ -76,21 +76,25 @@ public class CheckersGameMover implements GameMover {
                         .isValid(movement, gameManager.getGame().getBoard(), gameManager);
     }
 
-    // possible eat tiles are tile within 2 increments -> max 4 diagonal tiles,
-    // also, there should be a piece in middle to eat
-    private List<Tile> possiblePawnEatTiles(Tile fromTile, Board board) {
-        return board.getTiles().stream()
-                .filter(tile -> Math.abs(tile.getX() - fromTile.getX()) == 2)
-                .filter(tile -> Math.abs(tile.getY() - fromTile.getY()) == 2)
-                .filter(tile -> tile.getPiece() == null)
-                .filter(tile -> {
-                    Tile middleTile = board.getTile(
-                            (tile.getX() + fromTile.getX()) / 2,
-                            (tile.getY() + fromTile.getY()) / 2
-                    ).get();
-                    return middleTile.getPiece() != null;
-                })
-                .toList();
+
+    private List<Tile> possibleEatTiles(Tile fromTile, Board board) {
+        if (fromTile.getPiece().getPieceType() == PieceType.PAWN) {
+            // possible eat tiles are tile within 2 increments -> max 4 diagonal tiles,
+            // also, there should be a piece in middle to eat
+            return board.getTiles().stream()
+                    .filter(tile -> Math.abs(tile.getX() - fromTile.getX()) == 2)
+                    .filter(tile -> Math.abs(tile.getY() - fromTile.getY()) == 2)
+                    .filter(tile -> tile.getPiece() == null)
+                    .filter(tile -> {
+                        Tile middleTile = board.getTile(
+                                (tile.getX() + fromTile.getX()) / 2,
+                                (tile.getY() + fromTile.getY()) / 2
+                        ).get();
+                        return middleTile.getPiece() != null;
+                    })
+                    .toList();
+        }
+        return List.of();
     }
 
     private boolean isEatMovement(Movement movement) {
@@ -111,7 +115,7 @@ public class CheckersGameMover implements GameMover {
     }
 
     private boolean canEatAgain(Tile pieceTile, Board board, GameManager currentGameManager, List<Movement> newHistory) {
-        List<Tile> possibleEatTiles = possiblePawnEatTiles(pieceTile, board);
+        List<Tile> possibleEatTiles = possibleEatTiles(pieceTile, board);
 
         for (Tile possibleTile : possibleEatTiles) {
             Movement consecutiveMovement = new Movement(pieceTile, possibleTile);
