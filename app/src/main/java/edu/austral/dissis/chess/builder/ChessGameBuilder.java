@@ -1,4 +1,3 @@
-/*
 package edu.austral.dissis.chess.builder;
 
 import edu.austral.dissis.common.game.Colour;
@@ -28,4 +27,4 @@ public class ChessGameBuilder implements GameBuilder {
                 .build();
     }
 }
-*/
+

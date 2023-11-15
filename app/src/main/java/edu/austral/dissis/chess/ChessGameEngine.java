@@ -1,4 +1,3 @@
-/*
 package edu.austral.dissis.chess;
 
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
@@ -70,4 +69,3 @@ public class ChessGameEngine implements GameEngine {
                 gameEngineAdapter.getCurrentTurn(gameManager.getTurnChanger()));
     }
 }
-*/
