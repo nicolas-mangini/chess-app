@@ -1,6 +1,6 @@
-package edu.austral.dissis.LAN.client.listener;
+package edu.austral.dissis.common.LAN.client.listener;
 
-import edu.austral.dissis.LAN.client.ClientManager;
+import edu.austral.dissis.common.LAN.client.ClientManager;
 import edu.austral.dissis.chess.gui.InitialState;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;

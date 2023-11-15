@@ -1,6 +1,6 @@
-package edu.austral.dissis.LAN.client.listener.MoveResult;
+package edu.austral.dissis.common.LAN.client.listener.MoveResult;
 
-import edu.austral.dissis.LAN.client.ClientManager;
+import edu.austral.dissis.common.LAN.client.ClientManager;
 import edu.austral.dissis.chess.gui.InvalidMove;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.MessageListener;

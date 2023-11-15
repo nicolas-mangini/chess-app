@@ -1,9 +1,9 @@
-package edu.austral.dissis.LAN.server;
+package edu.austral.dissis.common.LAN.server;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import edu.austral.dissis.LAN.server.listener.ConnectionListener;
-import edu.austral.dissis.LAN.server.listener.ServerMoveListener;
-import edu.austral.dissis.LAN.server.listener.ServerGameEventListener;
+import edu.austral.dissis.common.LAN.server.listener.ConnectionListener;
+import edu.austral.dissis.common.LAN.server.listener.ServerMoveListener;
+import edu.austral.dissis.common.LAN.server.listener.ServerGameEventListener;
 import edu.austral.dissis.chess.gui.*;
 import edu.austral.ingsis.clientserver.Message;
 import edu.austral.ingsis.clientserver.Server;

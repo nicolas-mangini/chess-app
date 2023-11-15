@@ -1,6 +1,6 @@
-package edu.austral.dissis.LAN.client.listener;
+package edu.austral.dissis.common.LAN.client.listener;
 
-import edu.austral.dissis.LAN.client.ClientManager;
+import edu.austral.dissis.common.LAN.client.ClientManager;
 import edu.austral.dissis.chess.gui.GameEventListener;
 import edu.austral.dissis.chess.gui.Move;
 import lombok.AllArgsConstructor;

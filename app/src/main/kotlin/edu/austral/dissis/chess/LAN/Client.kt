@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.LAN
 
-import edu.austral.dissis.LAN.client.ClientManager
+import edu.austral.dissis.common.LAN.client.ClientManager
 import edu.austral.dissis.chess.gui.CachedImageResolver
 import edu.austral.dissis.chess.gui.DefaultImageResolver
 import edu.austral.dissis.chess.gui.GameView

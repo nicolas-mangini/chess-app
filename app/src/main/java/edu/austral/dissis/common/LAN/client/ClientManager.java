@@ -1,11 +1,13 @@
-package edu.austral.dissis.LAN.client;
+package edu.austral.dissis.common.LAN.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import edu.austral.dissis.LAN.client.listener.*;
-import edu.austral.dissis.LAN.client.listener.MoveResult.GameOverListener;
-import edu.austral.dissis.LAN.client.listener.MoveResult.InvalidMoveListener;
-import edu.austral.dissis.LAN.client.listener.MoveResult.NewGameStateListener;
+import edu.austral.dissis.common.LAN.client.listener.ConnectionListener;
+import edu.austral.dissis.common.LAN.client.listener.MoveResult.GameOverListener;
+import edu.austral.dissis.common.LAN.client.listener.MoveResult.InvalidMoveListener;
+import edu.austral.dissis.common.LAN.client.listener.MoveResult.NewGameStateListener;
 import edu.austral.dissis.chess.gui.*;
+import edu.austral.dissis.common.LAN.client.listener.ClientGameEventListener;
+import edu.austral.dissis.common.LAN.client.listener.InitialStateListener;
 import edu.austral.ingsis.clientserver.Client;
 import edu.austral.ingsis.clientserver.ClientConnectionListener;
 import edu.austral.ingsis.clientserver.Message;
