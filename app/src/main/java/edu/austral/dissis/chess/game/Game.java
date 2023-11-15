@@ -21,4 +21,22 @@ public class Game {
     private final MovementValidator gameValidators;
     private final List<GameOverValidator> gameOverValidators;
     private final List<Movement> history;
+
+    public Game(Game toCopy, List<Movement> newHistory) {
+        this.player1 = toCopy.getPlayer1();
+        this.player2 = toCopy.getPlayer2();
+        this.board = toCopy.getBoard();
+        this.gameValidators = toCopy.getGameValidators();
+        this.gameOverValidators = toCopy.getGameOverValidators();
+        this.history = newHistory;
+    }
+
+    public Game(Game toCopy, Board newBoard, List<Movement> newHistory) {
+        this.player1 = toCopy.getPlayer1();
+        this.player2 = toCopy.getPlayer2();
+        this.board = newBoard;
+        this.gameValidators = toCopy.getGameValidators();
+        this.gameOverValidators = toCopy.getGameOverValidators();
+        this.history = newHistory;
+    }
 }
