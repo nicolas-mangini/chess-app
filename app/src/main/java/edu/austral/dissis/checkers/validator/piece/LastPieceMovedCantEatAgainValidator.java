@@ -9,6 +9,9 @@ import edu.austral.dissis.common.validator.MovementValidator;
 
 import java.util.List;
 
+import static edu.austral.dissis.checkers.game.CheckersUtil.isEatMovement;
+import static edu.austral.dissis.checkers.game.CheckersUtil.possibleEatTiles;
+
 public class LastPieceMovedCantEatAgainValidator implements MovementValidator {
     /**
      * Validator to ensure that a piece can move if the last piece moved
@@ -18,26 +21,17 @@ public class LastPieceMovedCantEatAgainValidator implements MovementValidator {
     public boolean isValid(Movement movement, Board board, GameManager gameManager) {
         List<Movement> history = gameManager.getGame().getHistory();
         if (history.isEmpty()) return true;
+
         Movement previousMovement = history.get(history.size() - 1);
-        if (Math.abs(previousMovement.getFrom().getX() - previousMovement.getTo().getX()) != 2) {
+        if (isEatMovement(previousMovement)) {
             return true;
         }
 
         Piece pieceToMove = movement.getFrom().getPiece();
         Piece lastMovedPiece = history.get(history.size() - 1).getFrom().getPiece();
         Tile lastMovedPieceTile = board.getTileByPiece(lastMovedPiece).get();
-        List<Tile> possibleEatTiles = board.getTiles().stream()
-                .filter(tile -> Math.abs(tile.getX() - lastMovedPieceTile.getX()) == 2)
-                .filter(tile -> Math.abs(tile.getY() - lastMovedPieceTile.getY()) == 2)
-                .filter(tile -> tile.getPiece() == null)
-                .filter(tile -> {
-                    Tile middleTile = board.getTile(
-                            (tile.getX() + lastMovedPieceTile.getX()) / 2,
-                            (tile.getY() + lastMovedPieceTile.getY()) / 2
-                    ).get();
-                    return middleTile.getPiece() != null;
-                })
-                .toList();
+
+        List<Tile> possibleEatTiles = possibleEatTiles(lastMovedPieceTile, board);
 
         for (Tile possibleTile : possibleEatTiles) {
             Movement consecutiveMovement = new Movement(lastMovedPieceTile, possibleTile);
@@ -45,7 +39,6 @@ public class LastPieceMovedCantEatAgainValidator implements MovementValidator {
                 return pieceToMove.getId().equals(lastMovedPiece.getId());
             }
         }
-
         return true;
     }
 
