@@ -1,9 +1,10 @@
 package edu.austral.dissis.chess.builder;
 
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
+import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
 import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.game.Colour;
+import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
@@ -23,7 +24,7 @@ public class ChessMovementBuilder implements ValidatorBuilderI {
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
                 new CheckMate(),
-                new EmptyPieces()
+                new PiecesRemainingValidator(12)
         );
     }
 
@@ -32,33 +33,39 @@ public class ChessMovementBuilder implements ValidatorBuilderI {
         return new CompoundAndValidator(gameValidators);
     }
 
-    public MovementValidator createRookMovements() {
+    public PieceValidator createRookMovements() {
         List<MovementValidator> orValidators = validatorBuilder.createRookOrValidators();
-        return new CompoundOrValidator(orValidators);
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
     }
 
-    public MovementValidator createKnightMovements() {
+    public PieceValidator createKnightMovements() {
         List<MovementValidator> orValidators = validatorBuilder.createKnightOrValidators();
-        return new CompoundOrValidator(orValidators);
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
     }
 
-    public MovementValidator createBishopMovements() {
+    public PieceValidator createBishopMovements() {
         List<MovementValidator> orValidators = validatorBuilder.createBishopOrValidators();
-        return new CompoundOrValidator(orValidators);
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
     }
 
-    public MovementValidator createQueenMovements() {
+    public PieceValidator createQueenMovements() {
         List<MovementValidator> orValidators = validatorBuilder.createQueenOrValidators();
-        return new CompoundOrValidator(orValidators);
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
     }
 
-    public MovementValidator createKingMovements() {
+    public PieceValidator createKingMovements() {
         List<MovementValidator> orValidators = validatorBuilder.createKingOrValidators();
-        return new CompoundOrValidator(orValidators);
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
     }
 
-    public MovementValidator createPawnMovements(Colour colour) {
+    public PieceValidator createPawnMovements(Colour colour) {
         List<MovementValidator> orValidators = validatorBuilder.createPawnOrValidators(colour);
-        return new CompoundOrValidator(orValidators);
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
     }
 }

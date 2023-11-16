@@ -1,14 +1,15 @@
 package edu.austral.dissis.chess.builder;
 
+import edu.austral.dissis.common.builder.BoardBuilder;
 import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.chess.game.Game;
+import edu.austral.dissis.common.game.Game;
 import edu.austral.dissis.common.builder.GameBuilder;
 
 import java.util.ArrayList;
 
 public class ChessGameBuilder implements GameBuilder {
+    private final BoardBuilder chessBoardBuilder;
     private final ChessMovementBuilder chessMovementBuilder;
-    private final ChessBoardBuilder chessBoardBuilder;
 
     public ChessGameBuilder() {
         this.chessMovementBuilder = new ChessMovementBuilder();
@@ -27,3 +28,4 @@ public class ChessGameBuilder implements GameBuilder {
                 .build();
     }
 }
+

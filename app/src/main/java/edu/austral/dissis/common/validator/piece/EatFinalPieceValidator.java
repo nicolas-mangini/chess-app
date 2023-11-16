@@ -1,17 +1,16 @@
 package edu.austral.dissis.common.validator.piece;
 
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Movement;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.validator.MovementValidator;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class EatValidator implements MovementValidator {
+public class EatFinalPieceValidator implements MovementValidator {
     private final boolean canEat;
 
     /**

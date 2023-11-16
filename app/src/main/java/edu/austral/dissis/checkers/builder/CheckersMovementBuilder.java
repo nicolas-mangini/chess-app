@@ -1,16 +1,18 @@
 package edu.austral.dissis.checkers.builder;
 
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
+import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
+import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
+import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
+import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
 import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.game.Colour;
+import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
-import edu.austral.dissis.common.validator.piece.DirectionValidator;
-import edu.austral.dissis.common.validator.piece.EatValidator;
-import edu.austral.dissis.common.validator.piece.IncrementValidator;
+import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
     @Override
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
-                new EmptyPieces()
+                new PiecesRemainingValidator(0)
         );
     }
 
@@ -33,20 +35,71 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
         return new CompoundAndValidator(gameValidators);
     }
 
-    public MovementValidator createPawnMovements(Colour colour) {
+    public PieceValidator createPawnMovements(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
         List<MovementValidator> orValidators = List.of(
+                //simple movements
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, 1),
                         new IncrementValidator(1),
-                        new EatValidator(false)
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, -1),
                         new IncrementValidator(1),
-                        new EatValidator(false)
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                //eat movements
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, -1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                //eat consecutive movements
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-xDirection, -1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator(),
+                        new EatenBeforeValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-xDirection, 1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator(),
+                        new EatenBeforeValidator()
+                ))
+        );
+
+        List<MovementValidator> specialAndValidators = List.of(
+                new LastPieceMovedCantEatAgainValidator()
+        );
+
+        return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialAndValidators));
+    }
+
+/*    public MovementValidator createQueenValidators() {
+        List<MovementValidator> orValidators = List.of(
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.UP),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
                 ))
         );
         return new CompoundOrValidator(orValidators);
-    }
+    }*/
 }

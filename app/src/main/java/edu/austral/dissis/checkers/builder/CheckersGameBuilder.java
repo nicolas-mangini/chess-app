@@ -1,6 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
-import edu.austral.dissis.chess.game.Game;
+import edu.austral.dissis.common.game.Game;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.game.Colour;
 

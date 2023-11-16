@@ -16,31 +16,27 @@ public class ValidatorBuilder {
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
                         new PathClearValidator(Direction.RIGHT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.LEFT),
                         new PathClearValidator(Direction.LEFT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
 
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP),
                         new PathClearValidator(Direction.UP),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN),
                         new PathClearValidator(Direction.DOWN),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 ))
         );
     }
@@ -49,51 +45,43 @@ public class ValidatorBuilder {
         return List.of(
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(2, 1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(1, 2),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(-1, 2),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(-2, 1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(-2, -1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(-1, -2),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(1, -2),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new JumpMovementValidator(2, -1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 ))
         );
     }
@@ -103,30 +91,26 @@ public class ValidatorBuilder {
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_RIGHT),
                         new PathClearValidator(Direction.UP_RIGHT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN_LEFT),
                         new PathClearValidator(Direction.DOWN_LEFT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN_RIGHT),
                         new PathClearValidator(Direction.DOWN_RIGHT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_LEFT),
                         new PathClearValidator(Direction.UP_LEFT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 ))
         );
     }
@@ -136,58 +120,50 @@ public class ValidatorBuilder {
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
                         new PathClearValidator(Direction.RIGHT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.LEFT),
                         new PathClearValidator(Direction.LEFT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP),
                         new PathClearValidator(Direction.UP),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN),
                         new PathClearValidator(Direction.DOWN),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_RIGHT),
                         new PathClearValidator(Direction.UP_RIGHT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN_LEFT),
                         new PathClearValidator(Direction.DOWN_LEFT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN_RIGHT),
                         new PathClearValidator(Direction.DOWN_RIGHT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_LEFT),
                         new PathClearValidator(Direction.UP_LEFT),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 ))
         );
     }
@@ -198,65 +174,57 @@ public class ValidatorBuilder {
                         new DirectionValidator(Direction.RIGHT),
                         new PathClearValidator(Direction.RIGHT),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.LEFT),
                         new PathClearValidator(Direction.LEFT),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP),
                         new PathClearValidator(Direction.UP),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN),
                         new PathClearValidator(Direction.DOWN),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_RIGHT),
                         new PathClearValidator(Direction.UP_RIGHT),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN_LEFT),
                         new PathClearValidator(Direction.DOWN_LEFT),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.DOWN_RIGHT),
                         new PathClearValidator(Direction.DOWN_RIGHT),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.UP_LEFT),
                         new PathClearValidator(Direction.UP_LEFT),
                         new IncrementValidator(1),
-                        new EatValidator(true),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
                 ))
         );
     }
@@ -270,34 +238,36 @@ public class ValidatorBuilder {
                         new PathClearValidator(xDirection, 0),
                         new IncrementValidator(2),
                         new LimitMovementsValidator(1),
-                        new EatValidator(false),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, 0),
                         new PathClearValidator(xDirection, 0),
                         new IncrementValidator(1),
-                        new EatValidator(false),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, 1),
                         new PathClearValidator(xDirection, 1),
                         new IncrementValidator(1),
                         new MustEatValidator(),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatOwnPieceValidator(false)
                 )),
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(xDirection, -1),
                         new PathClearValidator(xDirection, -1),
                         new IncrementValidator(1),
                         new MustEatValidator(),
-                        new EatOwnPieceValidator(false),
-                        new CheckValidator(PieceType.KING)
+                        new EatOwnPieceValidator(false)
                 ))
+        );
+    }
+
+    public List<MovementValidator> createSpecialValidators() {
+        return List.of(
+                new CheckValidator(PieceType.KING)
         );
     }
 

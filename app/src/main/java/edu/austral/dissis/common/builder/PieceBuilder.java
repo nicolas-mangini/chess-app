@@ -1,6 +1,6 @@
 package edu.austral.dissis.common.builder;
 
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 
 import java.util.List;
 

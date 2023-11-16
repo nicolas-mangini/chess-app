@@ -16,3 +16,4 @@ public class ChessBoardBuilder implements BoardBuilder {
         return new SimpleBoard(chessPieceBuilder.buildAll(), 8, 8);
     }
 }
+

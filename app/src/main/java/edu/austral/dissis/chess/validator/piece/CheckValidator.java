@@ -1,10 +1,10 @@
 package edu.austral.dissis.chess.validator.piece;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.game.GameManager;
+import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
-import edu.austral.dissis.chess.piece.Piece;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.validator.MovementValidator;
@@ -20,6 +20,7 @@ public class CheckValidator implements MovementValidator {
 
     /**
      * Checks if the given movement would result in the piece being in check.
+     *
      * @return True if the movement would not result in the piece being in check, false otherwise.
      */
     @Override
@@ -61,20 +62,19 @@ public class CheckValidator implements MovementValidator {
         //to escape from check eating
         if (movement.getTo().equalCoordinate(enemyTile)) return false;
 
-        Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? movement.getTo() : kingTile;
+        //because the piece to move is not saved yet in movement.getTo()
+        Tile getToTileWithPiece = new Tile(movement.getTo());
+        getToTileWithPiece.setPiece(pieceToMove);
 
-        try {
-            boolean canEatKingOriginal = enemyTile.getPiece()
-                    .getPieceValidators()
-                    .isValid(new Movement(enemyTile, tileToMove), board, gameManager);
+        Tile tileToMove = movement.getFrom().equalCoordinate(kingTile) ? getToTileWithPiece : kingTile;
 
-            boolean canEatKingNew = enemyTile.getPiece()
-                    .getPieceValidators()
-                    .isValid(new Movement(enemyTile, tileToMove), newBoard, gameManager);
-            return canEatKingOriginal && canEatKingNew;
-        } catch (StackOverflowError e) {
-            System.out.println();
-        }
-        return false;
+        boolean canEatKingOriginal = enemyTile.getPiece()
+                .getPieceValidator()
+                .isValidClassic(new Movement(enemyTile, tileToMove), board, gameManager);
+
+        boolean canEatKingNew = enemyTile.getPiece()
+                .getPieceValidator()
+                .isValidClassic(new Movement(enemyTile, tileToMove), newBoard, gameManager);
+        return canEatKingOriginal && canEatKingNew;
     }
 }

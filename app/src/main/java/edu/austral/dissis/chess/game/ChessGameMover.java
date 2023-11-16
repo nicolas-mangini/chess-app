@@ -1,11 +1,13 @@
 package edu.austral.dissis.chess.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.piece.Piece;
-import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.common.game.Movement;
+import edu.austral.dissis.chess.gui.GameOver;
+import edu.austral.dissis.common.game.*;
+import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
+import edu.austral.dissis.common.util.Result;
+import edu.austral.dissis.common.util.WinResult;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -13,19 +15,29 @@ import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class GameMover {
-    public MovementResult<GameManager, String> tryMovement(Movement movement, GameManager gameManager) {
+public class ChessGameMover implements GameMover {
+    @Override
+    public Result<?, ?> tryMovement(Movement movement, GameManager gameManager) {
         Optional<Piece> pieceToMove = gameManager
                 .getGame()
                 .getBoard()
                 .getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY());
 
+        // if code enters here, return new invalid move
         if (!validateMovement(pieceToMove, movement, gameManager))
             return new MovementResult<>(gameManager, "Invalid movement!");
 
         Game movedGame = makeMovement(movement, gameManager.getGame());
         TurnChanger nextTurn = gameManager.getTurnChanger().nextTurn();
-        return new MovementResult<>(new GameManager(movedGame, this, nextTurn), null);
+        GameManager movedGameManager = new GameManager(movedGame, this, nextTurn);
+
+        //check if doing the movement you win -> before making the movement, i check that if the movement is checkmate
+        Result<Boolean, Colour> isGameOver = movedGameManager.isGameOver(movement);
+        if (isGameOver.getKey()) {
+            return isGameOver;
+        }
+
+        return new MovementResult<>(movedGameManager, null);
     }
 
     private Game makeMovement(Movement movement, Game game) {
@@ -47,7 +59,7 @@ public class GameMover {
                 .isValid(movement, gameManager.getGame().getBoard(), gameManager)
                 &&
                 piece.get().
-                        getPieceValidators()
+                        getPieceValidator()
                         .isValid(movement, gameManager.getGame().getBoard(), gameManager);
     }
 }
