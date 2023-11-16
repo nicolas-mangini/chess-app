@@ -2,13 +2,13 @@ package edu.austral.dissis.common.game;
 
 import edu.austral.dissis.checkers.builder.CheckersGameBuilder;
 import edu.austral.dissis.checkers.game.CheckersGameMover;
-import edu.austral.dissis.chess.adapter.GameEngineAdapter;
-import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
-import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
-import edu.austral.dissis.chess.game.*;
-import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.chess.builder.classic.ChessGameBuilder;
+import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
+import edu.austral.dissis.chess.game.ChessGameMover;
 import edu.austral.dissis.chess.gui.*;
+import edu.austral.dissis.common.adapter.Adapter;
+import edu.austral.dissis.common.adapter.GameEngineAdapter;
+import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
 import edu.austral.dissis.common.util.Result;
@@ -24,7 +24,7 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
     private final Stack<GameManager> previousGameManagers = new Stack<>();
 
     public GameEngine(GameType gameType) {
-        this.gameEngineAdapter = new ChessGameEngineAdapter();
+        this.gameEngineAdapter = new Adapter();
 
         GameBuilder gameBuilder;
         GameMover gameMover;
@@ -57,7 +57,7 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
         Movement movementAdapted = gameEngineAdapter.adaptMovement(move, previousGameManager.getGame().getBoard().getTiles());
 
         Result<?, ?> tryMovement = previousGameManager
-                .getChessGameMover()
+                .getGameMover()
                 .tryMovement(movementAdapted, previousGameManager);
 
         return handleMovementResult(tryMovement);

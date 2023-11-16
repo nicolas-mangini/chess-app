@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class GameManager {
     private final Game game;
-    private final GameMover chessGameMover;
+    private final GameMover gameMover;
     private final TurnChanger turnChanger;
 
     public Result<Boolean, Colour> isGameOver(Movement movement) {

@@ -1,10 +1,12 @@
 package edu.austral.dissis.common.util;
 
+import edu.austral.dissis.common.game.Colour;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
 
 @AllArgsConstructor
+// sobra el generics
 public class WinResult<Boolean, Colour> implements Result<Boolean, Colour> {
     private final Boolean winResult;
     private final Colour colour;
@@ -15,7 +17,7 @@ public class WinResult<Boolean, Colour> implements Result<Boolean, Colour> {
     }
 
     @Override
-    public Optional<Colour> getValue() {
+    public Optional getValue() {
         return Optional.ofNullable(this.colour);
     }
 }

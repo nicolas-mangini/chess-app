@@ -1,4 +1,4 @@
-package edu.austral.dissis.checkers.validator.piece;
+package edu.austral.dissis.common.validator.piece;
 
 import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;

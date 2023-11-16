@@ -19,6 +19,7 @@ public class CannotMoveValidator implements GameOverValidator {
                 .filter(tile -> tile.getPiece() == null)
                 .toList();
 
+        // get empty tiles
         List<Piece> pieces = board.getTiles().stream()
                 .map(Tile::getPiece)
                 .filter(Objects::nonNull)

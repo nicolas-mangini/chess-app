@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.validator.piece;
 
-import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.common.board.SimpleBoard;
 import edu.austral.dissis.common.game.GameManager;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
@@ -75,6 +75,6 @@ public class CheckValidator implements MovementValidator {
         boolean canEatKingNew = enemyTile.getPiece()
                 .getPieceValidator()
                 .isValidClassic(new Movement(enemyTile, tileToMove), newBoard, gameManager);
-        return canEatKingOriginal && canEatKingNew;
+        return canEatKingOriginal || canEatKingNew;
     }
 }

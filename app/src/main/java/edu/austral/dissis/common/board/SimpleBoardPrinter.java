@@ -1,11 +1,9 @@
-package edu.austral.dissis.chess.board;
+package edu.austral.dissis.common.board;
 
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.piece.Piece;
-import edu.austral.dissis.common.board.BoardPrinter;
-import edu.austral.dissis.common.board.Tile;
 
-public class ChessBoardPrinter implements BoardPrinter {
+public class SimpleBoardPrinter implements BoardPrinter {
     @Override
     public String print(SimpleBoard board) {
         StringBuilder boardString = new StringBuilder();

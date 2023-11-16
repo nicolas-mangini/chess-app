@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.adapter;
+package edu.austral.dissis.common.adapter;
 
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;

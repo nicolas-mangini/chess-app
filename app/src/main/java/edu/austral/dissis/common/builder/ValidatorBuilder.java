@@ -1,6 +1,5 @@
 package edu.austral.dissis.common.builder;
 
-import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
 import edu.austral.dissis.common.validator.game.TurnValidator;
@@ -119,6 +118,30 @@ public class ValidatorBuilder {
     }
 
     public List<MovementValidator> createChessQueenOrValidators() {
+/*        List.of(
+                CompoundAndValidator(
+                        CompoundOrValidator(List.of(
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.RIGHT),
+                                        new PathClearValidator(Direction.RIGHT)
+                                )),
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.LEFT),
+                                        new PathClearValidator(Direction.LEFT)
+                                )),
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.UP),
+                                        new PathClearValidator(Direction.UP)
+                                )),
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.DOWN),
+                                        new PathClearValidator(Direction.DOWN)
+                                )),
+                        )),
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
+                )
+        )*/
         return List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
@@ -291,6 +314,7 @@ public class ValidatorBuilder {
         );
     }
 
+    // agrupar los validators
     public List<MovementValidator> createChessPawnOrValidators(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
 

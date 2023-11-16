@@ -1,11 +1,12 @@
 package edu.austral.dissis.chess.game;
 
-import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.common.board.SimpleBoard;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.*;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
+import edu.austral.dissis.common.util.PromoteUtils;
 import edu.austral.dissis.common.util.Result;
 import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.AllArgsConstructor;
