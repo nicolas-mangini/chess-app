@@ -60,6 +60,10 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
                 .getChessGameMover()
                 .tryMovement(movementAdapted, previousGameManager);
 
+        return handleMovementResult(tryMovement);
+    }
+
+    public MoveResult handleMovementResult(Result<?, ?> tryMovement) {
         if (tryMovement instanceof MovementResult) {
             // if string "Invalid movement!" is present
             if (tryMovement.getValue().isPresent()) {
@@ -74,7 +78,6 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
 
                 return new NewGameState(newPieces, newTurn);
             }
-
         } else if (tryMovement instanceof WinResult) {
             Colour winner = (Colour) tryMovement.getValue().get();
             return new GameOver(gameEngineAdapter.adaptPlayerColor(winner));

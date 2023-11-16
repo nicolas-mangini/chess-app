@@ -8,6 +8,10 @@ import edu.austral.dissis.common.validator.MovementValidator;
 
 import java.util.Optional;
 
+/**
+ * Validator to ensure that a piece can perform an eating movement only if there is a piece
+ * of the opposite color in the middle of the movement.
+ */
 public class EatMiddlePieceValidator implements MovementValidator {
     @Override
     public boolean isValid(Movement movement, Board board, GameManager gameManager) {

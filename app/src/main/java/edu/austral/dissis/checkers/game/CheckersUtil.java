@@ -34,8 +34,6 @@ public class CheckersUtil {
      */
     public static List<Tile> possibleEatTiles(Tile fromTile, Board board) {
         if (fromTile.getPiece().getPieceType() == PieceType.PAWN) {
-            // possible eat tiles are tile within 2 increments -> max 4 diagonal tiles,
-            // also, there should be a piece in middle to eat
             return board.getTiles().stream()
                     .filter(tile -> Math.abs(tile.getX() - fromTile.getX()) == 2)
                     .filter(tile -> Math.abs(tile.getY() - fromTile.getY()) == 2)

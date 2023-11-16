@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static edu.austral.dissis.checkers.game.CheckersUtil.isEatMovement;
-import static edu.austral.dissis.checkers.game.CheckersUtil.possibleEatTiles;
-
 @AllArgsConstructor
 public class CheckersGameMover implements GameMover {
     @Override
@@ -46,7 +43,7 @@ public class CheckersGameMover implements GameMover {
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());
         newBoard.setPieceAtTile(null, movement.getFrom());
 
-        if (isEatMovement(movement)) {
+        if (CheckersUtil.isEatMovement(movement)) {
             Tile middle = middleMovementTile(movement, newBoard);
             newBoard.setPieceAtTile(null, middle);
 
@@ -58,7 +55,7 @@ public class CheckersGameMover implements GameMover {
                 return new GameManager(
                         new Game(gameManager.getGame(), newBoard, newHistory),
                         this,
-                        gameManager.getTurnChanger() //current turn
+                        gameManager.getTurnChanger() // current turn
                 );
             }
         }
@@ -94,7 +91,7 @@ public class CheckersGameMover implements GameMover {
     }
 
     private boolean canEatAgain(Tile pieceTile, Board board, GameManager currentGameManager, List<Movement> newHistory) {
-        List<Tile> possibleEatTiles = possibleEatTiles(pieceTile, board);
+        List<Tile> possibleEatTiles = CheckersUtil.possibleEatTiles(pieceTile, board);
 
         for (Tile possibleTile : possibleEatTiles) {
             Movement consecutiveMovement = new Movement(pieceTile, possibleTile);
