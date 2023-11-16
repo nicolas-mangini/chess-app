@@ -1,5 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
+import edu.austral.dissis.checkers.validator.game.CannotMoveValidator;
 import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
@@ -24,7 +25,8 @@ public class CheckersMovementBuilder {
 
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
-                new PiecesRemainingValidator(0)
+                new PiecesRemainingValidator(0),
+                new CannotMoveValidator()
         );
     }
 
