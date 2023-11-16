@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.builder;
 
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
+import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
 import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.game.Colour;
@@ -24,7 +24,7 @@ public class ChessMovementBuilder implements ValidatorBuilderI {
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
                 new CheckMate(),
-                new EmptyPieces()
+                new PiecesRemainingValidator(12)
         );
     }
 

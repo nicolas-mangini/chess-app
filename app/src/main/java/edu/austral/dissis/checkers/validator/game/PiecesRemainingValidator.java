@@ -6,17 +6,24 @@ import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.util.WinResult;
 import edu.austral.dissis.common.validator.GameOverValidator;
+import lombok.AllArgsConstructor;
 
-public class EmptyPieces implements GameOverValidator {
+@AllArgsConstructor
+public class PiecesRemainingValidator implements GameOverValidator {
+    private final int amount;
+
+    //end game when enemy has less or equal pieces than amount
     @Override
     public WinResult<Boolean, Colour> isGameOver(Movement movement, Board board, GameManager gameManager) {
-        Colour teamColour = movement.getFrom().getPiece().getColour();
+        Colour enemyColour = gameManager.getTurnChanger().getCurrentTurn();
 
-        boolean hasPieces = board.getTiles()
+        int piecesRemaining = (int) board.getTiles()
                 .stream()
                 .filter(tile -> tile.getPiece() != null)
-                .anyMatch(tile -> tile.getPiece().getColour().equals(teamColour));
-        if (!hasPieces) return new WinResult<>(true, teamColour);
+                .filter(tile -> tile.getPiece().getColour().equals(enemyColour))
+                .count();
+
+        if (piecesRemaining <= amount) return new WinResult<>(true, enemyColour);
         else return new WinResult<>(false, null);
     }
 }

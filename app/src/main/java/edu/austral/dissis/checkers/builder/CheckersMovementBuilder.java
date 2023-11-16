@@ -1,6 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
-import edu.austral.dissis.checkers.validator.game.EmptyPieces;
+import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
@@ -26,7 +26,7 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
     @Override
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
-                new EmptyPieces()
+                new PiecesRemainingValidator(10)
         );
     }
 
