@@ -2,7 +2,7 @@ package edu.austral.dissis.checkers.builder;
 
 import edu.austral.dissis.checkers.validator.game.CannotMoveValidator;
 import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
-import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
+import edu.austral.dissis.common.builder.ValidatorBuilder;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;

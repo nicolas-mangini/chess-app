@@ -1,7 +1,7 @@
 package edu.austral.dissis.chess.builder.custom;
 
 import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
-import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
+import edu.austral.dissis.common.builder.ValidatorBuilder;
 import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
@@ -17,7 +17,7 @@ public class CustomChessMovementBuilder {
     private final ValidatorBuilder validatorBuilder;
 
     public CustomChessMovementBuilder() {
-        this.validatorBuilder = new edu.austral.dissis.chess.builder.common.ValidatorBuilder();
+        this.validatorBuilder = new ValidatorBuilder();
     }
 
     public List<GameOverValidator> buildGameOverValidators() {

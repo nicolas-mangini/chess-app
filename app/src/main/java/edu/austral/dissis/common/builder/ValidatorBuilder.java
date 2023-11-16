@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.builder.common;
+package edu.austral.dissis.common.builder;
 
 import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;

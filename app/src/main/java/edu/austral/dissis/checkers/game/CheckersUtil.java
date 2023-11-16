@@ -10,16 +10,13 @@ import java.util.List;
 public class CheckersUtil {
     /**
      * Checks if a given movement corresponds to an "eat" move in the game of checkers.
-     * In checkers, an "eat" move occurs when a pawn moves two tiles diagonally, capturing an opponent's piece in the process.
+     * In checkers, an "eat" move occurs when a piece moves two tiles diagonally, capturing an opponent's piece in the process.
      *
      * @param movement The movement to be checked.
-     * @return {@code true} if the movement is a valid "eat" move for a pawn; otherwise, {@code false}.
+     * @return {@code true} if the movement is a valid "eat" move; otherwise, {@code false}.
      */
     public static boolean isEatMovement(Movement movement) {
-        if (movement.getFrom().getPiece().getPieceType() == PieceType.PAWN) {
-            return Math.abs(movement.getFrom().getX() - movement.getTo().getX()) == 2;
-        }
-        return false;
+        return Math.abs(movement.getFrom().getX() - movement.getTo().getX()) == 2;
     }
 
     /**
@@ -30,23 +27,19 @@ public class CheckersUtil {
      * @param fromTile The starting tile of the piece.
      * @param board    The checkers board on which the piece is located.
      * @return A list of tiles representing the possible tiles where the piece can jump to capture an opponent's piece.
-     *         If the piece is not a pawn or there are no valid jump moves, an empty list is returned.
      */
     public static List<Tile> possibleEatTiles(Tile fromTile, Board board) {
-        if (fromTile.getPiece().getPieceType() == PieceType.PAWN) {
-            return board.getTiles().stream()
-                    .filter(tile -> Math.abs(tile.getX() - fromTile.getX()) == 2)
-                    .filter(tile -> Math.abs(tile.getY() - fromTile.getY()) == 2)
-                    .filter(tile -> tile.getPiece() == null)
-                    .filter(tile -> {
-                        Tile middleTile = board.getTile(
-                                (tile.getX() + fromTile.getX()) / 2,
-                                (tile.getY() + fromTile.getY()) / 2
-                        ).get();
-                        return middleTile.getPiece() != null;
-                    })
-                    .toList();
-        }
-        return List.of();
+        return board.getTiles().stream()
+                .filter(tile -> Math.abs(tile.getX() - fromTile.getX()) == 2)
+                .filter(tile -> Math.abs(tile.getY() - fromTile.getY()) == 2)
+                .filter(tile -> tile.getPiece() == null)
+                .filter(tile -> {
+                    Tile middleTile = board.getTile(
+                            (tile.getX() + fromTile.getX()) / 2,
+                            (tile.getY() + fromTile.getY()) / 2
+                    ).get();
+                    return middleTile.getPiece() != null;
+                })
+                .toList();
     }
 }
