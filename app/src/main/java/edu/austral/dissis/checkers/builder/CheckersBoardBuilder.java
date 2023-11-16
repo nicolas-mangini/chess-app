@@ -14,6 +14,6 @@ public class CheckersBoardBuilder implements BoardBuilder {
     }
 
     public CheckersBoardBuilder() {
-        this.checkersPieceBuilder = new TESTCheckersPieceBuilder();
+        this.checkersPieceBuilder = new CheckersPieceBuilder();
     }
 }
