@@ -4,6 +4,7 @@ import edu.austral.dissis.checkers.builder.CheckersGameBuilder;
 import edu.austral.dissis.checkers.game.CheckersGameMover;
 import edu.austral.dissis.chess.adapter.GameEngineAdapter;
 import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
+import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
 import edu.austral.dissis.chess.game.*;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.chess.builder.ChessGameBuilder;
@@ -30,10 +31,16 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
             gameBuilder = new ChessGameBuilder();
             Game game = gameBuilder.build();
             this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else {
+        } else if (gameType.equals(GameType.CHECKERS)) {
             gameBuilder = new CheckersGameBuilder();
             Game game = gameBuilder.build();
             this.gameManager = new GameManager(game, new CheckersGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
+        } else if (gameType.equals(GameType.CUSTOM_CHESS)) {
+            gameBuilder = new CustomChessGameBuilder();
+            Game game = gameBuilder.build();
+            this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
+        } else {
+            throw new RuntimeException("Game type not supported");
         }
         previousGameManagers.push(this.gameManager);
     }

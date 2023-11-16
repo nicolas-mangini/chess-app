@@ -1,4 +1,3 @@
-/*
 package edu.austral.dissis.chess.builder.custom;
 
 import edu.austral.dissis.common.game.Game;
@@ -10,11 +9,11 @@ import java.util.ArrayList;
 
 public class CustomChessGameBuilder implements GameBuilder {
     private final BoardBuilder customChessBoardBuilder;
-    private final CustomChessMovementBuilderI customChessMovementBuilder;
+    private final CustomChessMovementBuilder customChessMovementBuilder;
 
     public CustomChessGameBuilder() {
         this.customChessBoardBuilder = new CustomChessBoardBuilder();
-        this.customChessMovementBuilder = new CustomChessMovementBuilderI();
+        this.customChessMovementBuilder = new CustomChessMovementBuilder();
     }
 
     @Override
@@ -23,9 +22,9 @@ public class CustomChessGameBuilder implements GameBuilder {
                 .player1(Colour.WHITE)
                 .player2(Colour.BLACK)
                 .board(customChessBoardBuilder.build())
+                .gameValidators(customChessMovementBuilder.buildGameValidators())
                 .gameOverValidators(customChessMovementBuilder.buildGameOverValidators())
                 .history(new ArrayList<>())
                 .build();
     }
 }
-*/

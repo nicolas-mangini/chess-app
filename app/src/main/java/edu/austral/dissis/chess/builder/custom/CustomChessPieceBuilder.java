@@ -1,4 +1,3 @@
-/*
 package edu.austral.dissis.chess.builder.custom;
 
 import edu.austral.dissis.common.piece.Piece;
@@ -12,11 +11,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CustomChessPieceBuilder implements PieceBuilder {
-    private final CustomChessMovementBuilderI customChessMovementBuilder;
+    private final CustomChessMovementBuilder customChessMovementBuilder;
     private static int ID;
 
     public CustomChessPieceBuilder() {
-        this.customChessMovementBuilder = new CustomChessMovementBuilderI();
+        this.customChessMovementBuilder = new CustomChessMovementBuilder();
     }
 
     @Override
@@ -106,7 +105,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidators(customChessMovementBuilder.createPawnMovements(colour))
+                .pieceValidator(customChessMovementBuilder.createPawnMovements(colour))
                 .build();
     }
 
@@ -116,7 +115,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 1))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidators(customChessMovementBuilder.createChancellorMovements())
+                .pieceValidator(customChessMovementBuilder.createChancellorMovements())
                 .build();
     }
 
@@ -126,7 +125,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 2))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidators(customChessMovementBuilder.createKnightMovements())
+                .pieceValidator(customChessMovementBuilder.createKnightMovements())
                 .build();
     }
 
@@ -136,7 +135,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 3))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidators(customChessMovementBuilder.createArchbishopMovements())
+                .pieceValidator(customChessMovementBuilder.createArchbishopMovements())
                 .build();
     }
 
@@ -146,7 +145,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 4))
                 .pieceType(PieceType.QUEEN)
-                .pieceValidators(customChessMovementBuilder.createQueenMovements())
+                .pieceValidator(customChessMovementBuilder.createQueenMovements())
                 .build();
     }
 
@@ -156,7 +155,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 5))
                 .pieceType(PieceType.KING)
-                .pieceValidators(customChessMovementBuilder.createKingMovements())
+                .pieceValidator(customChessMovementBuilder.createKingMovements())
                 .build();
     }
 
@@ -166,7 +165,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 6))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidators(customChessMovementBuilder.createArchbishopMovements())
+                .pieceValidator(customChessMovementBuilder.createArchbishopMovements())
                 .build();
     }
 
@@ -176,7 +175,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 7))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidators(customChessMovementBuilder.createKnightMovements())
+                .pieceValidator(customChessMovementBuilder.createKnightMovements())
                 .build();
     }
 
@@ -186,7 +185,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 8))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidators(customChessMovementBuilder.createChancellorMovements())
+                .pieceValidator(customChessMovementBuilder.createChancellorMovements())
                 .build();
     }
 
@@ -196,7 +195,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 8))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidators(customChessMovementBuilder.createChancellorMovements())
+                .pieceValidator(customChessMovementBuilder.createChancellorMovements())
                 .build();
     }
 
@@ -206,7 +205,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 2))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidators(customChessMovementBuilder.createKnightMovements())
+                .pieceValidator(customChessMovementBuilder.createKnightMovements())
                 .build();
     }
 
@@ -216,7 +215,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 3))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidators(customChessMovementBuilder.createArchbishopMovements())
+                .pieceValidator(customChessMovementBuilder.createArchbishopMovements())
                 .build();
     }
 
@@ -226,7 +225,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 4))
                 .pieceType(PieceType.QUEEN)
-                .pieceValidators(customChessMovementBuilder.createQueenMovements())
+                .pieceValidator(customChessMovementBuilder.createQueenMovements())
                 .build();
     }
 
@@ -236,7 +235,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 5))
                 .pieceType(PieceType.KING)
-                .pieceValidators(customChessMovementBuilder.createKingMovements())
+                .pieceValidator(customChessMovementBuilder.createKingMovements())
                 .build();
     }
 
@@ -246,7 +245,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 6))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidators(customChessMovementBuilder.createArchbishopMovements())
+                .pieceValidator(customChessMovementBuilder.createArchbishopMovements())
                 .build();
     }
 
@@ -256,7 +255,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 7))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidators(customChessMovementBuilder.createKnightMovements())
+                .pieceValidator(customChessMovementBuilder.createKnightMovements())
                 .build();
     }
 
@@ -266,7 +265,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 1))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidators(customChessMovementBuilder.createChancellorMovements())
+                .pieceValidator(customChessMovementBuilder.createChancellorMovements())
                 .build();
     }
-}*/
+}
