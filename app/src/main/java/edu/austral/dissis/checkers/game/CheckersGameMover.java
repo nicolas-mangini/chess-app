@@ -1,6 +1,7 @@
 package edu.austral.dissis.checkers.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.chess.game.PromoteUtils;
 import edu.austral.dissis.common.game.*;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
@@ -37,11 +38,15 @@ public class CheckersGameMover implements GameMover {
     }
 
     private GameManager makeMovement(Movement movement, GameManager gameManager) {
-        SimpleBoard newBoard = new SimpleBoard(gameManager.getGame().getBoard());
+        Board newBoard = new SimpleBoard(gameManager.getGame().getBoard());
         Piece pieceToMove = newBoard.getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY()).get();
 
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());
         newBoard.setPieceAtTile(null, movement.getFrom());
+
+        if (PromoteUtils.canPromote(pieceToMove, movement.getTo())) {
+            newBoard = PromoteUtils.promoteCheckers(pieceToMove, PieceType.QUEEN, movement.getTo(), newBoard);
+        }
 
         if (CheckersUtil.isEatMovement(movement)) {
             Tile middle = middleMovementTile(movement, newBoard);
@@ -81,13 +86,10 @@ public class CheckersGameMover implements GameMover {
     }
 
     private Tile middleMovementTile(Movement movement, Board board) {
-        if (movement.getFrom().getPiece().getPieceType() == PieceType.PAWN) {
-            return board.getTile(
-                    (movement.getFrom().getX() + movement.getTo().getX()) / 2,
-                    (movement.getFrom().getY() + movement.getTo().getY()) / 2
-            ).get();
-        }
-        return null;
+        return board.getTile(
+                (movement.getFrom().getX() + movement.getTo().getX()) / 2,
+                (movement.getFrom().getY() + movement.getTo().getY()) / 2
+        ).get();
     }
 
     private boolean canEatAgain(Tile pieceTile, Board board, GameManager currentGameManager, List<Movement> newHistory) {

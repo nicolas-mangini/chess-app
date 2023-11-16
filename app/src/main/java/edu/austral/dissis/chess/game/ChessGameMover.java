@@ -1,11 +1,13 @@
 package edu.austral.dissis.chess.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.*;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
 import edu.austral.dissis.common.util.Result;
+import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -47,6 +49,11 @@ public class ChessGameMover implements GameMover {
 
         List<Movement> newHistory = new ArrayList<>(game.getHistory());
         newHistory.add(movement);
+
+        if (PromoteUtils.canPromote(pieceToMove, movement.getTo())) {
+            Board promotedBoard = PromoteUtils.promoteChess(pieceToMove, PieceType.QUEEN, movement.getTo(), newBoard);
+            return new Game(game.getPlayer1(), game.getPlayer2(), promotedBoard, game.getGameValidators(), game.getGameOverValidators(), newHistory);
+        }
 
         return new Game(game.getPlayer1(), game.getPlayer2(), newBoard, game.getGameValidators(), game.getGameOverValidators(), newHistory);
     }
