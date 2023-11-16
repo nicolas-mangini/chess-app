@@ -19,8 +19,8 @@ public class ClientManager {
     private final Client client;
     private final GameView gameView;
 
-    public ClientManager(GameView gameView) {
-        this.client = buildClient();
+    public ClientManager(GameView gameView, int port) {
+        this.client = buildClient(port);
         this.gameView = gameView;
         addListenersToGameView();
         startConnection();
@@ -50,12 +50,12 @@ public class ClientManager {
         gameView.addListener(new ClientGameEventListener(this));
     }
 
-    private Client buildClient() {
+    private Client buildClient(int port) {
         ClientConnectionListener connectionListener = new ConnectionListener(this);
 
         return NettyClientBuilder.Companion
                 .createDefault()
-                .withAddress(new InetSocketAddress("localhost", 8081))
+                .withAddress(new InetSocketAddress("localhost", port))
                 .withConnectionListener(connectionListener)
                 .addMessageListener("initialState", new TypeReference<>() {
                 }, new InitialStateListener(this))

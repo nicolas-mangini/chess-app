@@ -14,9 +14,9 @@ public class ServerManager {
     private final Server server;
     private final GameEngine gameEngine;
 
-    public ServerManager(GameEngine gameEngine) {
+    public ServerManager(GameEngine gameEngine, int port) {
         this.gameEngine = gameEngine;
-        this.server = buildNettyServer();
+        this.server = buildNettyServer(port);
         startServer();
     }
 
@@ -48,12 +48,12 @@ public class ServerManager {
         }
     }
 
-    private Server buildNettyServer() {
+    private Server buildNettyServer(int port) {
         GameEventListener gameEventListener = new ServerGameEventListener(this);
         ServerConnectionListener connectionListener = new ConnectionListener(this);
 
         return NettyServerBuilder.Companion.createDefault()
-                .withPort(8081)
+                .withPort(port)
                 .withConnectionListener(connectionListener)
                 .addMessageListener("move",
                         new TypeReference<>() {

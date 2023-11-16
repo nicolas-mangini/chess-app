@@ -16,6 +16,6 @@ class ServerApplication : Application() {
     //private val gameEngine = CheckersGameEngine()
 
     override fun start(primaryStage: Stage) {
-        ServerManager(gameEngine)
+        ServerManager(gameEngine, 8082)
     }
 }
