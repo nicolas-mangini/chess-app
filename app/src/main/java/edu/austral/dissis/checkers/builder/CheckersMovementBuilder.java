@@ -26,7 +26,7 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
     @Override
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
-                new PiecesRemainingValidator(10)
+                new PiecesRemainingValidator(0)
         );
     }
 
