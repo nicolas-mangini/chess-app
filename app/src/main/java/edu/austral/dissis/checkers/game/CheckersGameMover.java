@@ -1,14 +1,12 @@
 package edu.austral.dissis.checkers.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.common.game.Game;
-import edu.austral.dissis.common.game.GameManager;
+import edu.austral.dissis.common.game.*;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
-import edu.austral.dissis.common.game.GameMover;
-import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.util.MovementResult;
+import edu.austral.dissis.common.util.Result;
 import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.AllArgsConstructor;
 
@@ -19,7 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CheckersGameMover implements GameMover {
     @Override
-    public MovementResult<GameManager, String> tryMovement(Movement movement, GameManager gameManager) {
+    public Result<?, ?> tryMovement(Movement movement, GameManager gameManager) {
         Optional<Piece> pieceToMove = gameManager
                 .getGame()
                 .getBoard()
@@ -29,6 +27,12 @@ public class CheckersGameMover implements GameMover {
             return new MovementResult<>(gameManager, "Invalid movement!");
 
         GameManager movedGameManager = makeMovement(movement, gameManager);
+
+        Result<Boolean, Colour> isGameOver = movedGameManager.isGameOver(movement);
+        if (isGameOver.getKey()) {
+            return isGameOver;
+        }
+
         return new MovementResult<>(movedGameManager, null);
     }
 

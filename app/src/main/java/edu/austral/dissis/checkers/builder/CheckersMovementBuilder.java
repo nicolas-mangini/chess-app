@@ -5,7 +5,6 @@ import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
-import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.piece.PieceValidator;

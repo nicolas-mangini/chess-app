@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class MovementResult<Game, String> implements Result<Game, String> {
-    private final Game game;
+public class MovementResult<GameManager, String> implements Result<GameManager, String> {
+    private final GameManager game;
     private final String error;
 
     @Override
-    public Game getKey() {
+    public GameManager getKey() {
         return this.game;
     }
 

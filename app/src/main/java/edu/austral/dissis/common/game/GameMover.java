@@ -1,8 +1,8 @@
 package edu.austral.dissis.common.game;
 
 import edu.austral.dissis.common.util.MovementResult;
+import edu.austral.dissis.common.util.Result;
 
 public interface GameMover {
-    MovementResult<GameManager, String> tryMovement(Movement movement, GameManager gameManager);
-
+    Result<?, ?> tryMovement(Movement movement, GameManager gameManager);
 }
