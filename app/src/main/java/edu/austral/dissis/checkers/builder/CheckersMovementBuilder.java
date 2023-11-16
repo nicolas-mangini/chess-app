@@ -1,7 +1,7 @@
 package edu.austral.dissis.checkers.builder;
 
 import edu.austral.dissis.checkers.validator.game.CannotMoveValidator;
-import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
+import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;

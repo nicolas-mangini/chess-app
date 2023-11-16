@@ -1,6 +1,6 @@
 package edu.austral.dissis.chess.builder.custom;
 
-import edu.austral.dissis.checkers.validator.game.PiecesRemainingValidator;
+import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
 import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;

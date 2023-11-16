@@ -13,7 +13,6 @@ import java.util.Optional;
 public class EatOwnPieceValidator implements MovementValidator {
     private final boolean canEat;
 
-    //TODO EatValidator + OwnPieceValidator?
     @Override
     public boolean isValid(Movement movement, Board board, GameManager gameManager) {
         Piece fromPiece = movement.getFrom().getPiece();
