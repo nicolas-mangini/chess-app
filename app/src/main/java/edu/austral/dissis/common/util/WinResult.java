@@ -3,6 +3,7 @@ package edu.austral.dissis.common.util;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;
+
 @AllArgsConstructor
 public class WinResult<Boolean, Colour> implements Result<Boolean, Colour> {
     private final Boolean winResult;

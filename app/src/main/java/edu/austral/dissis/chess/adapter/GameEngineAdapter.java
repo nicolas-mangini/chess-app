@@ -6,7 +6,6 @@ import edu.austral.dissis.chess.gui.*;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Movement;
 import edu.austral.dissis.common.turn.TurnChanger;
-import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 
 import java.util.List;
 

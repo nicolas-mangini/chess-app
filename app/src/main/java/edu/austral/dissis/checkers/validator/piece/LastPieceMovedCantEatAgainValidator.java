@@ -19,7 +19,7 @@ public class LastPieceMovedCantEatAgainValidator implements MovementValidator {
         List<Movement> history = gameManager.getGame().getHistory();
         if (history.isEmpty()) return true;
         Movement previousMovement = history.get(history.size() - 1);
-        if (Math.abs(previousMovement.getFrom().getX() - previousMovement.getTo().getX()) != 2){
+        if (Math.abs(previousMovement.getFrom().getX() - previousMovement.getTo().getX()) != 2) {
             return true;
         }
 

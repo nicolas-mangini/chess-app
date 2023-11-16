@@ -1,13 +1,11 @@
 package edu.austral.dissis.chess.game;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
-import edu.austral.dissis.chess.gui.GameOver;
 import edu.austral.dissis.common.game.*;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.turn.TurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
 import edu.austral.dissis.common.util.Result;
-import edu.austral.dissis.common.util.WinResult;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;

@@ -27,21 +27,26 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
         this.gameEngineAdapter = new ChessGameEngineAdapter();
 
         GameBuilder gameBuilder;
-        if (gameType.equals(GameType.CHESS)) {
-            gameBuilder = new ChessGameBuilder();
-            Game game = gameBuilder.build();
-            this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else if (gameType.equals(GameType.CHECKERS)) {
-            gameBuilder = new CheckersGameBuilder();
-            Game game = gameBuilder.build();
-            this.gameManager = new GameManager(game, new CheckersGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else if (gameType.equals(GameType.CUSTOM_CHESS)) {
-            gameBuilder = new CustomChessGameBuilder();
-            Game game = gameBuilder.build();
-            this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else {
-            throw new RuntimeException("Game type not supported");
+        GameMover gameMover;
+
+        switch (gameType) {
+            case CHESS -> {
+                gameBuilder = new ChessGameBuilder();
+                gameMover = new ChessGameMover();
+            }
+            case CUSTOM_CHESS -> {
+                gameBuilder = new CustomChessGameBuilder();
+                gameMover = new ChessGameMover();
+            }
+            case CHECKERS -> {
+                gameBuilder = new CheckersGameBuilder();
+                gameMover = new CheckersGameMover();
+            }
+            default -> throw new RuntimeException("Game type not supported");
         }
+
+        Game game = gameBuilder.build();
+        this.gameManager = new GameManager(game, gameMover, new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
     }
 

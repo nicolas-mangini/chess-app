@@ -32,7 +32,6 @@ public class SimpleBoard implements Board {
         }
     }
 
-
     public SimpleBoard(int rows, int columns) {
         tiles = new ArrayList<>();
         for (int x = 1; x <= rows; x++) {

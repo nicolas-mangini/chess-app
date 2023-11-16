@@ -12,6 +12,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class EatOwnPieceValidator implements MovementValidator {
     private final boolean canEat;
+
     //TODO EatValidator + OwnPieceValidator?
     @Override
     public boolean isValid(Movement movement, Board board, GameManager gameManager) {

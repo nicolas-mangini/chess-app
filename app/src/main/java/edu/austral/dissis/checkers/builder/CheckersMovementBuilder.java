@@ -91,15 +91,4 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
 
         return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialAndValidators));
     }
-
-/*    public MovementValidator createQueenValidators() {
-        List<MovementValidator> orValidators = List.of(
-                new CompoundAndValidator(List.of(
-                        new DirectionValidator(Direction.UP),
-                        new EatFinalPieceValidator(false),
-                        new EatOwnPieceValidator(false)
-                ))
-        );
-        return new CompoundOrValidator(orValidators);
-    }*/
 }

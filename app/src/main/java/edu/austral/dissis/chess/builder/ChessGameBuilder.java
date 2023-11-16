@@ -28,4 +28,3 @@ public class ChessGameBuilder implements GameBuilder {
                 .build();
     }
 }
-

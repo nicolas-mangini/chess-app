@@ -46,7 +46,7 @@ public class ClientManager {
         client.closeConnection();
     }
 
-    private void addListenersToGameView(){
+    private void addListenersToGameView() {
         gameView.addListener(new ClientGameEventListener(this));
     }
 
