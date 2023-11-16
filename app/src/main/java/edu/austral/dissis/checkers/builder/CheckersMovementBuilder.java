@@ -5,7 +5,6 @@ import edu.austral.dissis.checkers.validator.piece.EatMiddlePieceValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
 import edu.austral.dissis.chess.builder.common.ValidatorBuilder;
-import edu.austral.dissis.common.builder.ValidatorBuilderI;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
@@ -16,14 +15,13 @@ import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
-public class CheckersMovementBuilder implements ValidatorBuilderI {
+public class CheckersMovementBuilder {
     private final ValidatorBuilder validatorBuilder;
 
     public CheckersMovementBuilder() {
-        this.validatorBuilder = new ValidatorBuilder();
+        this.validatorBuilder = new edu.austral.dissis.chess.builder.common.ValidatorBuilder();
     }
 
-    @Override
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
                 new PiecesRemainingValidator(0)
@@ -31,7 +29,7 @@ public class CheckersMovementBuilder implements ValidatorBuilderI {
     }
 
     public MovementValidator buildGameValidators() {
-        List<MovementValidator> gameValidators = validatorBuilder.createChessGameValidators();
+        List<MovementValidator> gameValidators = validatorBuilder.createCheckersGameValidators();
         return new CompoundAndValidator(gameValidators);
     }
 

@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.builder;
+package edu.austral.dissis.chess.builder.classic;
 
 import edu.austral.dissis.chess.board.SimpleBoard;
 import edu.austral.dissis.common.builder.BoardBuilder;
