@@ -1,6 +1,7 @@
 
 package edu.austral.dissis.chess.builder.custom;
 
+import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.SimpleBoard;
 import edu.austral.dissis.common.builder.BoardBuilder;
 import edu.austral.dissis.common.builder.PieceBuilder;
@@ -13,7 +14,7 @@ public class CustomChessBoardBuilder implements BoardBuilder {
     }
 
     @Override
-    public SimpleBoard build() {
+    public Board build() {
         return new SimpleBoard(customChessPieceBuilder.buildAll(), 8, 8);
     }
 }

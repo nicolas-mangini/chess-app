@@ -8,8 +8,8 @@ import edu.austral.dissis.common.builder.GameBuilder;
 import java.util.ArrayList;
 
 public class ChessGameBuilder implements GameBuilder {
-    private final BoardBuilder chessBoardBuilder;
     private final ChessMovementBuilder chessMovementBuilder;
+    private final BoardBuilder chessBoardBuilder;
 
     public ChessGameBuilder() {
         this.chessMovementBuilder = new ChessMovementBuilder();

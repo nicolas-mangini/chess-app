@@ -19,11 +19,13 @@ public class CheckersPieceBuilder implements PieceBuilder {
                 .toList();
     }
 
-    private List<Piece> createWhitePieces() {
+    @Override
+    public List<Piece> createWhitePieces() {
         return createWhitePawns();
     }
 
-    private List<Piece> createBlackPieces() {
+    @Override
+    public List<Piece> createBlackPieces() {
         return createBlackPawns();
     }
 
@@ -93,7 +95,7 @@ public class CheckersPieceBuilder implements PieceBuilder {
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidator(CheckersMovementBuilder.createCheckersMovements(PieceType.PAWN, colour))
+                .pieceValidator(CheckersMovementBuilder.createMovements(PieceType.PAWN, colour))
                 .build();
     }
 }

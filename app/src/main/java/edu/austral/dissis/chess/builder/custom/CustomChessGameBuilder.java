@@ -8,12 +8,12 @@ import edu.austral.dissis.common.game.Colour;
 import java.util.ArrayList;
 
 public class CustomChessGameBuilder implements GameBuilder {
-    private final BoardBuilder customChessBoardBuilder;
     private final CustomChessMovementBuilder customChessMovementBuilder;
+    private final BoardBuilder customChessBoardBuilder;
 
     public CustomChessGameBuilder() {
-        this.customChessBoardBuilder = new CustomChessBoardBuilder();
         this.customChessMovementBuilder = new CustomChessMovementBuilder();
+        this.customChessBoardBuilder = new CustomChessBoardBuilder();
     }
 
     @Override
