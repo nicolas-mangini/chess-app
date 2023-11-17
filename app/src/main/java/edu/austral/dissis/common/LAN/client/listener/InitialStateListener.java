@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 @AllArgsConstructor
-public class InitialStateListener implements MessageListener<InitialState>{
+public class InitialStateListener implements MessageListener<InitialState> {
     private final ClientManager clientManager;
 
     @Override

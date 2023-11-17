@@ -24,4 +24,13 @@ public class Piece {
         this.pieceType = toCopy.pieceType;
         this.pieceValidator = toCopy.pieceValidator;
     }
+
+    // for promote
+    public Piece(Piece toCopy, PieceType newPieceType, PieceValidator newPieceValidators) {
+        this.id = toCopy.id;
+        this.colour = toCopy.colour;
+        this.initialPosition = toCopy.initialPosition;
+        this.pieceType = newPieceType;
+        this.pieceValidator = newPieceValidators;
+    }
 }

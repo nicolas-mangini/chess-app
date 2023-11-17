@@ -11,12 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CheckersPieceBuilder implements PieceBuilder {
-    private final CheckersMovementBuilder checkersMovementBuilder;
     private static int ID;
-
-    public CheckersPieceBuilder() {
-        this.checkersMovementBuilder = new CheckersMovementBuilder();
-    }
 
     @Override
     public List<Piece> buildAll() {
@@ -98,7 +93,7 @@ public class CheckersPieceBuilder implements PieceBuilder {
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidator(checkersMovementBuilder.createPawnMovements(colour))
+                .pieceValidator(CheckersMovementBuilder.createCheckersMovements(PieceType.PAWN, colour))
                 .build();
     }
 }

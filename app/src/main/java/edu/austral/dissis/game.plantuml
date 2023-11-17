@@ -1,0 +1,535 @@
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+
+interface Board << interface >> {
+  + findPiece(PieceType, Colour): Optional<Piece>
+  + getTileByPiece(Piece): Optional<Tile>
+  + setPieceAtTile(Piece, Tile): void
+  + getPieceByTile(int, int): Optional<Piece>
+  + getTile(int, int): Optional<Tile>
+   tiles: List<Tile>
+   maxSquare: Tile
+}
+interface BoardBuilder << interface >> {
+  + build(): Board
+}
+interface BoardPrinter << interface >> {
+  + print(SimpleBoard): String
+}
+class CannotMoveValidator {
+  + CannotMoveValidator(): 
+  + isGameOver(Movement, Board, GameManager): WinResult<Boolean, Colour>
+}
+class CheckMate {
+  + CheckMate(): 
+  + isGameOver(Movement, Board, GameManager): WinResult<Boolean, Colour>
+  - checkAllEnemyMovements(Board, GameManager, Colour): boolean
+  - validateMovement(Movement, Board, GameManager, Piece): boolean
+}
+class CheckValidator {
+  + CheckValidator(PieceType): 
+  - checkEnemyValidators(Movement, Board, GameManager, Tile, Tile, Piece): boolean
+  - checkEnemyMovements(Movement, Board, GameManager, Tile, Colour, Piece): boolean
+  + isValid(Movement, Board, GameManager): boolean
+}
+class CheckersBoardBuilder {
+  + CheckersBoardBuilder(): 
+  + build(): Board
+}
+class CheckersGameBuilder {
+  + CheckersGameBuilder(): 
+  + build(): Game
+}
+class CheckersGameMover {
+  + CheckersGameMover(): 
+  - validateMovement(Optional<Piece>, Movement, GameManager): boolean
+  - canEatAgain(Tile, Board, GameManager, List<Movement>): boolean
+  - makeMovement(Movement, GameManager): GameManager
+  + tryMovement(Movement, GameManager): Result<?, ?>
+  - middleMovementTile(Movement, Board): Tile?
+}
+class CheckersMovementBuilder {
+  + CheckersMovementBuilder(): 
+  + buildGameOverValidators(): List<GameOverValidator>
+  + buildGameValidators(): MovementValidator
+  + createPawnMovements(Colour): PieceValidator
+}
+class CheckersPieceBuilder {
+  + CheckersPieceBuilder(): 
+  - createWhitePieces(): List<Piece>
+  - createWhitePawns(): List<Piece>
+  - whiteInitialPositions(): List<Tile>
+  - createPawn(Colour, Tile): Piece
+  - createBlackPawns(): List<Piece>
+  - blackInitialPositions(): List<Tile>
+  + buildAll(): List<Piece>
+  - createBlackPieces(): List<Piece>
+}
+class CheckersUtil {
+  + CheckersUtil(): 
+  + possibleEatTiles(Tile, Board): List<Tile>
+  + isEatMovement(Movement): boolean
+}
+class ChessBoardBuilder {
+  + ChessBoardBuilder(): 
+  + build(): SimpleBoard
+}
+class ChessBoardPrinter {
+  + ChessBoardPrinter(): 
+  + print(SimpleBoard): String
+}
+class ChessGameBuilder {
+  + ChessGameBuilder(): 
+  + build(): Game
+}
+class ChessGameEngineAdapter {
+  + ChessGameEngineAdapter(): 
+  + adaptPlayerColor(Colour): PlayerColor
+  + getBoardSize(Board): BoardSize
+  + getCurrentTurn(TurnChanger): PlayerColor
+  + adaptPosition(Tile): Position
+  + adaptTile(Position, List<Tile>): Tile
+  + getCurrentPieces(Board): List<ChessPiece>
+  + adaptMovement(Move, List<Tile>): Movement
+}
+class ChessGameMover {
+  + ChessGameMover(): 
+  + tryMovement(Movement, GameManager): Result<?, ?>
+  - makeMovement(Movement, Game): Game
+  - validateMovement(Optional<Piece>, Movement, GameManager): boolean
+}
+class ChessMovementBuilder {
+  + ChessMovementBuilder(): 
+  + createPawnMovements(Colour): PieceValidator
+  + buildGameOverValidators(): List<GameOverValidator>
+  + buildGameValidators(): MovementValidator
+  + createBishopMovements(): PieceValidator
+  + createRookMovements(): PieceValidator
+  + createKnightMovements(): PieceValidator
+  + createQueenMovements(): PieceValidator
+  + createKingMovements(): PieceValidator
+}
+class ChessPieceBuilder {
+  + ChessPieceBuilder(): 
+  - createKnightB1(): Piece
+  - createQueenB1(): Piece
+  - createKnightW1(): Piece
+  - whitePawnInitialPositions(): List<Tile>
+  + createBlackPieces(): List<Piece>
+  - createKingB1(): Piece
+  + buildAll(): List<Piece>
+  - blackPawnInitialPositions(): List<Tile>
+  - createQueenW1(): Piece
+  - createRookW1(): Piece
+  - createKnightW2(): Piece
+  - createBishopW1(): Piece
+  - createRookW2(): Piece
+  - createRookB2(): Piece
+  - createPawns(Colour): List<Piece>
+  + createWhitePieces(): List<Piece>
+  - createKingW1(): Piece
+  - createBishopB1(): Piece
+  - createBishopB2(): Piece
+  - createBishopW2(): Piece
+  - createRookB1(): Piece
+  - createKnightB2(): Piece
+  - createPawn(Colour, Tile): Piece
+}
+class ClientGameEventListener {
+  + ClientGameEventListener(ClientManager): 
+  + handleMove(Move): void
+}
+class ClientManager {
+  + ClientManager(GameView, int): 
+  + notifyMovement(Move): void
+  - addListenersToGameView(): void
+  + handleInitialState(InitialState): void
+  + handleMoveResult(MoveResult): void
+  + closeConnection(): void
+  - buildClient(int): Client
+  + startConnection(): void
+}
+enum Colour << enumeration >> {
+  + Colour(): 
+  + valueOf(String): Colour
+  + values(): Colour[]
+}
+class CompoundAndValidator {
+  + CompoundAndValidator(List<MovementValidator>): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class CompoundOrValidator {
+  + CompoundOrValidator(List<MovementValidator>): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class ConnectionListener {
+  + ConnectionListener(ClientManager): 
+  + handleConnection(): void
+  + handleConnectionClosed(): void
+}
+class ConnectionListener {
+  + ConnectionListener(ServerManager): 
+  + handleClientConnection(String): void
+  + handleClientConnectionClosed(String): void
+}
+class CustomChessBoardBuilder {
+  + CustomChessBoardBuilder(): 
+  + build(): SimpleBoard
+}
+class CustomChessGameBuilder {
+  + CustomChessGameBuilder(): 
+  + build(): Game
+}
+class CustomChessMovementBuilder {
+  + CustomChessMovementBuilder(): 
+  + createKnightMovements(): PieceValidator
+  + createKingMovements(): PieceValidator
+  + buildGameValidators(): MovementValidator
+  + createChancellorMovements(): PieceValidator
+  + createQueenMovements(): PieceValidator
+  + buildGameOverValidators(): List<GameOverValidator>
+  + createArchbishopMovements(): PieceValidator
+  + createPawnMovements(Colour): PieceValidator
+}
+class CustomChessPieceBuilder {
+  + CustomChessPieceBuilder(): 
+  - createKingW1(): Piece
+  - createQueenB1(): Piece
+  - createPawn(Colour, Tile): Piece
+  - createQueenW1(): Piece
+  + createWhitePieces(): List<Piece>
+  - createBishopB1(): Piece
+  - createBishopW2(): Piece
+  - createBishopB2(): Piece
+  - createBlackPawns(): List<Piece>
+  - createKnightB2(): Piece
+  - whitePawnInitialPositions(): List<Tile>
+  - createKnightW2(): Piece
+  - createKnightB1(): Piece
+  - createKingB1(): Piece
+  - blackPawnInitialPositions(): List<Tile>
+  - createKnightW1(): Piece
+  + buildAll(): List<Piece>
+  - createRookB2(): Piece
+  - createRookB1(): Piece
+  - createWhitePawns(): List<Piece>
+  + createBlackPieces(): List<Piece>
+  - createRookW1(): Piece
+  - createRookW2(): Piece
+  - createBishopW1(): Piece
+}
+enum Direction << enumeration >> {
+  - Direction(int, int): 
+  - y: int
+  - x: int
+  + valueOf(String): Direction
+  + values(): Direction[]
+   y: int
+   x: int
+}
+class DirectionValidator {
+  + DirectionValidator(Direction): 
+  + DirectionValidator(int, int): 
+  + isValid(Movement, Board, GameManager): boolean
+  - isOutsideBoard(Tile, Board): boolean
+}
+class EatFinalPieceValidator {
+  + EatFinalPieceValidator(boolean): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class EatMiddlePieceValidator {
+  + EatMiddlePieceValidator(): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class EatOwnPieceValidator {
+  + EatOwnPieceValidator(boolean): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class EatenBeforeValidator {
+  + EatenBeforeValidator(): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class Game {
+  + Game(Colour, Colour, Board, MovementValidator, List<GameOverValidator>, List<Movement>): 
+  + Game(Game, Board, List<Movement>): 
+  + Game(Game, List<Movement>): 
+  - player2: Colour
+  - player1: Colour
+  - gameValidators: MovementValidator
+  - gameOverValidators: List<GameOverValidator>
+  - history: List<Movement>
+  - board: Board
+  + builder(): GameBuilder
+   gameValidators: MovementValidator
+   history: List<Movement>
+   board: Board
+   player1: Colour
+   gameOverValidators: List<GameOverValidator>
+   player2: Colour
+}
+interface GameBuilder << interface >> {
+  + build(): Game
+}
+class GameEngine {
+  + GameEngine(GameType): 
+  + init(): InitialState
+  + handleMovementResult(Result<?, ?>): MoveResult
+  + applyMove(Move): MoveResult
+}
+interface GameEngineAdapter << interface >> {
+  + adaptPosition(Tile): Position
+  + getBoardSize(Board): BoardSize
+  + getCurrentPieces(Board): List<ChessPiece>
+  + adaptTile(Position, List<Tile>): Tile
+  + adaptPlayerColor(Colour): PlayerColor
+  + getCurrentTurn(TurnChanger): PlayerColor
+  + adaptMovement(Move, List<Tile>): Movement
+}
+class GameManager {
+  + GameManager(Game, GameMover, TurnChanger): 
+  - game: Game
+  - chessGameMover: GameMover
+  - turnChanger: TurnChanger
+  + isGameOver(Movement): Result<Boolean, Colour>
+   chessGameMover: GameMover
+   game: Game
+   turnChanger: TurnChanger
+}
+interface GameMover << interface >> {
+  + tryMovement(Movement, GameManager): Result<?, ?>
+}
+class GameOverListener {
+  + GameOverListener(ClientManager): 
+  + handleMessage(Message<GameOver>): void
+}
+interface GameOverValidator << interface >> {
+  + isGameOver(Movement, Board, GameManager): WinResult<Boolean, Colour>
+}
+enum GameType << enumeration >> {
+  + GameType(): 
+  + valueOf(String): GameType
+  + values(): GameType[]
+}
+class IncrementValidator {
+  + IncrementValidator(int): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class InitialStateListener {
+  + InitialStateListener(ClientManager): 
+  + handleMessage(Message<InitialState>): void
+}
+class InvalidMoveListener {
+  + InvalidMoveListener(ClientManager): 
+  + handleMessage(Message<InvalidMove>): void
+}
+class JumpMovementValidator {
+  + JumpMovementValidator(int, int): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class LastPieceMovedCantEatAgainValidator {
+  + LastPieceMovedCantEatAgainValidator(): 
+  + isValid(Movement, Board, GameManager): boolean
+  - validatePieceMovement(Movement, Board, GameManager): boolean
+}
+class LimitMovementsValidator {
+  + LimitMovementsValidator(int): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class Movement {
+  + Movement(Tile, Tile): 
+  + Movement(Movement): 
+  - from: Tile
+  - to: Tile
+   from: Tile
+   to: Tile
+}
+class MovementResult<GameManager, String> {
+  + MovementResult(GameManager, String): 
+   value: Optional<String>
+   key: GameManager
+}
+interface MovementValidator << interface >> {
+  + isValid(Movement, Board, GameManager): boolean
+}
+class MustEatValidator {
+  + MustEatValidator(): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class NewGameStateListener {
+  + NewGameStateListener(ClientManager): 
+  + handleMessage(Message<NewGameState>): void
+}
+class NonExistentPieceValidator {
+  + NonExistentPieceValidator(): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class PathClearValidator {
+  + PathClearValidator(int, int): 
+  + PathClearValidator(Direction): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class Piece {
+  + Piece(String, Colour, Tile, PieceType, PieceValidator): 
+  + Piece(Piece): 
+  - colour: Colour
+  - pieceValidator: PieceValidator
+  - initialPosition: Tile
+  - pieceType: PieceType
+  - id: String
+  + builder(): PieceBuilder
+   pieceValidator: PieceValidator
+   colour: Colour
+   initialPosition: Tile
+   id: String
+   pieceType: PieceType
+}
+interface PieceBuilder << interface >> {
+  + buildAll(): List<Piece>
+}
+enum PieceType << enumeration >> {
+  + PieceType(): 
+  + valueOf(String): PieceType
+  + values(): PieceType[]
+}
+class PieceValidator {
+  + PieceValidator(MovementValidator, MovementValidator): 
+  + isValid(Movement, Board, GameManager): boolean
+  + isValidClassic(Movement, Board, GameManager): boolean
+}
+class PiecesRemainingValidator {
+  + PiecesRemainingValidator(int): 
+  + isGameOver(Movement, Board, GameManager): WinResult<Boolean, Colour>
+}
+interface Result<K, V> << interface >> {
+   value: Optional<V>
+   key: K
+}
+class ServerGameEventListener {
+  + ServerGameEventListener(ServerManager): 
+  + handleMove(Move): void
+}
+class ServerManager {
+  + ServerManager(GameEngine, int): 
+  + notifyMovement(Move): void
+  + stopServer(): void
+  - broadcastMovementResult(MoveResult): void
+  + sendInitialState(String): void
+  + startServer(): void
+  - buildNettyServer(int): Server
+}
+class ServerMoveListener {
+  + ServerMoveListener(GameEventListener): 
+  + handleMessage(Message<Move>): void
+}
+class SimpleBoard {
+  + SimpleBoard(List<Piece>, int, int): 
+  + SimpleBoard(Board): 
+  - tiles: List<Tile>
+  - printer: BoardPrinter
+  + getTileByPiece(Piece): Optional<Tile>
+  + findPiece(PieceType, Colour): Optional<Piece>
+  + setPieceAtTile(Piece, Tile): void
+  + getPieceByTile(int, int): Optional<Piece>
+  + getTile(int, int): Optional<Tile>
+   printer: BoardPrinter
+   tiles: List<Tile>
+   maxSquare: Tile
+}
+class TESTCheckersPieceBuilder {
+  + TESTCheckersPieceBuilder(): 
+  + buildAll(): List<Piece>
+  - createBlackPieces(): List<Piece>
+  - whiteInitialPositions(): List<Tile>
+  - createBlackPawns(): List<Piece>
+  - blackInitialPositions(): List<Tile>
+  - createWhitePawns(): List<Piece>
+  - createPawn(Colour, Tile): Piece
+  - createWhitePieces(): List<Piece>
+}
+class Tile {
+  + Tile(Integer, Integer, Piece): 
+  + Tile(int, int): 
+  + Tile(Tile): 
+  - piece: Piece
+  - x: Integer
+  - y: Integer
+  + equalCoordinate(Tile): boolean
+   x: Integer
+   piece: Piece
+   y: Integer
+}
+interface TurnChanger << interface >> {
+  + nextTurn(): TurnChanger
+   currentTurn: Colour
+   previousTurn: Colour
+}
+class TurnValidator {
+  + TurnValidator(): 
+  + isValid(Movement, Board, GameManager): boolean
+}
+class TwoPlayersTurnChanger {
+  + TwoPlayersTurnChanger(): 
+  + TwoPlayersTurnChanger(Colour): 
+  - currentTurn: Colour
+  + nextTurn(): TwoPlayersTurnChanger
+   currentTurn: Colour
+   previousTurn: Colour
+}
+class ValidatorBuilder {
+  + ValidatorBuilder(): 
+  + createKingOrValidators(): List<MovementValidator>
+  + createPawnOrValidators(Colour): List<MovementValidator>
+  + createSpecialValidators(): List<MovementValidator>
+  + createRookOrValidators(): List<MovementValidator>
+  + createBishopOrValidators(): List<MovementValidator>
+  + createKnightOrValidators(): List<MovementValidator>
+  + createChessGameValidators(): List<MovementValidator>
+  + createQueenOrValidators(): List<MovementValidator>
+  + createCheckersGameValidators(): List<MovementValidator>
+}
+class WinResult<Boolean, Colour> {
+  + WinResult(Boolean, Colour): 
+   value: Optional<Colour>
+   key: Boolean
+}
+
+CannotMoveValidator                  -[#008200,dashed]-^  GameOverValidator                   
+CheckMate                            -[#008200,dashed]-^  GameOverValidator                   
+CheckValidator                       -[#008200,dashed]-^  MovementValidator                   
+CheckersBoardBuilder                 -[#008200,dashed]-^  BoardBuilder                        
+CheckersGameBuilder                  -[#008200,dashed]-^  GameBuilder                         
+CheckersGameMover                    -[#008200,dashed]-^  GameMover                           
+CheckersPieceBuilder                 -[#008200,dashed]-^  PieceBuilder                        
+ChessBoardBuilder                    -[#008200,dashed]-^  BoardBuilder                        
+ChessBoardPrinter                    -[#008200,dashed]-^  BoardPrinter                        
+ChessGameBuilder                     -[#008200,dashed]-^  GameBuilder                         
+ChessGameEngineAdapter               -[#008200,dashed]-^  GameEngineAdapter                   
+ChessGameMover                       -[#008200,dashed]-^  GameMover                           
+ChessPieceBuilder                    -[#008200,dashed]-^  PieceBuilder                        
+CompoundAndValidator                 -[#008200,dashed]-^  MovementValidator                   
+CompoundOrValidator                  -[#008200,dashed]-^  MovementValidator                   
+CustomChessBoardBuilder              -[#008200,dashed]-^  BoardBuilder                        
+CustomChessGameBuilder               -[#008200,dashed]-^  GameBuilder                         
+CustomChessPieceBuilder              -[#008200,dashed]-^  PieceBuilder                        
+DirectionValidator                   -[#008200,dashed]-^  MovementValidator                   
+EatFinalPieceValidator               -[#008200,dashed]-^  MovementValidator                   
+EatMiddlePieceValidator              -[#008200,dashed]-^  MovementValidator                   
+EatOwnPieceValidator                 -[#008200,dashed]-^  MovementValidator                   
+EatenBeforeValidator                 -[#008200,dashed]-^  MovementValidator                   
+IncrementValidator                   -[#008200,dashed]-^  MovementValidator                   
+JumpMovementValidator                -[#008200,dashed]-^  MovementValidator                   
+LastPieceMovedCantEatAgainValidator  -[#008200,dashed]-^  MovementValidator                   
+LimitMovementsValidator              -[#008200,dashed]-^  MovementValidator                   
+MovementResult                       -[#008200,dashed]-^  Result                              
+MustEatValidator                     -[#008200,dashed]-^  MovementValidator                   
+NonExistentPieceValidator            -[#008200,dashed]-^  MovementValidator                   
+PathClearValidator                   -[#008200,dashed]-^  MovementValidator                   
+PiecesRemainingValidator             -[#008200,dashed]-^  GameOverValidator                   
+SimpleBoard                          -[#008200,dashed]-^  Board                               
+TESTCheckersPieceBuilder             -[#008200,dashed]-^  PieceBuilder                        
+TurnValidator                        -[#008200,dashed]-^  MovementValidator                   
+TwoPlayersTurnChanger                -[#008200,dashed]-^  TurnChanger                         
+WinResult                            -[#008200,dashed]-^  Result                              
+@enduml

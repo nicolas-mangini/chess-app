@@ -2,13 +2,13 @@ package edu.austral.dissis.common.game;
 
 import edu.austral.dissis.checkers.builder.CheckersGameBuilder;
 import edu.austral.dissis.checkers.game.CheckersGameMover;
-import edu.austral.dissis.chess.adapter.GameEngineAdapter;
-import edu.austral.dissis.chess.adapter.ChessGameEngineAdapter;
+import edu.austral.dissis.chess.builder.classic.ChessGameBuilder;
 import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
-import edu.austral.dissis.chess.game.*;
-import edu.austral.dissis.common.builder.GameBuilder;
-import edu.austral.dissis.chess.builder.ChessGameBuilder;
+import edu.austral.dissis.chess.game.ChessGameMover;
 import edu.austral.dissis.chess.gui.*;
+import edu.austral.dissis.common.adapter.Adapter;
+import edu.austral.dissis.common.adapter.GameEngineAdapter;
+import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.turn.TwoPlayersTurnChanger;
 import edu.austral.dissis.common.util.MovementResult;
 import edu.austral.dissis.common.util.Result;
@@ -24,24 +24,29 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
     private final Stack<GameManager> previousGameManagers = new Stack<>();
 
     public GameEngine(GameType gameType) {
-        this.gameEngineAdapter = new ChessGameEngineAdapter();
+        this.gameEngineAdapter = new Adapter();
 
         GameBuilder gameBuilder;
-        if (gameType.equals(GameType.CHESS)) {
-            gameBuilder = new ChessGameBuilder();
-            Game game = gameBuilder.build();
-            this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else if (gameType.equals(GameType.CHECKERS)) {
-            gameBuilder = new CheckersGameBuilder();
-            Game game = gameBuilder.build();
-            this.gameManager = new GameManager(game, new CheckersGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else if (gameType.equals(GameType.CUSTOM_CHESS)) {
-            gameBuilder = new CustomChessGameBuilder();
-            Game game = gameBuilder.build();
-            this.gameManager = new GameManager(game, new ChessGameMover(), new TwoPlayersTurnChanger(Colour.WHITE));
-        } else {
-            throw new RuntimeException("Game type not supported");
+        GameMover gameMover;
+
+        switch (gameType) {
+            case CHESS -> {
+                gameBuilder = new ChessGameBuilder();
+                gameMover = new ChessGameMover();
+            }
+            case CUSTOM_CHESS -> {
+                gameBuilder = new CustomChessGameBuilder();
+                gameMover = new ChessGameMover();
+            }
+            case CHECKERS -> {
+                gameBuilder = new CheckersGameBuilder();
+                gameMover = new CheckersGameMover();
+            }
+            default -> throw new RuntimeException("Game type not supported");
         }
+
+        Game game = gameBuilder.build();
+        this.gameManager = new GameManager(game, gameMover, new TwoPlayersTurnChanger(Colour.WHITE));
         previousGameManagers.push(this.gameManager);
     }
 
@@ -52,9 +57,13 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
         Movement movementAdapted = gameEngineAdapter.adaptMovement(move, previousGameManager.getGame().getBoard().getTiles());
 
         Result<?, ?> tryMovement = previousGameManager
-                .getChessGameMover()
+                .getGameMover()
                 .tryMovement(movementAdapted, previousGameManager);
 
+        return handleMovementResult(tryMovement);
+    }
+
+    public MoveResult handleMovementResult(Result<?, ?> tryMovement) {
         if (tryMovement instanceof MovementResult) {
             // if string "Invalid movement!" is present
             if (tryMovement.getValue().isPresent()) {
@@ -69,7 +78,6 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
 
                 return new NewGameState(newPieces, newTurn);
             }
-
         } else if (tryMovement instanceof WinResult) {
             Colour winner = (Colour) tryMovement.getValue().get();
             return new GameOver(gameEngineAdapter.adaptPlayerColor(winner));

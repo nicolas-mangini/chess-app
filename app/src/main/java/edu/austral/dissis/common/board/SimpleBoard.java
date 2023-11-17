@@ -1,10 +1,7 @@
-package edu.austral.dissis.chess.board;
+package edu.austral.dissis.common.board;
 
-import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.piece.Piece;
-import edu.austral.dissis.common.board.BoardPrinter;
-import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.validator.piece.PieceType;
 import lombok.Getter;
 
@@ -13,7 +10,7 @@ import java.util.*;
 @Getter
 public class SimpleBoard implements Board {
     private final List<Tile> tiles;
-    private final BoardPrinter printer = new ChessBoardPrinter();
+    private final BoardPrinter printer = new SimpleBoardPrinter();
 
     public SimpleBoard(List<Piece> pieces, int rows, int columns) {
         tiles = new ArrayList<>();
@@ -29,16 +26,6 @@ public class SimpleBoard implements Board {
             int y = initialPosition.getY();
             Tile tile = getTile(x, y).get();
             tile.setPiece(piece);
-        }
-    }
-
-
-    public SimpleBoard(int rows, int columns) {
-        tiles = new ArrayList<>();
-        for (int x = 1; x <= rows; x++) {
-            for (int y = 1; y <= columns; y++) {
-                tiles.add(new Tile(x, y, null));
-            }
         }
     }
 

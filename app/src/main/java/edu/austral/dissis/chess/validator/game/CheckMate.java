@@ -24,6 +24,7 @@ public class CheckMate implements GameOverValidator {
 
     /**
      * Checks if any piece of the given enemy color can make a valid movement.
+     *
      * @return True if any piece of the enemy color can make a valid move, false otherwise.
      */
     private boolean checkAllEnemyMovements(Board board, GameManager gameManager,
@@ -52,4 +53,3 @@ public class CheckMate implements GameOverValidator {
         return enemyPiece.getPieceValidator().isValid(movement, board, gameManager);
     }
 }
-

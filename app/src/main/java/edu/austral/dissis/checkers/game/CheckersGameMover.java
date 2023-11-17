@@ -1,6 +1,7 @@
 package edu.austral.dissis.checkers.game;
 
-import edu.austral.dissis.chess.board.SimpleBoard;
+import edu.austral.dissis.common.board.SimpleBoard;
+import edu.austral.dissis.common.util.PromoteUtils;
 import edu.austral.dissis.common.game.*;
 import edu.austral.dissis.common.piece.Piece;
 import edu.austral.dissis.common.board.Board;
@@ -37,13 +38,17 @@ public class CheckersGameMover implements GameMover {
     }
 
     private GameManager makeMovement(Movement movement, GameManager gameManager) {
-        SimpleBoard newBoard = new SimpleBoard(gameManager.getGame().getBoard());
+        Board newBoard = new SimpleBoard(gameManager.getGame().getBoard());
         Piece pieceToMove = newBoard.getPieceByTile(movement.getFrom().getX(), movement.getFrom().getY()).get();
 
         newBoard.setPieceAtTile(pieceToMove, movement.getTo());
         newBoard.setPieceAtTile(null, movement.getFrom());
 
-        if (isEatMovement(movement)) {
+        if (PromoteUtils.canPromote(pieceToMove, movement.getTo())) {
+            newBoard = PromoteUtils.promoteCheckers(pieceToMove, PieceType.QUEEN, movement.getTo(), newBoard);
+        }
+
+        if (CheckersUtil.isEatMovement(movement)) {
             Tile middle = middleMovementTile(movement, newBoard);
             newBoard.setPieceAtTile(null, middle);
 
@@ -55,7 +60,7 @@ public class CheckersGameMover implements GameMover {
                 return new GameManager(
                         new Game(gameManager.getGame(), newBoard, newHistory),
                         this,
-                        gameManager.getTurnChanger() //current turn
+                        gameManager.getTurnChanger() // current turn
                 );
             }
         }
@@ -80,46 +85,15 @@ public class CheckersGameMover implements GameMover {
                         .isValid(movement, gameManager.getGame().getBoard(), gameManager);
     }
 
-
-    private List<Tile> possibleEatTiles(Tile fromTile, Board board) {
-        if (fromTile.getPiece().getPieceType() == PieceType.PAWN) {
-            // possible eat tiles are tile within 2 increments -> max 4 diagonal tiles,
-            // also, there should be a piece in middle to eat
-            return board.getTiles().stream()
-                    .filter(tile -> Math.abs(tile.getX() - fromTile.getX()) == 2)
-                    .filter(tile -> Math.abs(tile.getY() - fromTile.getY()) == 2)
-                    .filter(tile -> tile.getPiece() == null)
-                    .filter(tile -> {
-                        Tile middleTile = board.getTile(
-                                (tile.getX() + fromTile.getX()) / 2,
-                                (tile.getY() + fromTile.getY()) / 2
-                        ).get();
-                        return middleTile.getPiece() != null;
-                    })
-                    .toList();
-        }
-        return List.of();
-    }
-
-    private boolean isEatMovement(Movement movement) {
-        if (movement.getFrom().getPiece().getPieceType() == PieceType.PAWN) {
-            return Math.abs(movement.getFrom().getX() - movement.getTo().getX()) == 2;
-        }
-        return false;
-    }
-
     private Tile middleMovementTile(Movement movement, Board board) {
-        if (movement.getFrom().getPiece().getPieceType() == PieceType.PAWN) {
-            return board.getTile(
-                    (movement.getFrom().getX() + movement.getTo().getX()) / 2,
-                    (movement.getFrom().getY() + movement.getTo().getY()) / 2
-            ).get();
-        }
-        return null;
+        return board.getTile(
+                (movement.getFrom().getX() + movement.getTo().getX()) / 2,
+                (movement.getFrom().getY() + movement.getTo().getY()) / 2
+        ).get();
     }
 
     private boolean canEatAgain(Tile pieceTile, Board board, GameManager currentGameManager, List<Movement> newHistory) {
-        List<Tile> possibleEatTiles = possibleEatTiles(pieceTile, board);
+        List<Tile> possibleEatTiles = CheckersUtil.possibleEatTiles(pieceTile, board);
 
         for (Tile possibleTile : possibleEatTiles) {
             Movement consecutiveMovement = new Movement(pieceTile, possibleTile);

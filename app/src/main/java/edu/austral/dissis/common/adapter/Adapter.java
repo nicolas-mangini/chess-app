@@ -1,4 +1,4 @@
-package edu.austral.dissis.chess.adapter;
+package edu.austral.dissis.common.adapter;
 
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
@@ -10,7 +10,7 @@ import edu.austral.dissis.common.turn.TurnChanger;
 import java.util.List;
 import java.util.Optional;
 
-public class ChessGameEngineAdapter implements GameEngineAdapter {
+public class Adapter implements GameEngineAdapter {
     @Override
     public BoardSize getBoardSize(Board board) {
         return new BoardSize(board.getMaxSquare().getX(), board.getMaxSquare().getY());

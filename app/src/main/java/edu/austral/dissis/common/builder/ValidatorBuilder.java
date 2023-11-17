@@ -1,6 +1,8 @@
-package edu.austral.dissis.chess.builder.common;
+package edu.austral.dissis.common.builder;
 
-import edu.austral.dissis.chess.validator.game.ChessTurnValidator;
+import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
+import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
+import edu.austral.dissis.common.validator.game.TurnValidator;
 import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
@@ -115,7 +117,31 @@ public class ValidatorBuilder {
         );
     }
 
-    public List<MovementValidator> createQueenOrValidators() {
+    public List<MovementValidator> createChessQueenOrValidators() {
+/*        List.of(
+                CompoundAndValidator(
+                        CompoundOrValidator(List.of(
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.RIGHT),
+                                        new PathClearValidator(Direction.RIGHT)
+                                )),
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.LEFT),
+                                        new PathClearValidator(Direction.LEFT)
+                                )),
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.UP),
+                                        new PathClearValidator(Direction.UP)
+                                )),
+                                new CompoundAndValidator(List.of(
+                                        new DirectionValidator(Direction.DOWN),
+                                        new PathClearValidator(Direction.DOWN)
+                                )),
+                        )),
+                        new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
+                )
+        )*/
         return List.of(
                 new CompoundAndValidator(List.of(
                         new DirectionValidator(Direction.RIGHT),
@@ -163,6 +189,65 @@ public class ValidatorBuilder {
                         new DirectionValidator(Direction.UP_LEFT),
                         new PathClearValidator(Direction.UP_LEFT),
                         new EatFinalPieceValidator(true),
+                        new EatOwnPieceValidator(false)
+                ))
+        );
+    }
+
+    public List<MovementValidator> createCheckersQueenOrValidators() {
+        return List.of(
+                //simple movements
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.UP_RIGHT),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.DOWN_LEFT),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.DOWN_RIGHT),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.UP_LEFT),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                // eat validator
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.UP_RIGHT),
+                        new IncrementValidator(1),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.DOWN_LEFT),
+                        new IncrementValidator(1),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.DOWN_RIGHT),
+                        new IncrementValidator(1),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(Direction.UP_LEFT),
+                        new IncrementValidator(1),
+                        new EatFinalPieceValidator(false),
                         new EatOwnPieceValidator(false)
                 ))
         );
@@ -229,7 +314,8 @@ public class ValidatorBuilder {
         );
     }
 
-    public List<MovementValidator> createPawnOrValidators(Colour colour) {
+    // agrupar los validators
+    public List<MovementValidator> createChessPawnOrValidators(Colour colour) {
         int xDirection = colour == Colour.BLACK ? 1 : -1;
 
         return List.of(
@@ -265,27 +351,80 @@ public class ValidatorBuilder {
         );
     }
 
-    public List<MovementValidator> createSpecialValidators() {
+    public List<MovementValidator> createCheckersPawnOrValidators(Colour colour) {
+        int xDirection = colour == Colour.BLACK ? 1 : -1;
+        return List.of(
+                //simple movements
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 1),
+                        new IncrementValidator(1),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, -1),
+                        new IncrementValidator(1),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false)
+                )),
+                //eat movements
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, 1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(xDirection, -1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator()
+                )),
+                //eat consecutive movements
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-xDirection, -1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator(),
+                        new EatenBeforeValidator()
+                )),
+                new CompoundAndValidator(List.of(
+                        new DirectionValidator(-xDirection, 1),
+                        new IncrementValidator(2),
+                        new EatFinalPieceValidator(false),
+                        new EatOwnPieceValidator(false),
+                        new EatMiddlePieceValidator(),
+                        new EatenBeforeValidator()
+                ))
+        );
+    }
+
+    public List<MovementValidator> createChessSpecialValidators() {
         return List.of(
                 new CheckValidator(PieceType.KING)
+        );
+    }
+
+    public List<MovementValidator> createCheckersSpecialValidators() {
+        return List.of(
+                new LastPieceMovedCantEatAgainValidator()
         );
     }
 
     public List<MovementValidator> createChessGameValidators() {
         return List.of(
                 new NonExistentPieceValidator(),
-                new ChessTurnValidator()
+                new TurnValidator()
         );
     }
 
     public List<MovementValidator> createCheckersGameValidators() {
         return List.of(
-                new NonExistentPieceValidator()
-                //new CheckersTurnValidator()
+                new NonExistentPieceValidator(),
+                new TurnValidator()
         );
-    }
-
-    public List<MovementValidator> createGameOverValidators() {
-        return List.of(new CheckValidator(PieceType.KING));
     }
 }

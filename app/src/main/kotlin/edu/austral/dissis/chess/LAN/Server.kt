@@ -11,7 +11,7 @@ fun main() {
 }
 
 class ServerApplication : Application() {
-    private val gameEngine = GameEngine(GameType.CHECKERS)
+    private val gameEngine = GameEngine(GameType.CHESS)
 
     override fun start(primaryStage: Stage) {
         ServerManager(gameEngine, 8082)

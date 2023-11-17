@@ -8,8 +8,8 @@ public interface MovementValidator {
     /**
      * Validates whether a rule is valid or not.
      *
-     * @param movement The movement to be validated.
-     * @param board The game board.
+     * @param movement    The movement to be validated.
+     * @param board       The game board.
      * @param gameManager the game and turn manager.
      * @return true if the movement is valid, false otherwise.
      */

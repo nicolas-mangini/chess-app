@@ -10,11 +10,13 @@ public class ConnectionListener implements ClientConnectionListener {
 
     @Override
     public void handleConnection() {
+        System.out.println("Connected to server!");
         clientManager.startConnection();
     }
 
     @Override
     public void handleConnectionClosed() {
+        System.out.println("Connection closed!");
         clientManager.closeConnection();
     }
 }
