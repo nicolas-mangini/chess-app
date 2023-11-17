@@ -21,12 +21,12 @@ public class CheckersPieceBuilder implements PieceBuilder {
 
     @Override
     public List<Piece> buildWhitePieces() {
-        return buildAllPawns(Colour.WHITE);
+        return buildWhitePawns();
     }
 
     @Override
     public List<Piece> buildBlackPieces() {
-        return buildAllPawns(Colour.BLACK);
+        return buildBlackPawns();
     }
 
     private List<Tile> whitePawnInitialPositions() {
@@ -67,17 +67,23 @@ public class CheckersPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Piece> buildAllPawns(Colour colour) {
+    private List<Piece> buildBlackPawns() {
         List<Piece> pawns = new ArrayList<>();
-        List<Tile> initialPositions = new ArrayList<>();
-        if (colour == Colour.BLACK) {
-            initialPositions = blackPawnInitialPositions();
-        } else if (colour == Colour.WHITE) {
-            initialPositions = whitePawnInitialPositions();
-        }
-        for (int i = 0; i < 8; i++) {
+        List<Tile> initialPositions = whitePawnInitialPositions();
+        for (int i = 0; i < 12; i++) {
             Tile initialPosition = initialPositions.get(i);
-            Piece piece = buildPawn(colour, initialPosition);
+            Piece piece = buildPawn(Colour.BLACK, initialPosition);
+            pawns.add(piece);
+        }
+        return pawns;
+    }
+
+    private List<Piece> buildWhitePawns() {
+        List<Piece> pawns = new ArrayList<>();
+        List<Tile> initialPositions = blackPawnInitialPositions();
+        for (int i = 0; i < 12; i++) {
+            Tile initialPosition = initialPositions.get(i);
+            Piece piece = buildPawn(Colour.WHITE, initialPosition);
             pawns.add(piece);
         }
         return pawns;

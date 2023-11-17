@@ -15,7 +15,7 @@ public class CannotMoveValidator implements GameOverValidator {
     @Override
     public WinResult<Boolean, Colour> isGameOver(Movement movement, Board board, GameManager gameManager) {
         Colour teamColour = movement.getFrom().getPiece().getColour();
-        Colour enemyColour = teamColour.equals(Colour.WHITE) ? Colour.BLACK : Colour.WHITE;
+        Colour enemyColour = gameManager.getTurnChanger().getCurrentTurn();
 
         if (canEnemyEat(board, enemyColour, gameManager)) {
             return new WinResult<>(false, null);
