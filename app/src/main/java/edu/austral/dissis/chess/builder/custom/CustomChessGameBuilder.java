@@ -1,5 +1,6 @@
 package edu.austral.dissis.chess.builder.custom;
 
+import edu.austral.dissis.common.builder.MovementBuilder;
 import edu.austral.dissis.common.game.Game;
 import edu.austral.dissis.common.builder.BoardBuilder;
 import edu.austral.dissis.common.builder.GameBuilder;
@@ -8,7 +9,7 @@ import edu.austral.dissis.common.game.Colour;
 import java.util.ArrayList;
 
 public class CustomChessGameBuilder implements GameBuilder {
-    private final CustomChessMovementBuilder customChessMovementBuilder;
+    private final MovementBuilder customChessMovementBuilder;
     private final BoardBuilder customChessBoardBuilder;
 
     public CustomChessGameBuilder() {

@@ -1,6 +1,7 @@
 package edu.austral.dissis.chess.builder.classic;
 
 import edu.austral.dissis.common.builder.BoardBuilder;
+import edu.austral.dissis.common.builder.MovementBuilder;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.game.Game;
 import edu.austral.dissis.common.builder.GameBuilder;
@@ -8,7 +9,7 @@ import edu.austral.dissis.common.builder.GameBuilder;
 import java.util.ArrayList;
 
 public class ChessGameBuilder implements GameBuilder {
-    private final ChessMovementBuilder chessMovementBuilder;
+    private final MovementBuilder chessMovementBuilder;
     private final BoardBuilder chessBoardBuilder;
 
     public ChessGameBuilder() {

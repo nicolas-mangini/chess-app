@@ -21,15 +21,15 @@ public class CheckersPieceBuilder implements PieceBuilder {
 
     @Override
     public List<Piece> createWhitePieces() {
-        return createWhitePawns();
+        return createAllPawns(Colour.WHITE);
     }
 
     @Override
     public List<Piece> createBlackPieces() {
-        return createBlackPawns();
+        return createAllPawns(Colour.BLACK);
     }
 
-    private List<Tile> whiteInitialPositions() {
+    private List<Tile> whitePawnInitialPositions() {
         return List.of(
                 new Tile(1, 2),
                 new Tile(1, 4),
@@ -48,7 +48,7 @@ public class CheckersPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Tile> blackInitialPositions() {
+    private List<Tile> blackPawnInitialPositions() {
         return List.of(
                 new Tile(8, 1),
                 new Tile(8, 3),
@@ -67,23 +67,17 @@ public class CheckersPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Piece> createBlackPawns() {
+    private List<Piece> createAllPawns(Colour colour) {
         List<Piece> pawns = new ArrayList<>();
-        List<Tile> initialPositions = whiteInitialPositions();
-        for (int i = 0; i < 12; i++) {
-            Tile initialPosition = initialPositions.get(i);
-            Piece piece = createPawn(Colour.BLACK, initialPosition);
-            pawns.add(piece);
+        List<Tile> initialPositions = new ArrayList<>();
+        if (colour == Colour.BLACK) {
+            initialPositions = blackPawnInitialPositions();
+        } else if (colour == Colour.WHITE) {
+            initialPositions = whitePawnInitialPositions();
         }
-        return pawns;
-    }
-
-    private List<Piece> createWhitePawns() {
-        List<Piece> pawns = new ArrayList<>();
-        List<Tile> initialPositions = blackInitialPositions();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 8; i++) {
             Tile initialPosition = initialPositions.get(i);
-            Piece piece = createPawn(Colour.WHITE, initialPosition);
+            Piece piece = createPawn(colour, initialPosition);
             pawns.add(piece);
         }
         return pawns;

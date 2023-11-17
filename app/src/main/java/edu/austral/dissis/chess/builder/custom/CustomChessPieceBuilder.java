@@ -30,7 +30,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 createKnightW2(),
                 createRookW2());
 
-        return Stream.concat(pieces.stream(), createWhitePawns().stream()).toList();
+        return Stream.concat(pieces.stream(), createAllPawns(Colour.WHITE).stream()).toList();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
                 createKnightB2(),
                 createRookB2());
 
-        return Stream.concat(pieces.stream(), createBlackPawns().stream()).toList();
+        return Stream.concat(pieces.stream(), createAllPawns(Colour.BLACK).stream()).toList();
     }
 
     private List<Tile> whitePawnInitialPositions() {
@@ -74,23 +74,17 @@ public class CustomChessPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Piece> createWhitePawns() {
+    private List<Piece> createAllPawns(Colour colour) {
         List<Piece> pawns = new ArrayList<>();
-        List<Tile> initialPositions = whitePawnInitialPositions();
-        for (int i = 0; i < 8; i++) {
-            Tile initialPosition = initialPositions.get(i);
-            Piece piece = createPawn(Colour.WHITE, initialPosition);
-            pawns.add(piece);
+        List<Tile> initialPositions = new ArrayList<>();
+        if (colour == Colour.BLACK) {
+            initialPositions = blackPawnInitialPositions();
+        } else if (colour == Colour.WHITE) {
+            initialPositions = whitePawnInitialPositions();
         }
-        return pawns;
-    }
-
-    private List<Piece> createBlackPawns() {
-        List<Piece> pawns = new ArrayList<>();
-        List<Tile> initialPositions = blackPawnInitialPositions();
         for (int i = 0; i < 8; i++) {
             Tile initialPosition = initialPositions.get(i);
-            Piece piece = createPawn(Colour.BLACK, initialPosition);
+            Piece piece = createPawn(colour, initialPosition);
             pawns.add(piece);
         }
         return pawns;

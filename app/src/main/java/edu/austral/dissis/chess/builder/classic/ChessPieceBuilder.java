@@ -30,7 +30,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 createKnightW2(),
                 createRookW2());
 
-        return Stream.concat(pieces.stream(), createPawns(Colour.WHITE).stream()).toList();
+        return Stream.concat(pieces.stream(), createAllPawns(Colour.WHITE).stream()).toList();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 createKnightB2(),
                 createRookB2());
 
-        return Stream.concat(pieces.stream(), createPawns(Colour.BLACK).stream()).toList();
+        return Stream.concat(pieces.stream(), createAllPawns(Colour.BLACK).stream()).toList();
     }
 
     private List<Tile> whitePawnInitialPositions() {
@@ -74,7 +74,7 @@ public class ChessPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Piece> createPawns(Colour colour) {
+    private List<Piece> createAllPawns(Colour colour) {
         List<Piece> pawns = new ArrayList<>();
         List<Tile> initialPositions = new ArrayList<>();
         if (colour == Colour.BLACK) {
