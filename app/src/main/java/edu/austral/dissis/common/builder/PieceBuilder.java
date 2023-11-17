@@ -7,7 +7,7 @@ import java.util.List;
 public interface PieceBuilder {
     List<Piece> buildAll();
 
-    List<Piece> createWhitePieces();
+    List<Piece> buildWhitePieces();
 
-    List<Piece> createBlackPieces();
+    List<Piece> buildBlackPieces();
 }

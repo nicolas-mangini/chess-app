@@ -15,37 +15,37 @@ public class CustomChessPieceBuilder implements PieceBuilder {
 
     @Override
     public List<Piece> buildAll() {
-        return Stream.concat(createWhitePieces().stream(), createBlackPieces().stream())
+        return Stream.concat(buildWhitePieces().stream(), buildBlackPieces().stream())
                 .toList();
     }
 
     @Override
-    public List<Piece> createWhitePieces() {
-        List<Piece> pieces = List.of(createRookW1(),
-                createKnightW1(),
-                createBishopW1(),
-                createKingW1(),
-                createQueenW1(),
-                createBishopW2(),
-                createKnightW2(),
-                createRookW2());
+    public List<Piece> buildWhitePieces() {
+        List<Piece> pieces = List.of(buildRookW1(),
+                buildKnightW1(),
+                buildBishopW1(),
+                buildKingW1(),
+                buildQueenW1(),
+                buildBishopW2(),
+                buildKnightW2(),
+                buildRookW2());
 
-        return Stream.concat(pieces.stream(), createAllPawns(Colour.WHITE).stream()).toList();
+        return Stream.concat(pieces.stream(), buildAllPawns(Colour.WHITE).stream()).toList();
     }
 
     @Override
-    public List<Piece> createBlackPieces() {
+    public List<Piece> buildBlackPieces() {
         List<Piece> pieces = List.of(
-                createRookB1(),
-                createKnightB1(),
-                createBishopB1(),
-                createKingB1(),
-                createQueenB1(),
-                createBishopB2(),
-                createKnightB2(),
-                createRookB2());
+                buildRookB1(),
+                buildKnightB1(),
+                buildBishopB1(),
+                buildKingB1(),
+                buildQueenB1(),
+                buildBishopB2(),
+                buildKnightB2(),
+                buildRookB2());
 
-        return Stream.concat(pieces.stream(), createAllPawns(Colour.BLACK).stream()).toList();
+        return Stream.concat(pieces.stream(), buildAllPawns(Colour.BLACK).stream()).toList();
     }
 
     private List<Tile> whitePawnInitialPositions() {
@@ -74,7 +74,7 @@ public class CustomChessPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Piece> createAllPawns(Colour colour) {
+    private List<Piece> buildAllPawns(Colour colour) {
         List<Piece> pawns = new ArrayList<>();
         List<Tile> initialPositions = new ArrayList<>();
         if (colour == Colour.BLACK) {
@@ -84,179 +84,179 @@ public class CustomChessPieceBuilder implements PieceBuilder {
         }
         for (int i = 0; i < 8; i++) {
             Tile initialPosition = initialPositions.get(i);
-            Piece piece = createPawn(colour, initialPosition);
+            Piece piece = buildPawn(colour, initialPosition);
             pawns.add(piece);
         }
         return pawns;
     }
 
-    private Piece createPawn(Colour colour, Tile initialPosition) {
+    private Piece buildPawn(Colour colour, Tile initialPosition) {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.PAWN, colour))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.PAWN, colour))
                 .build();
     }
 
-    private Piece createRookW1() {
+    private Piece buildRookW1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 1))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.CHANCELLOR, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.CHANCELLOR, Colour.WHITE))
                 .build();
     }
 
-    private Piece createKnightW1() {
+    private Piece buildKnightW1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 2))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.KNIGHT, Colour.WHITE))
                 .build();
     }
 
-    private Piece createBishopW1() {
+    private Piece buildBishopW1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 3))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.ARCHBISHOP, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.ARCHBISHOP, Colour.WHITE))
                 .build();
     }
 
-    private Piece createQueenW1() {
+    private Piece buildQueenW1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 4))
                 .pieceType(PieceType.QUEEN)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.QUEEN, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.QUEEN, Colour.WHITE))
                 .build();
     }
 
-    private Piece createKingW1() {
+    private Piece buildKingW1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 5))
                 .pieceType(PieceType.KING)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.KING, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.KING, Colour.WHITE))
                 .build();
     }
 
-    private Piece createBishopW2() {
+    private Piece buildBishopW2() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 6))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.ARCHBISHOP, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.ARCHBISHOP, Colour.WHITE))
                 .build();
     }
 
-    private Piece createKnightW2() {
+    private Piece buildKnightW2() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 7))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.KNIGHT, Colour.WHITE))
                 .build();
     }
 
-    private Piece createRookW2() {
+    private Piece buildRookW2() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 8))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.CHANCELLOR, Colour.WHITE))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.CHANCELLOR, Colour.WHITE))
                 .build();
     }
 
-    private Piece createRookB1() {
+    private Piece buildRookB1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 8))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.CHANCELLOR, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.CHANCELLOR, Colour.BLACK))
                 .build();
     }
 
-    private Piece createKnightB1() {
+    private Piece buildKnightB1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 2))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.KNIGHT, Colour.BLACK))
                 .build();
     }
 
-    private Piece createBishopB1() {
+    private Piece buildBishopB1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 3))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.ARCHBISHOP, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.ARCHBISHOP, Colour.BLACK))
                 .build();
     }
 
-    private Piece createQueenB1() {
+    private Piece buildQueenB1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 4))
                 .pieceType(PieceType.QUEEN)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.QUEEN, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.QUEEN, Colour.BLACK))
                 .build();
     }
 
-    private Piece createKingB1() {
+    private Piece buildKingB1() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 5))
                 .pieceType(PieceType.KING)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.KING, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.KING, Colour.BLACK))
                 .build();
     }
 
-    private Piece createBishopB2() {
+    private Piece buildBishopB2() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 6))
                 .pieceType(PieceType.ARCHBISHOP)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.ARCHBISHOP, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.ARCHBISHOP, Colour.BLACK))
                 .build();
     }
 
-    private Piece createKnightB2() {
+    private Piece buildKnightB2() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 7))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.KNIGHT, Colour.BLACK))
                 .build();
     }
 
-    private Piece createRookB2() {
+    private Piece buildRookB2() {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 1))
                 .pieceType(PieceType.CHANCELLOR)
-                .pieceValidator(CustomChessMovementBuilder.createMovements(PieceType.CHANCELLOR, Colour.BLACK))
+                .pieceValidator(CustomChessMovementBuilder.buildMovements(PieceType.CHANCELLOR, Colour.BLACK))
                 .build();
     }
 }

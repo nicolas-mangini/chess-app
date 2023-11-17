@@ -3,7 +3,7 @@ package edu.austral.dissis.common.util;
 
 import edu.austral.dissis.checkers.builder.CheckersMovementBuilder;
 import edu.austral.dissis.common.board.SimpleBoard;
-import edu.austral.dissis.chess.builder.classic.ChessMovementBuilder;
+import edu.austral.dissis.chess.builder.classic.ClassicChessMovementBuilder;
 import edu.austral.dissis.common.board.Board;
 import edu.austral.dissis.common.board.Tile;
 import edu.austral.dissis.common.game.Colour;
@@ -22,7 +22,7 @@ public class PromoteUtils {
 
     public static Board promoteChess(Piece piece, PieceType newPieceType, Tile toTile, Board board) {
         Board newBoard = new SimpleBoard(board);
-        PieceValidator newPieceValidators = ChessMovementBuilder.createMovements(newPieceType, piece.getColour());
+        PieceValidator newPieceValidators = ClassicChessMovementBuilder.buildMovements(newPieceType, piece.getColour());
         Piece newPiece = new Piece(piece, newPieceType, newPieceValidators);
         newBoard.setPieceAtTile(newPiece, toTile);
         return newBoard;
@@ -30,7 +30,7 @@ public class PromoteUtils {
 
     public static Board promoteCheckers(Piece piece, PieceType newPieceType, Tile toTile, Board board) {
         Board newBoard = new SimpleBoard(board);
-        PieceValidator newPieceValidators = CheckersMovementBuilder.createMovements(newPieceType, piece.getColour());
+        PieceValidator newPieceValidators = CheckersMovementBuilder.buildMovements(newPieceType, piece.getColour());
         Piece newPiece = new Piece(piece, newPieceType, newPieceValidators);
         newBoard.setPieceAtTile(newPiece, toTile);
         return newBoard;

@@ -1,38 +1,20 @@
 package edu.austral.dissis.chess.builder.classic;
 
 import edu.austral.dissis.chess.builder.ChessValidatorBuilder;
-import edu.austral.dissis.common.builder.MovementBuilder;
 import edu.austral.dissis.common.game.Colour;
-import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
-import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
-import edu.austral.dissis.chess.validator.game.CheckMate;
 import edu.austral.dissis.common.validator.piece.PieceType;
 
 import java.util.List;
 
-public class ChessMovementBuilder implements MovementBuilder {
+public class ClassicChessMovementBuilder {
     private static final ChessValidatorBuilder validatorBuilder = new ChessValidatorBuilder();
 
-    @Override
-    public List<GameOverValidator> buildGameOverValidators() {
-        return List.of(
-                new CheckMate(),
-                new PiecesRemainingValidator(12)
-        );
-    }
-
-    @Override
-    public MovementValidator buildGameValidators() {
-        List<MovementValidator> gameValidators = validatorBuilder.createGameValidators();
-        return new CompoundAndValidator(gameValidators);
-    }
-
-    public static PieceValidator createMovements(PieceType pieceType, Colour colour) {
-        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
+    public static PieceValidator buildMovements(PieceType pieceType, Colour colour) {
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialPieceValidators();
         switch (pieceType) {
             case ROOK -> {
                 List<MovementValidator> orValidators = validatorBuilder.createRookValidators();

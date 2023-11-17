@@ -1,17 +1,35 @@
 package edu.austral.dissis.chess.builder;
 
+import edu.austral.dissis.common.validator.game.CannotMoveValidator;
 import edu.austral.dissis.chess.validator.piece.CheckValidator;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
+import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
 import edu.austral.dissis.common.validator.game.NonExistentPieceValidator;
+import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.common.validator.game.TurnValidator;
 import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
 public class ChessValidatorBuilder {
+    public List<MovementValidator> createGameValidators() {
+        return List.of(
+                new NonExistentPieceValidator(),
+                new TurnValidator()
+        );
+    }
+
+    public List<GameOverValidator> createGameOverValidators() {
+        return List.of(
+                // CheckMate is basically that all enemy pieces cannot move (piece cannot move if is in check)
+                new CannotMoveValidator(),
+                new PiecesRemainingValidator(0)
+        );
+    }
+
     public List<MovementValidator> createRookValidators() {
         return List.of(
                 new CompoundAndValidator(
@@ -238,16 +256,9 @@ public class ChessValidatorBuilder {
         );
     }
 
-    public List<MovementValidator> createSpecialValidators() {
+    public List<MovementValidator> createSpecialPieceValidators() {
         return List.of(
                 new CheckValidator(PieceType.KING)
-        );
-    }
-
-    public List<MovementValidator> createGameValidators() {
-        return List.of(
-                new NonExistentPieceValidator(),
-                new TurnValidator()
         );
     }
 }

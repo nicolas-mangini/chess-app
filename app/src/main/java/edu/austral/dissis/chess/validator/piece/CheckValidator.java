@@ -21,7 +21,7 @@ public class CheckValidator implements MovementValidator {
     /**
      * Checks if the given movement would result in the piece being in check.
      *
-     * @return True if the movement would not result in the piece being in check, false otherwise.
+     * @return True if none enemy piece can eat the king after the movement.
      */
     @Override
     public boolean isValid(Movement movement, Board board, GameManager gameManager) {

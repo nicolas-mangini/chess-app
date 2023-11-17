@@ -15,18 +15,18 @@ public class CheckersPieceBuilder implements PieceBuilder {
 
     @Override
     public List<Piece> buildAll() {
-        return Stream.concat(createWhitePieces().stream(), createBlackPieces().stream())
+        return Stream.concat(buildWhitePieces().stream(), buildBlackPieces().stream())
                 .toList();
     }
 
     @Override
-    public List<Piece> createWhitePieces() {
-        return createAllPawns(Colour.WHITE);
+    public List<Piece> buildWhitePieces() {
+        return buildAllPawns(Colour.WHITE);
     }
 
     @Override
-    public List<Piece> createBlackPieces() {
-        return createAllPawns(Colour.BLACK);
+    public List<Piece> buildBlackPieces() {
+        return buildAllPawns(Colour.BLACK);
     }
 
     private List<Tile> whitePawnInitialPositions() {
@@ -67,7 +67,7 @@ public class CheckersPieceBuilder implements PieceBuilder {
         );
     }
 
-    private List<Piece> createAllPawns(Colour colour) {
+    private List<Piece> buildAllPawns(Colour colour) {
         List<Piece> pawns = new ArrayList<>();
         List<Tile> initialPositions = new ArrayList<>();
         if (colour == Colour.BLACK) {
@@ -77,19 +77,19 @@ public class CheckersPieceBuilder implements PieceBuilder {
         }
         for (int i = 0; i < 8; i++) {
             Tile initialPosition = initialPositions.get(i);
-            Piece piece = createPawn(colour, initialPosition);
+            Piece piece = buildPawn(colour, initialPosition);
             pawns.add(piece);
         }
         return pawns;
     }
 
-    private Piece createPawn(Colour colour, Tile initialPosition) {
+    private Piece buildPawn(Colour colour, Tile initialPosition) {
         return Piece.builder()
                 .id(String.valueOf(ID++))
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidator(CheckersMovementBuilder.createMovements(PieceType.PAWN, colour))
+                .pieceValidator(CheckersMovementBuilder.buildMovements(PieceType.PAWN, colour))
                 .build();
     }
 }

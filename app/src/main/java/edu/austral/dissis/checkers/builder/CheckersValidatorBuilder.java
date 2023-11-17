@@ -1,18 +1,35 @@
 package edu.austral.dissis.checkers.builder;
 
+import edu.austral.dissis.common.validator.game.CannotMoveValidator;
 import edu.austral.dissis.checkers.validator.piece.EatenBeforeValidator;
 import edu.austral.dissis.checkers.validator.piece.LastPieceMovedCantEatAgainValidator;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.CompoundOrValidator;
+import edu.austral.dissis.common.validator.GameOverValidator;
 import edu.austral.dissis.common.validator.MovementValidator;
 import edu.austral.dissis.common.validator.game.NonExistentPieceValidator;
+import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
 import edu.austral.dissis.common.validator.game.TurnValidator;
 import edu.austral.dissis.common.validator.piece.*;
 
 import java.util.List;
 
 public class CheckersValidatorBuilder {
+    public List<MovementValidator> createGameValidators() {
+        return List.of(
+                new NonExistentPieceValidator(),
+                new TurnValidator()
+        );
+    }
+
+    public List<GameOverValidator> createGameOverValidators() {
+        return List.of(
+                new PiecesRemainingValidator(0),
+                new CannotMoveValidator()
+        );
+    }
+
     public List<MovementValidator> createQueenValidators() {
         return List.of(
                 new CompoundAndValidator(
@@ -108,16 +125,9 @@ public class CheckersValidatorBuilder {
         );
     }
 
-    public List<MovementValidator> createSpecialValidators() {
+    public List<MovementValidator> createSpecialPieceValidators() {
         return List.of(
                 new LastPieceMovedCantEatAgainValidator()
-        );
-    }
-
-    public List<MovementValidator> createGameValidators() {
-        return List.of(
-                new NonExistentPieceValidator(),
-                new TurnValidator()
         );
     }
 }

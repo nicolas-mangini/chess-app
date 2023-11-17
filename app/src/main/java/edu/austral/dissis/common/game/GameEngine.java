@@ -2,7 +2,7 @@ package edu.austral.dissis.common.game;
 
 import edu.austral.dissis.checkers.builder.CheckersGameBuilder;
 import edu.austral.dissis.checkers.game.CheckersGameMover;
-import edu.austral.dissis.chess.builder.classic.ChessGameBuilder;
+import edu.austral.dissis.chess.builder.classic.ClassicChessGameBuilder;
 import edu.austral.dissis.chess.builder.custom.CustomChessGameBuilder;
 import edu.austral.dissis.chess.game.ChessGameMover;
 import edu.austral.dissis.chess.gui.*;
@@ -31,7 +31,7 @@ public class GameEngine implements edu.austral.dissis.chess.gui.GameEngine {
 
         switch (gameType) {
             case CHESS -> {
-                gameBuilder = new ChessGameBuilder();
+                gameBuilder = new ClassicChessGameBuilder();
                 gameMover = new ChessGameMover();
             }
             case CUSTOM_CHESS -> {

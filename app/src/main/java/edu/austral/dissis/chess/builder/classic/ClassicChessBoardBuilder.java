@@ -5,11 +5,11 @@ import edu.austral.dissis.common.board.SimpleBoard;
 import edu.austral.dissis.common.builder.BoardBuilder;
 import edu.austral.dissis.common.builder.PieceBuilder;
 
-public class ChessBoardBuilder implements BoardBuilder {
+public class ClassicChessBoardBuilder implements BoardBuilder {
     private final PieceBuilder chessPieceBuilder;
 
-    public ChessBoardBuilder() {
-        this.chessPieceBuilder = new ChessPieceBuilder();
+    public ClassicChessBoardBuilder() {
+        this.chessPieceBuilder = new ClassicChessPieceBuilder();
     }
 
     @Override

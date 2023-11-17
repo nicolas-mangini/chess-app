@@ -1,7 +1,6 @@
 package edu.austral.dissis.checkers.builder;
 
 import edu.austral.dissis.common.builder.BoardBuilder;
-import edu.austral.dissis.common.builder.MovementBuilder;
 import edu.austral.dissis.common.game.Game;
 import edu.austral.dissis.common.builder.GameBuilder;
 import edu.austral.dissis.common.game.Colour;
@@ -9,11 +8,9 @@ import edu.austral.dissis.common.game.Colour;
 import java.util.ArrayList;
 
 public class CheckersGameBuilder implements GameBuilder {
-    private final MovementBuilder checkersMovementBuilder;
     private final BoardBuilder checkersBoardBuilder;
 
     public CheckersGameBuilder() {
-        this.checkersMovementBuilder = new CheckersMovementBuilder();
         this.checkersBoardBuilder = new CheckersBoardBuilder();
     }
 
@@ -23,8 +20,8 @@ public class CheckersGameBuilder implements GameBuilder {
                 .player1(Colour.WHITE)
                 .player2(Colour.BLACK)
                 .board(checkersBoardBuilder.build())
-                .gameValidators(checkersMovementBuilder.buildGameValidators())
-                .gameOverValidators(checkersMovementBuilder.buildGameOverValidators())
+                .gameValidators(CheckersGameRulesBuilder.buildGameValidators())
+                .gameOverValidators(CheckersGameRulesBuilder.buildGameOverValidators())
                 .history(new ArrayList<>())
                 .build();
     }
