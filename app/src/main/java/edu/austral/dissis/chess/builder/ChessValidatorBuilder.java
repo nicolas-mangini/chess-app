@@ -125,6 +125,22 @@ public class ChessValidatorBuilder {
                                         new CompoundAndValidator(List.of(
                                                 new DirectionValidator(Direction.DOWN),
                                                 new PathClearValidator(Direction.DOWN)
+                                        )),
+                                        new CompoundAndValidator(List.of(
+                                                new DirectionValidator(Direction.UP_RIGHT),
+                                                new PathClearValidator(Direction.UP_RIGHT)
+                                        )),
+                                        new CompoundAndValidator(List.of(
+                                                new DirectionValidator(Direction.DOWN_LEFT),
+                                                new PathClearValidator(Direction.DOWN_LEFT)
+                                        )),
+                                        new CompoundAndValidator(List.of(
+                                                new DirectionValidator(Direction.DOWN_RIGHT),
+                                                new PathClearValidator(Direction.DOWN_RIGHT)
+                                        )),
+                                        new CompoundAndValidator(List.of(
+                                                new DirectionValidator(Direction.UP_LEFT),
+                                                new PathClearValidator(Direction.UP_LEFT)
                                         ))
                                 )),
                                 new EatFinalPieceValidator(true),
