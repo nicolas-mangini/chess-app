@@ -22,7 +22,7 @@ public class PromoteUtils {
 
     public static Board promoteChess(Piece piece, PieceType newPieceType, Tile toTile, Board board) {
         Board newBoard = new SimpleBoard(board);
-        PieceValidator newPieceValidators = ChessMovementBuilder.createChessMovements(newPieceType, piece.getColour());
+        PieceValidator newPieceValidators = ChessMovementBuilder.createMovements(newPieceType, piece.getColour());
         Piece newPiece = new Piece(piece, newPieceType, newPieceValidators);
         newBoard.setPieceAtTile(newPiece, toTile);
         return newBoard;
@@ -30,7 +30,7 @@ public class PromoteUtils {
 
     public static Board promoteCheckers(Piece piece, PieceType newPieceType, Tile toTile, Board board) {
         Board newBoard = new SimpleBoard(board);
-        PieceValidator newPieceValidators = CheckersMovementBuilder.createCheckersMovements(newPieceType, piece.getColour());
+        PieceValidator newPieceValidators = CheckersMovementBuilder.createMovements(newPieceType, piece.getColour());
         Piece newPiece = new Piece(piece, newPieceType, newPieceValidators);
         newBoard.setPieceAtTile(newPiece, toTile);
         return newBoard;

@@ -19,6 +19,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .toList();
     }
 
+    @Override
     public List<Piece> createWhitePieces() {
         List<Piece> pieces = List.of(createRookW1(),
                 createKnightW1(),
@@ -32,6 +33,7 @@ public class ChessPieceBuilder implements PieceBuilder {
         return Stream.concat(pieces.stream(), createPawns(Colour.WHITE).stream()).toList();
     }
 
+    @Override
     public List<Piece> createBlackPieces() {
         List<Piece> pieces = List.of(
                 createRookB1(),
@@ -94,7 +96,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(colour)
                 .initialPosition(initialPosition)
                 .pieceType(PieceType.PAWN)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.PAWN, colour))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.PAWN, colour))
                 .build();
     }
 
@@ -104,7 +106,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 1))
                 .pieceType(PieceType.ROOK)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.ROOK, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.ROOK, Colour.WHITE))
                 .build();
     }
 
@@ -114,7 +116,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 2))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.KNIGHT, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.WHITE))
                 .build();
     }
 
@@ -124,7 +126,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 3))
                 .pieceType(PieceType.BISHOP)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.BISHOP, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.BISHOP, Colour.WHITE))
                 .build();
     }
 
@@ -134,7 +136,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 4))
                 .pieceType(PieceType.QUEEN)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.QUEEN, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.QUEEN, Colour.WHITE))
                 .build();
     }
 
@@ -144,7 +146,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 5))
                 .pieceType(PieceType.KING)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.KING, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.KING, Colour.WHITE))
                 .build();
     }
 
@@ -154,7 +156,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 6))
                 .pieceType(PieceType.BISHOP)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.BISHOP, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.BISHOP, Colour.WHITE))
                 .build();
     }
 
@@ -164,7 +166,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 7))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.KNIGHT, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.WHITE))
                 .build();
     }
 
@@ -174,7 +176,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.WHITE)
                 .initialPosition(new Tile(8, 8))
                 .pieceType(PieceType.ROOK)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.ROOK, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.ROOK, Colour.WHITE))
                 .build();
     }
 
@@ -184,7 +186,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 8))
                 .pieceType(PieceType.ROOK)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.ROOK, Colour.WHITE))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.ROOK, Colour.WHITE))
                 .build();
     }
 
@@ -194,7 +196,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 2))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.KNIGHT, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.BLACK))
                 .build();
     }
 
@@ -204,7 +206,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 3))
                 .pieceType(PieceType.BISHOP)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.BISHOP, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.BISHOP, Colour.BLACK))
                 .build();
     }
 
@@ -214,7 +216,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 4))
                 .pieceType(PieceType.QUEEN)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.QUEEN, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.QUEEN, Colour.BLACK))
                 .build();
     }
 
@@ -224,7 +226,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 5))
                 .pieceType(PieceType.KING)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.KING, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.KING, Colour.BLACK))
                 .build();
     }
 
@@ -234,7 +236,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 6))
                 .pieceType(PieceType.BISHOP)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.BISHOP, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.BISHOP, Colour.BLACK))
                 .build();
     }
 
@@ -244,7 +246,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 7))
                 .pieceType(PieceType.KNIGHT)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.KNIGHT, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.KNIGHT, Colour.BLACK))
                 .build();
     }
 
@@ -254,7 +256,7 @@ public class ChessPieceBuilder implements PieceBuilder {
                 .colour(Colour.BLACK)
                 .initialPosition(new Tile(1, 1))
                 .pieceType(PieceType.ROOK)
-                .pieceValidator(ChessMovementBuilder.createChessMovements(PieceType.ROOK, Colour.BLACK))
+                .pieceValidator(ChessMovementBuilder.createMovements(PieceType.ROOK, Colour.BLACK))
                 .build();
     }
 }

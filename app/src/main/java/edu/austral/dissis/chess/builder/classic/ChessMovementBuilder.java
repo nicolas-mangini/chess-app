@@ -1,8 +1,9 @@
 package edu.austral.dissis.chess.builder.classic;
 
+import edu.austral.dissis.chess.builder.ChessValidatorBuilder;
+import edu.austral.dissis.common.builder.MovementBuilder;
 import edu.austral.dissis.common.game.Colour;
 import edu.austral.dissis.common.validator.game.PiecesRemainingValidator;
-import edu.austral.dissis.common.builder.ValidatorBuilder;
 import edu.austral.dissis.common.piece.PieceValidator;
 import edu.austral.dissis.common.validator.CompoundAndValidator;
 import edu.austral.dissis.common.validator.GameOverValidator;
@@ -13,9 +14,10 @@ import edu.austral.dissis.common.validator.piece.PieceType;
 
 import java.util.List;
 
-public class ChessMovementBuilder {
-    private static final ValidatorBuilder validatorBuilder = new ValidatorBuilder();
+public class ChessMovementBuilder implements MovementBuilder {
+    private static final ChessValidatorBuilder validatorBuilder = new ChessValidatorBuilder();
 
+    @Override
     public List<GameOverValidator> buildGameOverValidators() {
         return List.of(
                 new CheckMate(),
@@ -23,36 +25,37 @@ public class ChessMovementBuilder {
         );
     }
 
+    @Override
     public MovementValidator buildGameValidators() {
-        List<MovementValidator> gameValidators = validatorBuilder.createChessGameValidators();
+        List<MovementValidator> gameValidators = validatorBuilder.createGameValidators();
         return new CompoundAndValidator(gameValidators);
     }
 
-    public static PieceValidator createChessMovements(PieceType pieceType, Colour colour) {
-        List<MovementValidator> specialValidators = validatorBuilder.createChessSpecialValidators();
+    public static PieceValidator createMovements(PieceType pieceType, Colour colour) {
+        List<MovementValidator> specialValidators = validatorBuilder.createSpecialValidators();
         switch (pieceType) {
             case ROOK -> {
-                List<MovementValidator> orValidators = validatorBuilder.createRookOrValidators();
+                List<MovementValidator> orValidators = validatorBuilder.createRookValidators();
                 return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
             }
             case KNIGHT -> {
-                List<MovementValidator> orValidators = validatorBuilder.createKnightOrValidators();
+                List<MovementValidator> orValidators = validatorBuilder.createKnightValidators();
                 return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
             }
             case BISHOP -> {
-                List<MovementValidator> orValidators = validatorBuilder.createBishopOrValidators();
+                List<MovementValidator> orValidators = validatorBuilder.createBishopValidators();
                 return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
             }
             case QUEEN -> {
-                List<MovementValidator> orValidators = validatorBuilder.createChessQueenOrValidators();
+                List<MovementValidator> orValidators = validatorBuilder.createQueenValidators();
                 return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
             }
             case KING -> {
-                List<MovementValidator> orValidators = validatorBuilder.createKingOrValidators();
+                List<MovementValidator> orValidators = validatorBuilder.createKingValidators();
                 return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
             }
             case PAWN -> {
-                List<MovementValidator> orValidators = validatorBuilder.createChessPawnOrValidators(colour);
+                List<MovementValidator> orValidators = validatorBuilder.createPawnValidators(colour);
                 return new PieceValidator(new CompoundOrValidator(orValidators), new CompoundAndValidator(specialValidators));
             }
             default -> throw new RuntimeException("Piece type not supported");

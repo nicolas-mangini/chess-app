@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface PieceBuilder {
     List<Piece> buildAll();
+
+    List<Piece> createWhitePieces();
+
+    List<Piece> createBlackPieces();
 }
